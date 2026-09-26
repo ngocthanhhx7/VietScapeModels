@@ -9,8 +9,10 @@ import InteractiveViewer from './components/sections/InteractiveViewer';
 import TestimonialsSection from './components/sections/TestimonialsSection';
 import InquirySection from './components/sections/InquirySection';
 import FloatingContactDock from './components/common/FloatingContactDock';
+import HeritageEntrance, { hasSeenHeritageEntrance } from './components/common/HeritageEntrance';
 
 export const App: React.FC = () => {
+  const [showEntrance, setShowEntrance] = useState<boolean>(() => !hasSeenHeritageEntrance());
   const [selectedViewerModelId, setSelectedViewerModelId] = useState<string>('chua-mot-cot');
   const [inquiryModelInterest, setInquiryModelInterest] = useState<string>('Kit Chùa Một Cột — Thăng Long Hà Nội (98.200 VNĐ)');
 
@@ -33,8 +35,15 @@ export const App: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-heritage-sand text-heritage-dark selection:bg-heritage-gold/20 flex flex-col font-sans scroll-smooth">
+      {/* Grand Opening Heritage Entrance (Curtain & Chim Lac Reveal) */}
+      <HeritageEntrance
+        isOpen={showEntrance}
+        onComplete={() => setShowEntrance(false)}
+        onSkip={() => setShowEntrance(false)}
+      />
+
       {/* 1. Header / Navigation */}
-      <Header />
+      <Header onReplayEntrance={() => setShowEntrance(true)} />
 
       {/* Main 8 Content Sections */}
       <main className="flex-1 w-full">
@@ -71,7 +80,7 @@ export const App: React.FC = () => {
       </main>
 
       {/* 9. Footer & Cultural Accents */}
-      <Footer />
+      <Footer onReplayEntrance={() => setShowEntrance(true)} />
 
       {/* Realtime Multi-channel Floating Contact Dock (Official Info) */}
       <FloatingContactDock

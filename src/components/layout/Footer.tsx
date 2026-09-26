@@ -2,7 +2,11 @@ import React, { useState } from 'react';
 import { ArrowRight, ShieldCheck, Award, Sparkles, CheckCircle2, Phone, Mail, MessageCircle } from 'lucide-react';
 import { DongSonDrumMotif, HoiVanFretMotif, LyLotusMotif } from '../common/HeritageMotifs';
 
-export const Footer: React.FC = () => {
+export interface FooterProps {
+  onReplayEntrance?: () => void;
+}
+
+export const Footer: React.FC<FooterProps> = ({ onReplayEntrance }) => {
   const [newsletterEmail, setNewsletterEmail] = useState('');
   const [newsletterSubmitted, setNewsletterSubmitted] = useState(false);
 
@@ -85,7 +89,7 @@ export const Footer: React.FC = () => {
                   className="hover:text-heritage-gold transition-colors flex items-center justify-between w-full text-left"
                 >
                   <span>Chùa Một Cột (Liên Hoa Đài)</span>
-                  <span className="text-xs font-mono text-heritage-gold/80 font-bold">98.2K</span>
+                  <span className="text-xs font-mono text-heritage-gold font-bold whitespace-nowrap">98.200 VNĐ</span>
                 </button>
               </li>
               <li>
@@ -94,7 +98,7 @@ export const Footer: React.FC = () => {
                   className="hover:text-heritage-gold transition-colors flex items-center justify-between w-full text-left"
                 >
                   <span>Lăng Chủ tịch Hồ Chí Minh</span>
-                  <span className="text-xs font-mono text-heritage-gold/80 font-bold">98.2K</span>
+                  <span className="text-xs font-mono text-heritage-gold font-bold whitespace-nowrap">98.200 VNĐ</span>
                 </button>
               </li>
               <li>
@@ -103,7 +107,7 @@ export const Footer: React.FC = () => {
                   className="hover:text-heritage-gold transition-colors flex items-center justify-between w-full text-left"
                 >
                   <span>Khuê Văn Các (Văn Miếu)</span>
-                  <span className="text-xs font-mono text-heritage-gold/80 font-bold">98.2K</span>
+                  <span className="text-xs font-mono text-heritage-gold font-bold whitespace-nowrap">98.200 VNĐ</span>
                 </button>
               </li>
               <li>
@@ -197,6 +201,16 @@ export const Footer: React.FC = () => {
         <div className="pt-8 mt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono text-heritage-sand/60">
           <p className="text-center sm:text-left">© 2026 VietScape Models — Đồ án Khởi nghiệp Sáng tạo EXE101 (Nhóm 3 — GD1912, Đại học FPT).</p>
           <div className="flex flex-wrap items-center justify-center sm:justify-end gap-4 sm:gap-6">
+            {onReplayEntrance && (
+              <button
+                onClick={onReplayEntrance}
+                className="hover:text-heritage-gold transition-colors flex items-center gap-1.5 cursor-pointer text-heritage-gold/90 hover:underline"
+                title="Xem lại hiệu ứng mở màn Hoàng Triều"
+              >
+                <Sparkles className="w-3.5 h-3.5 text-heritage-gold" />
+                <span>Xem lại mở màn Hoàng Triều</span>
+              </button>
+            )}
             <a href="#contact" className="hover:text-heritage-gold transition-colors">
               Chính sách bảo hành 1-đổi-1
             </a>

@@ -23,7 +23,7 @@
   }
 
   h1, h2, h3, h4, h5, h6 {
-    font-family: 'Playfair Display', 'Cinzel', serif;
+    font-family: 'Playfair Display', Lora, Georgia, serif;
   }
 }
 
@@ -94,3 +94,19 @@
 ::-webkit-scrollbar-thumb:hover {
   background: #9A7818;
 }
+
+/* Royal Silk Curtain Texture & Shimmer for Heritage Entrance */
+.royal-silk-curtain {
+  background: 
+    radial-gradient(ellipse at 50% 50%, rgba(197, 155, 39, 0.08) 0%, transparent 80%),
+    repeating-linear-gradient(
+      90deg,
+      #130F0D 0px,
+      #1C1714 24px,
+      #241E1A 48px,
+      #171310 72px,
+      #2B221E 96px,
+      #14100E 120px
+    );
+}
+

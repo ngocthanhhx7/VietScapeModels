@@ -2,7 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { Menu, X, ArrowUpRight, Sparkles } from 'lucide-react';
 import { DongSonDrumMotif } from '../common/HeritageMotifs';
 
-export const Header: React.FC = () => {
+export interface HeaderProps {
+  onReplayEntrance?: () => void;
+}
+
+export const Header: React.FC<HeaderProps> = ({ onReplayEntrance }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -77,6 +81,17 @@ export const Header: React.FC = () => {
 
         {/* Action Button & Hotline */}
         <div className="hidden sm:flex items-center gap-4">
+          {onReplayEntrance && (
+            <button
+              onClick={onReplayEntrance}
+              className="p-2 rounded-full text-heritage-muted hover:text-heritage-gold hover:bg-heritage-cream/60 transition-all cursor-pointer"
+              title="Xem lại hiệu ứng mở màn Hoàng Triều"
+              aria-label="Xem lại hiệu ứng mở màn Hoàng Triều"
+            >
+              <Sparkles className="w-4 h-4 text-heritage-gold" />
+            </button>
+          )}
+
           <div className="hidden xl:flex flex-col text-right font-mono text-[11px] leading-tight">
             <span className="text-heritage-muted">Hotline / Zalo dự án</span>
             <a href="tel:0852699188" className="text-heritage-dark font-semibold hover:text-heritage-gold transition-colors">
@@ -89,7 +104,7 @@ export const Header: React.FC = () => {
             className="group relative inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-xs font-mono uppercase tracking-wider font-semibold bg-heritage-dark text-heritage-sand overflow-hidden shadow-sm hover:shadow-md transition-all hover:bg-heritage-gold duration-300"
           >
             <Sparkles className="w-3.5 h-3.5 text-heritage-gold group-hover:text-heritage-sand transition-colors" />
-            <span>Đặt Mua Kit DIY (98.2K)</span>
+            <span>Đặt Mua Kit DIY (98.200 VNĐ)</span>
             <ArrowUpRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
           </button>
         </div>
@@ -121,6 +136,18 @@ export const Header: React.FC = () => {
               </button>
             ))}
             <div className="pt-3 flex flex-col gap-3">
+              {onReplayEntrance && (
+                <button
+                  onClick={() => {
+                    setMobileMenuOpen(false);
+                    onReplayEntrance();
+                  }}
+                  className="w-full py-2.5 rounded-full text-center text-xs font-mono uppercase tracking-wider text-heritage-dark border border-heritage-gold/40 flex items-center justify-center gap-2 hover:bg-heritage-gold/10 transition-colors cursor-pointer"
+                >
+                  <Sparkles className="w-3.5 h-3.5 text-heritage-gold" />
+                  <span>Xem lại mở màn Hoàng Triều</span>
+                </button>
+              )}
               <a
                 href="tel:0852699188"
                 className="text-center py-2 text-xs font-mono text-heritage-gold border border-heritage-gold/30 rounded-full"
@@ -132,7 +159,7 @@ export const Header: React.FC = () => {
                 className="w-full py-3 rounded-full text-center text-xs font-mono uppercase tracking-wider font-semibold bg-heritage-dark text-heritage-sand flex items-center justify-center gap-2 hover:bg-heritage-gold transition-colors"
               >
                 <Sparkles className="w-4 h-4 text-heritage-gold" />
-                <span>Đặt Mua Kit DIY (98.2K)</span>
+                <span>Đặt Mua Kit DIY (98.200 VNĐ)</span>
               </button>
             </div>
           </div>

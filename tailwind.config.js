@@ -21,8 +21,7 @@ export default {
         },
       },
       fontFamily: {
-        serif: ['"Playfair Display"', 'Cinzel', 'serif'],
-        cinzel: ['Cinzel', 'serif'],
+        serif: ['"Playfair Display"', 'Lora', 'Georgia', 'Cambria', '"Times New Roman"', 'serif'],
         sans: ['"Be Vietnam Pro"', 'sans-serif'],
         mono: ['"JetBrains Mono"', 'monospace'],
       },

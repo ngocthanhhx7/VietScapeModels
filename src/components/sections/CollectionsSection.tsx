@@ -117,7 +117,7 @@ export const CollectionsSection: React.FC<CollectionsSectionProps> = ({
                     {model.status === 'available' ? (
                       <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono bg-emerald-50 text-emerald-800 border border-emerald-200">
                         <span className="w-1.5 h-1.5 rounded-full bg-emerald-600 animate-pulse" />
-                        Kit DIY Sẵn Sàng (98.2K)
+                        Kit DIY Sẵn Sàng (98.200 VNĐ)
                       </span>
                     ) : (
                       <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono bg-amber-50 text-amber-800 border border-amber-200">
@@ -195,7 +195,7 @@ export const CollectionsSection: React.FC<CollectionsSectionProps> = ({
                       {model.priceEstimateVnd && (
                         <div className="text-right">
                           <span className="text-[11px] font-mono text-heritage-muted block">Giá bộ Kit</span>
-                          <span className="font-serif text-xl font-bold text-heritage-dark text-emerald-800">
+                          <span className="font-serif text-xl font-bold text-heritage-dark whitespace-nowrap">
                             {model.priceEstimateVnd}
                           </span>
                         </div>
@@ -250,7 +250,7 @@ export const CollectionsSection: React.FC<CollectionsSectionProps> = ({
                       className="flex-1 py-3 px-5 rounded-xl text-xs font-mono uppercase tracking-wider font-semibold bg-heritage-dark text-heritage-sand hover:bg-heritage-gold transition-colors duration-300 flex items-center justify-center gap-2 cursor-pointer shadow-xs hover:shadow-md"
                     >
                       <Sparkles className="w-3.5 h-3.5 text-heritage-gold group-hover:text-heritage-sand" />
-                      <span>{model.status === 'available' ? 'Đặt mua Kit (98.2K)' : 'Đăng ký nhận tin'}</span>
+                      <span>{model.status === 'available' ? 'Đặt mua Kit (98.200 VNĐ)' : 'Đăng ký nhận tin'}</span>
                     </button>
 
                     <button
@@ -285,7 +285,7 @@ export const CollectionsSection: React.FC<CollectionsSectionProps> = ({
               </div>
 
               <h3 className="font-serif text-2xl sm:text-3xl font-bold text-heritage-dark">
-                Combo Bộ Dụng Cụ DIY Chuyên Dụng <span className="text-gold-gradient">(+39.000 ₫)</span>
+                Combo Bộ Dụng Cụ DIY Chuyên Dụng <span className="text-gold-gradient">(+39.000 VNĐ)</span>
               </h3>
 
               <p className="text-sm text-heritage-muted font-sans leading-relaxed max-w-2xl">
@@ -323,11 +323,11 @@ export const CollectionsSection: React.FC<CollectionsSectionProps> = ({
               <div className="space-y-1">
                 <span className="text-xs font-mono text-heritage-muted block">Giá mua kèm Kit:</span>
                 <div className="flex items-baseline justify-center lg:justify-end gap-2">
-                  <span className="font-serif text-3xl font-bold text-heritage-dark text-emerald-800">
-                    +39.000 ₫
+                  <span className="font-serif text-3xl font-bold text-emerald-800 whitespace-nowrap">
+                    +39.000 VNĐ
                   </span>
-                  <span className="text-xs font-mono line-through text-heritage-muted">
-                    65.000 ₫
+                  <span className="text-xs font-mono line-through text-heritage-muted whitespace-nowrap">
+                    65.000 VNĐ
                   </span>
                 </div>
                 <span className="text-[11px] font-mono text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full inline-block mt-1">
@@ -336,7 +336,7 @@ export const CollectionsSection: React.FC<CollectionsSectionProps> = ({
               </div>
 
               <button
-                onClick={() => onSelectModelForInquiry('Combo Kit + Bộ dụng cụ DIY (+39K)')}
+                onClick={() => onSelectModelForInquiry('Combo Kit + Bộ dụng cụ DIY (+39.000 VNĐ)')}
                 className="w-full py-3.5 px-6 rounded-2xl text-xs font-mono uppercase tracking-wider font-semibold bg-heritage-dark text-heritage-sand hover:bg-heritage-gold transition-all duration-300 flex items-center justify-center gap-2 shadow-md hover:shadow-lg cursor-pointer"
               >
                 <span>Thêm Combo Vào Đơn Hàng</span>

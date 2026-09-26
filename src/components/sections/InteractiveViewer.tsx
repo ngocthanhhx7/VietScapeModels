@@ -488,7 +488,7 @@ export const InteractiveViewer: React.FC<InteractiveViewerProps> = ({
                 className="w-full py-3.5 rounded-xl text-xs font-mono uppercase tracking-wider font-semibold bg-heritage-dark text-heritage-sand hover:bg-heritage-gold transition-colors duration-300 flex items-center justify-center gap-2 shadow-xs cursor-pointer"
               >
                 <Sparkles className="w-4 h-4 text-heritage-gold" />
-                <span>Đặt mua Kit {model.name} (98.2K)</span>
+                <span>Đặt mua Kit {model.name} (98.200 VNĐ)</span>
               </button>
             </div>
           </div>

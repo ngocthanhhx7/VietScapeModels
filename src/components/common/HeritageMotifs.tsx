@@ -215,3 +215,191 @@ export const HeritageDivider: React.FC<{
     <div className="h-px flex-1 max-w-xs bg-gradient-to-l from-transparent via-heritage-gold/40 to-heritage-gold" />
   </div>
 );
+
+/**
+ * Biểu tượng Chim Lạc Đông Sơn mạ vàng (Vector SVG nghệ thuật cao)
+ */
+export const ChimLacBirdMotif: React.FC<{
+  className?: string;
+  width?: number | string;
+  height?: number | string;
+}> = ({ className = '', width = '100%', height = 'auto' }) => (
+  <svg
+    width={width}
+    height={height}
+    viewBox="0 0 240 140"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    className={className}
+    aria-hidden="true"
+  >
+    <defs>
+      <linearGradient id="chimLacGoldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stopColor="#FFF3C4" />
+        <stop offset="30%" stopColor="#E5B942" />
+        <stop offset="70%" stopColor="#C59B27" />
+        <stop offset="100%" stopColor="#8A6710" />
+      </linearGradient>
+      <filter id="lacAuraGlow" x="-30%" y="-30%" width="160%" height="160%">
+        <feGaussianBlur stdDeviation="3.5" result="glow" />
+        <feMerge>
+          <feMergeNode in="glow" />
+          <feMergeNode in="SourceGraphic" />
+        </feMerge>
+      </filter>
+    </defs>
+
+    <g filter="url(#lacAuraGlow)">
+      {/* Main Body & Head & Beak */}
+      <path
+        d="M12 68 L52 62 C50 56 55 48 64 47 C72 46 80 50 86 56 C96 58 112 60 126 68 C140 76 158 80 180 82 C196 83 216 79 232 72 C214 86 186 92 164 90 C144 88 128 82 116 76 C106 78 94 78 82 74 C74 72 66 73 58 72 L12 68 Z"
+        fill="url(#chimLacGoldGrad)"
+      />
+
+      {/* Crown Crest Plume (Mào Chim Lạc uốn cong thanh thoát) */}
+      <path
+        d="M64 47 C68 32 80 18 102 12 C90 22 84 34 82 46 C76 44 70 45 64 47 Z"
+        fill="url(#chimLacGoldGrad)"
+        fillOpacity="0.95"
+      />
+      <path
+        d="M74 38 C88 28 106 20 122 18 C108 26 96 36 90 48"
+        stroke="#FFF3C4"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        fill="none"
+      />
+
+      {/* Majestic Wing (Cánh sải uy nghiêm với họa tiết lông vũ Đông Sơn) */}
+      <path
+        d="M84 56 C92 36 108 14 134 4 C142 1 148 4 144 12 C138 22 130 32 128 36 C136 30 152 18 162 16 C166 15 168 18 164 24 C156 34 146 46 142 50 C152 44 168 34 178 33 C182 33 183 37 178 42 C168 52 152 64 140 70 C130 73 118 70 108 66 Z"
+        fill="url(#chimLacGoldGrad)"
+      />
+
+      {/* Wing Feather Engravings (Khắc vạch lông vũ kỷ hà) */}
+      <path
+        d="M104 46 L124 18 M114 52 L142 28 M124 58 L156 40"
+        stroke="#6E4F06"
+        strokeWidth="1.2"
+        strokeLinecap="round"
+        strokeOpacity="0.7"
+      />
+
+      {/* Secondary Far Wing Tip (Cánh phụ phía xa) */}
+      <path
+        d="M72 48 C78 30 92 16 108 8 C112 6 114 9 110 14 C104 22 96 34 94 40 Z"
+        fill="url(#chimLacGoldGrad)"
+        fillOpacity="0.75"
+      />
+
+      {/* Eye of Chim Lạc (Mắt nhật nguyệt) */}
+      <circle cx="58" cy="58" r="2.5" fill="#1C1714" />
+      <circle cx="58.5" cy="57.5" r="0.8" fill="#FFF3C4" />
+
+      {/* Trailing Ribbon Plumage (Dải lông đuôi ba chùm uốn lượn) */}
+      <path
+        d="M176 82 C194 80 216 75 234 66 C220 78 198 86 178 87 Z"
+        fill="url(#chimLacGoldGrad)"
+        fillOpacity="0.9"
+      />
+      <path
+        d="M166 88 C186 91 210 90 228 84 C212 94 188 98 166 94 Z"
+        fill="url(#chimLacGoldGrad)"
+        fillOpacity="0.8"
+      />
+      <path
+        d="M154 90 C172 98 196 102 216 100 C198 106 174 106 150 96 Z"
+        fill="url(#chimLacGoldGrad)"
+        fillOpacity="0.7"
+      />
+
+      {/* Traditional geometric chevron hatchings on body */}
+      <path
+        d="M88 64 L92 68 L88 72 M96 65 L100 69 L96 73 M104 67 L108 71 L104 74"
+        stroke="#8A6710"
+        strokeWidth="1.2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeOpacity="0.6"
+      />
+    </g>
+  </svg>
+);
+
+/**
+ * Trống đồng Đông Sơn Đại Bản (Grand Dong Son Drum) — 14 tia sáng, các vòng kỷ hà và đàn chim lạc
+ */
+export const GrandDongSonDrumMotif: React.FC<{
+  className?: string;
+  size?: number | string;
+}> = ({ className = '', size = 400 }) => {
+  const cx = 200;
+  const cy = 200;
+  const numPoints = 14;
+  const outerR = 64;
+  const innerR = 26;
+
+  let starPath = '';
+  for (let i = 0; i < numPoints * 2; i++) {
+    const angle = (i * Math.PI) / numPoints - Math.PI / 2;
+    const r = i % 2 === 0 ? outerR : innerR;
+    const x = (cx + r * Math.cos(angle)).toFixed(1);
+    const y = (cy + r * Math.sin(angle)).toFixed(1);
+    starPath += (i === 0 ? `M${x} ${y}` : ` L${x} ${y}`);
+  }
+  starPath += ' Z';
+
+  const teethCount = 36;
+  let teethPath = '';
+  for (let i = 0; i < teethCount * 2; i++) {
+    const angle = (i * Math.PI) / teethCount;
+    const r = i % 2 === 0 ? 88 : 98;
+    const x = (cx + r * Math.cos(angle)).toFixed(1);
+    const y = (cy + r * Math.sin(angle)).toFixed(1);
+    teethPath += (i === 0 ? `M${x} ${y}` : ` L${x} ${y}`);
+  }
+  teethPath += ' Z';
+
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 400 400"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      className={className}
+      aria-hidden="true"
+    >
+      <circle cx={cx} cy={cy} r="192" stroke="currentColor" strokeWidth="2" strokeOpacity="0.5" />
+      <circle cx={cx} cy={cy} r="188" stroke="currentColor" strokeWidth="1" strokeDasharray="3 3" strokeOpacity="0.6" />
+      <circle cx={cx} cy={cy} r="176" stroke="currentColor" strokeWidth="1.5" strokeOpacity="0.4" />
+      <circle cx={cx} cy={cy} r="162" stroke="currentColor" strokeWidth="1.2" strokeOpacity="0.5" />
+      <circle cx={cx} cy={cy} r="132" stroke="currentColor" strokeWidth="1.2" strokeOpacity="0.4" />
+      <circle cx={cx} cy={cy} r="106" stroke="currentColor" strokeWidth="1.5" strokeOpacity="0.5" />
+      <circle cx={cx} cy={cy} r="84" stroke="currentColor" strokeWidth="1.2" strokeOpacity="0.4" />
+      <circle cx={cx} cy={cy} r="70" stroke="currentColor" strokeWidth="1.5" strokeOpacity="0.5" />
+      <circle cx={cx} cy={cy} r="18" stroke="currentColor" strokeWidth="1" strokeOpacity="0.7" />
+
+      {/* 14-pointed solar star center */}
+      <path d={starPath} fill="currentColor" fillOpacity="0.85" />
+      <circle cx={cx} cy={cy} r="5" fill="currentColor" />
+
+      {/* Sawtooth chevron band */}
+      <path d={teethPath} stroke="currentColor" strokeWidth="1" strokeOpacity="0.7" fill="currentColor" fillOpacity="0.15" />
+
+      {/* Orbiting flying birds */}
+      {[0, 60, 120, 180, 240, 300].map((deg) => (
+        <g key={deg} transform={`rotate(${deg} ${cx} ${cy}) translate(${cx + 128}, ${cy - 10}) scale(0.22)`}>
+          <path
+            d="M0 25 C15 20 30 10 50 0 C40 15 35 30 45 40 C30 35 20 40 10 50 C12 40 10 30 0 25 Z"
+            fill="currentColor"
+            fillOpacity="0.85"
+          />
+          <path d="M50 0 L90 5 C75 18 60 22 45 25" stroke="currentColor" strokeWidth="2" fill="none" strokeOpacity="0.9" />
+          <path d="M-20 35 C-5 35 5 30 15 25" stroke="currentColor" strokeWidth="2" fill="none" strokeOpacity="0.7" />
+        </g>
+      ))}
+    </svg>
+  );
+};
+

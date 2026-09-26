@@ -54,7 +54,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                 onClick={onExploreCollections}
                 className="group px-7 py-3.5 rounded-full text-xs font-mono uppercase tracking-widest font-semibold bg-heritage-dark text-white hover:bg-heritage-gold transition-all duration-300 flex items-center gap-2.5 shadow-md hover:shadow-lg cursor-pointer"
               >
-                <span>Sở hữu Kit chỉ từ 98.2K</span>
+                <span>Sở hữu Kit chỉ từ 98.200 VNĐ</span>
                 <ArrowDown className="w-4 h-4 transition-transform group-hover:translate-y-0.5" />
               </button>
 
@@ -97,7 +97,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
             {/* Floating Heritage Badge */}
             <div className="absolute -top-4 -right-2 z-20 bg-white/95 backdrop-blur-md px-4 py-2 rounded-2xl border border-heritage-gold/30 shadow-md flex items-center gap-2 text-xs font-mono text-heritage-dark animate-float">
               <span className="w-2 h-2 rounded-full bg-emerald-500 animate-ping" />
-              <span>Giá trải nghiệm: 98.200 ₫/kit</span>
+              <span>Giá trải nghiệm: 98.200 VNĐ/kit</span>
             </div>
 
             {/* Museum Pedestal Card */}
@@ -124,7 +124,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
         {/* Heritage Stats Strip Bar */}
         <div className="mt-16 pt-8 border-t border-heritage-border/80 grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
           <div className="space-y-1">
-            <span className="font-serif text-3xl sm:text-4xl font-bold text-heritage-dark">98.200 ₫</span>
+            <span className="font-serif text-3xl sm:text-4xl font-bold text-heritage-dark whitespace-nowrap">98.200 VNĐ</span>
             <p className="text-xs font-mono uppercase tracking-wider text-heritage-muted">Mức giá sinh viên</p>
           </div>
           <div className="space-y-1">
