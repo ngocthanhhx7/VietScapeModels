@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ArrowDown, Sparkles, Compass, ShieldCheck, Box } from 'lucide-react';
+import { ArrowDown, Sparkles, Compass, Scissors, Headphones, Package } from 'lucide-react';
 import { DongSonDrumMotif, LyLotusMotif } from '../common/HeritageMotifs';
 import { MuseumPedestal } from '../common/MuseumPedestal';
 
@@ -33,53 +33,53 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
             className="lg:col-span-7 space-y-6 text-left"
           >
             {/* Tagline Badge */}
-            <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full text-xs font-mono uppercase tracking-[0.25em] bg-heritage-gold/10 text-heritage-dark border border-heritage-gold/30 backdrop-blur-xs">
+            <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full text-xs font-mono uppercase tracking-[0.2em] bg-heritage-gold/10 text-heritage-dark border border-heritage-gold/30 backdrop-blur-xs">
               <LyLotusMotif size={18} className="text-heritage-gold" />
-              <span>Neo-Heritage Collectible Art</span>
+              <span>Bộ Kit Mô Hình Giấy 3D DIY — Đồ Án Khởi Nghiệp EXE101</span>
             </div>
 
             {/* Main Editorial Headline */}
-            <h1 className="font-serif text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-heritage-dark leading-[1.12]">
-              Tái Hiện <span className="text-gold-gradient">Hồn Thiêng</span> Kiến Trúc Việt Qua Từng Đường Nét 3D
+            <h1 className="font-serif text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-heritage-dark leading-[1.14]">
+              Tự Tay Ráp Di Sản — Chạm Vào <span className="text-gold-gradient">Hồn Thiêng</span> Kiến Trúc Việt
             </h1>
 
             {/* Subheading Narrative */}
             <p className="text-heritage-muted text-base sm:text-lg leading-relaxed font-sans max-w-2xl">
-              Nơi mỹ cảm truyền thống giao hòa cùng kỹ nghệ quang hóa 8K chuẩn bảo tàng. Từng thớ gỗ mái đao, từng hàng cột đá hoa cương được đo đạc và phục dựng tinh xảo trong kích thước thu nhỏ để di sản ngàn năm luôn hiện diện bên bạn.
+              Biến những mảnh giấy bìa phẳng thành kỳ quan kiến trúc 3D với phong cách Low-poly tối giản. Trải nghiệm tự tay cắt dán (DIY) giải tỏa căng thẳng sau giờ học và làm việc, kết hợp quét mã QR lắng nghe podcast lịch sử song ngữ Anh - Việt sống động dưới 5 phút.
             </p>
 
             {/* Dual CTAs & Social Proof */}
             <div className="pt-2 flex flex-wrap items-center gap-4">
               <button
                 onClick={onExploreCollections}
-                className="group px-7 py-3.5 rounded-full text-xs font-mono uppercase tracking-widest font-semibold bg-heritage-dark text-white hover:bg-heritage-gold transition-all duration-300 flex items-center gap-2.5 shadow-md hover:shadow-lg"
+                className="group px-7 py-3.5 rounded-full text-xs font-mono uppercase tracking-widest font-semibold bg-heritage-dark text-white hover:bg-heritage-gold transition-all duration-300 flex items-center gap-2.5 shadow-md hover:shadow-lg cursor-pointer"
               >
-                <span>Khám phá bộ sưu tập</span>
+                <span>Sở hữu Kit chỉ từ 98.2K</span>
                 <ArrowDown className="w-4 h-4 transition-transform group-hover:translate-y-0.5" />
               </button>
 
               <button
                 onClick={onOpenViewer}
-                className="group px-6 py-3.5 rounded-full text-xs font-mono uppercase tracking-widest font-semibold bg-white border border-heritage-border hover:border-heritage-gold text-heritage-dark hover:bg-heritage-cream/50 transition-all duration-300 flex items-center gap-2.5 shadow-xs"
+                className="group px-6 py-3.5 rounded-full text-xs font-mono uppercase tracking-widest font-semibold bg-white border border-heritage-border hover:border-heritage-gold text-heritage-dark hover:bg-heritage-cream/50 transition-all duration-300 flex items-center gap-2.5 shadow-xs cursor-pointer"
               >
                 <Compass className="w-4 h-4 text-heritage-gold group-hover:rotate-45 transition-transform duration-500" />
-                <span>Trải nghiệm xoay 3D</span>
+                <span>Trải nghiệm xoay 3D &amp; Podcast QR</span>
               </button>
             </div>
 
             {/* Guarantees / Quality Highlights */}
-            <div className="pt-6 border-t border-heritage-border/70 grid grid-cols-2 sm:grid-cols-3 gap-4 text-xs font-mono text-heritage-muted">
+            <div className="pt-6 border-t border-heritage-border/70 grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs font-mono text-heritage-muted">
               <div className="flex items-center gap-2">
-                <ShieldCheck className="w-4 h-4 text-heritage-gold shrink-0" />
-                <span>Tỉ lệ khảo cổ học chuẩn</span>
+                <Scissors className="w-4 h-4 text-heritage-gold shrink-0" />
+                <span>Tự ráp DIY dễ dàng — Dập nếp chuẩn mm</span>
               </div>
               <div className="flex items-center gap-2">
-                <Sparkles className="w-4 h-4 text-heritage-gold shrink-0" />
-                <span>Resin 8K vi chi tiết</span>
+                <Headphones className="w-4 h-4 text-heritage-gold shrink-0" />
+                <span>QR Podcast song ngữ Anh - Việt</span>
               </div>
-              <div className="flex items-center gap-2 col-span-2 sm:col-span-1">
-                <Box className="w-4 h-4 text-heritage-gold shrink-0" />
-                <span>Hộp trưng bày Acrylic</span>
+              <div className="flex items-center gap-2">
+                <Package className="w-4 h-4 text-heritage-gold shrink-0" />
+                <span>Bao bì Flat-pack mỏng nhẹ dễ mang đi</span>
               </div>
             </div>
           </motion.div>
@@ -97,23 +97,23 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
             {/* Floating Heritage Badge */}
             <div className="absolute -top-4 -right-2 z-20 bg-white/95 backdrop-blur-md px-4 py-2 rounded-2xl border border-heritage-gold/30 shadow-md flex items-center gap-2 text-xs font-mono text-heritage-dark animate-float">
               <span className="w-2 h-2 rounded-full bg-emerald-500 animate-ping" />
-              <span>Tác phẩm tiêu biểu 2026</span>
+              <span>Giá trải nghiệm: 98.200 ₫/kit</span>
             </div>
 
             {/* Museum Pedestal Card */}
             <div className="relative group cursor-pointer" onClick={onOpenViewer}>
               <MuseumPedestal
                 imageSrc={`${import.meta.env.BASE_URL}models/chua-mot-cot-perspective.png`}
-                imageAlt="Chùa Một Cột - Mô hình 3D tỉ lệ 1:75"
+                imageAlt="Chùa Một Cột - Mô hình Giấy 3D DIY Low-poly"
                 minHeight="min-h-[440px]"
-                badgeText="Chùa Một Cột — Diên Hựu Tự (1049)"
+                badgeText="Chùa Một Cột — Kit Giấy 3D DIY (1049)"
               />
 
               {/* Bottom Interactive Prompt */}
               <div className="absolute bottom-4 left-6 right-6 z-20 flex items-center justify-between bg-white/90 backdrop-blur-md px-4 py-2.5 rounded-xl border border-heritage-border text-xs font-mono text-heritage-dark shadow-xs group-hover:border-heritage-gold transition-colors">
                 <div className="flex items-center gap-2">
-                  <Compass className="w-4 h-4 text-heritage-gold animate-spin-slow" />
-                  <span>Nhấn để khám phá chi tiết 3D</span>
+                  <Sparkles className="w-4 h-4 text-heritage-gold animate-spin-slow" />
+                  <span>Chạm để khám phá 3D &amp; Nghe Podcast</span>
                 </div>
                 <span className="text-heritage-gold font-semibold">Tỉ lệ 1:75</span>
               </div>
@@ -124,20 +124,20 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
         {/* Heritage Stats Strip Bar */}
         <div className="mt-16 pt-8 border-t border-heritage-border/80 grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
           <div className="space-y-1">
-            <span className="font-serif text-3xl sm:text-4xl font-bold text-heritage-dark">1049</span>
-            <p className="text-xs font-mono uppercase tracking-wider text-heritage-muted">Khởi nguồn di sản</p>
+            <span className="font-serif text-3xl sm:text-4xl font-bold text-heritage-dark">98.200 ₫</span>
+            <p className="text-xs font-mono uppercase tracking-wider text-heritage-muted">Mức giá sinh viên</p>
           </div>
           <div className="space-y-1">
-            <span className="font-serif text-3xl sm:text-4xl font-bold text-heritage-gold">0.025 mm</span>
-            <p className="text-xs font-mono uppercase tracking-wider text-heritage-muted">Độ phân giải lớp in 8K</p>
+            <span className="font-serif text-3xl sm:text-4xl font-bold text-heritage-gold">180+ gsm</span>
+            <p className="text-xs font-mono uppercase tracking-wider text-heritage-muted">Giấy mỹ thuật dày dặn</p>
           </div>
           <div className="space-y-1">
-            <span className="font-serif text-3xl sm:text-4xl font-bold text-heritage-dark">100%</span>
-            <p className="text-xs font-mono uppercase tracking-wider text-heritage-muted">Đo đạc tư liệu chuẩn</p>
+            <span className="font-serif text-3xl sm:text-4xl font-bold text-heritage-dark">&lt; 5 Phút</span>
+            <p className="text-xs font-mono uppercase tracking-wider text-heritage-muted">Podcast QR song ngữ</p>
           </div>
           <div className="space-y-1">
-            <span className="font-serif text-3xl sm:text-4xl font-bold text-heritage-gold">Độc Bản</span>
-            <p className="text-xs font-mono uppercase tracking-wider text-heritage-muted">Đánh số giới hạn</p>
+            <span className="font-serif text-3xl sm:text-4xl font-bold text-heritage-gold">100% DIY</span>
+            <p className="text-xs font-mono uppercase tracking-wider text-heritage-muted">Healing &amp; Xả stress</p>
           </div>
         </div>
       </div>

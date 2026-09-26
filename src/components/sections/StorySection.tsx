@@ -1,34 +1,34 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Scroll, Sparkles, Feather } from 'lucide-react';
+import { Scissors, Sparkles, Headphones } from 'lucide-react';
 import { SectionHeader } from '../common/SectionHeader';
 import { CloudScrollMotif, DongSonDrumMotif } from '../common/HeritageMotifs';
 
 export const StorySection: React.FC = () => {
   const pillars = [
     {
-      icon: Scroll,
-      title: 'Tôn Kính Khảo Cổ & Sử Liệu',
-      subtitle: 'Nghiên cứu nguyên mẫu',
+      icon: Scissors,
+      title: 'Tinh Thần DIY & Liệu Pháp Healing',
+      subtitle: 'Cắt dán thủ công chánh niệm',
       description:
-        'Mỗi tác phẩm của VietScape bắt đầu từ hàng tháng trời khảo cứu tư liệu khảo cổ, bản rập văn bia, ảnh chụp thời Pháp và các đồ án phục dựng của Viện Bảo tồn Di tích.',
-      highlight: 'Chuẩn xác tỉ lệ cấu kiện',
+        'Tạm rời xa màn hình điện thoại và sự bủa vây của mạng xã hội. 60-90 phút tập trung cắt, gấp, dán từng mảng giấy mang lại sự thư thái, kích hoạt tư duy hình học không gian và cảm giác chữa lành (healing) sâu sắc.',
+      highlight: 'Giảm stress & Rèn luyện tập trung',
     },
     {
       icon: Sparkles,
-      title: 'Kỹ Nghệ Quang Hóa 8K',
-      subtitle: 'Độ tinh xảo micromet',
+      title: 'Thiết Kế Low-poly Tối Giản Chuẩn Tỉ Lệ',
+      subtitle: 'Ngôn ngữ thị giác thời thượng',
       description:
-        'Sử dụng công nghệ in quang hóa photopolymer với ma trận điểm ảnh 8K siêu phân giải, lớp cắt 25 micromet tái hiện sắc nét cả đường thớ gỗ thời Lý hay hoa văn búp sen.',
-      highlight: 'Độ phân giải 0.025 mm',
+        'Thay vì lối phục dựng rườm rà dễ cong gãy, VietScape tinh lọc cấu trúc cổ điển thành hệ khối đa giác Low-poly hiện đại. Từng góc đao Chùa Một Cột, hàng cột Lăng Bác đều giữ trọn vẹn tỷ lệ vàng kiến trúc nguyên bản.',
+      highlight: 'Phong cách Minimalist Decor',
     },
     {
-      icon: Feather,
-      title: 'Hồn Cốt Nghệ Nhân Việt',
-      subtitle: 'Hoàn thiện thủ công',
+      icon: Headphones,
+      title: 'Trải Nghiệm Phygital & Podcast Song Ngữ',
+      subtitle: 'Chạm mô hình — Lắng nghe di sản',
       description:
-        'Sau khi đúc, từng chi tiết được nghệ nhân thủ công mài tỉa, chấm men giả cổ, lau sáp ong tự nhiên trên đế gỗ tần bì để toát lên hơi thở thời gian và hồn thiêng di sản.',
-      highlight: 'Sơn phủ thủ công độc bản',
+        'Sự kết hợp đột phá giữa sản phẩm vật lý (Physical) và trải nghiệm số (Digital). Quét mã QR in trên bao bì để mở ngay podcast âm thanh sống động (Anh - Việt) dưới 5 phút, được biên soạn từ nguồn sử liệu chuẩn xác.',
+      highlight: 'Audio Guide Song Ngữ < 5 phút',
     },
   ];
 
@@ -45,13 +45,13 @@ export const StorySection: React.FC = () => {
       <div className="max-w-7xl mx-auto space-y-16 relative z-10">
         {/* Section Header */}
         <SectionHeader
-          badge="Câu chuyện thương hiệu & Sứ mệnh"
+          badge="Câu chuyện khởi nghiệp & Sứ mệnh di sản"
           title={
             <>
-              Gìn Giữ <span className="text-gold-gradient">Hồn Thiêng Văn Hiến</span> Trong Kỷ Nguyên Số
+              Hồi Sinh Di Sản Bằng <span className="text-gold-gradient">Đôi Tay Người Trẻ</span> &amp; Công Nghệ Số
             </>
           }
-          subtitle="Chúng tôi tin rằng di sản không phải là hiện vật nằm yên sau lớp kính bảo tàng, mà là nguồn cảm hứng sống động cần được chạm tới, trân trọng và đồng hành cùng không gian sống đương đại."
+          subtitle="Khởi nguồn từ thực trạng quà lưu niệm Việt Nam còn nghèo nàn, cồng kềnh và thiếu chiều sâu văn hóa, nhóm sinh viên FPT University đã phát triển giải pháp kit giấy 3D kết hợp podcast song ngữ để lịch sử chạm tới trái tim thế hệ trẻ."
           dividerVariant="lotus"
         />
 
@@ -61,13 +61,13 @@ export const StorySection: React.FC = () => {
 
           <div className="max-w-4xl mx-auto text-center space-y-4">
             <span className="text-xs font-mono uppercase tracking-[0.25em] text-heritage-gold font-semibold block">
-              — Triết lý VietScape Models —
+              — Tuyên ngôn Dự án VietScape Models (Đồ án EXE101) —
             </span>
             <blockquote className="font-serif text-xl sm:text-2xl lg:text-3xl italic text-heritage-dark font-medium leading-relaxed">
-              &ldquo;Di sản không phải là đống tro tàn của quá khứ để hoài niệm, mà là ngọn lửa minh triết ngàn đời cần được tiếp nối và thắp sáng trong tâm khảm người Việt hôm nay.&rdquo;
+              &ldquo;Di sản không chỉ nằm im sau lớp kính viện bảo tàng. Di sản sống động nhất khi được chính bạn tự tay nâng niu, cắt dán từng nếp gấp và lắng nghe câu chuyện nghìn năm cất tiếng.&rdquo;
             </blockquote>
             <p className="text-xs font-mono text-heritage-muted pt-2">
-              Sứ mệnh đưa kiến trúc biểu tượng Việt Nam vươn tầm nghệ thuật sưu tầm quốc tế
+              Sứ mệnh biến từng góc bàn học tập, làm việc thành không gian kết nối văn hóa cội nguồn
             </p>
           </div>
         </div>

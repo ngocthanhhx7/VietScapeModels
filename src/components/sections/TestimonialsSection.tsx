@@ -16,24 +16,24 @@ const getInitials = (name: string): string => {
 export const TestimonialsSection: React.FC = () => {
   const pressPartners = [
     {
-      name: 'Tạp Chí Kiến Trúc Việt Nam',
-      role: 'Bảo trợ chuyên môn & Phục dựng',
-      category: 'Hội Kiến trúc sư Việt Nam',
+      name: 'CLB Mỹ Thuật & Thủ Công FPT',
+      role: 'Trải nghiệm workshop & DIY',
+      category: 'Cộng đồng sinh viên sáng tạo',
     },
     {
-      name: 'Di Sản & Văn Hóa Đương Đại',
-      role: 'Tạp chí giám định mỹ thuật',
-      category: 'Hội đồng Khoa học Văn hóa',
+      name: 'Nhà Sách Nhã Nam / Phương Nam',
+      role: 'Ký gửi & Trưng bày sách di sản',
+      category: 'Hệ thống phân phối văn hóa',
     },
     {
-      name: 'Vietnam Heritage Foundation',
-      role: 'Đối tác nghiên cứu khảo cổ',
-      category: 'Tổ chức Di sản Phi lợi nhuận',
+      name: 'Cộng Đồng Papercraft Việt Nam',
+      role: 'Bảo trợ kỹ thuật & Kiểm thử mẫu',
+      category: 'Cộng đồng nghệ thuật thủ công',
     },
     {
-      name: 'Heritage Diplomatic Gifts',
-      role: 'Quà tặng ngoại giao cấp cao',
-      category: 'Giao lưu văn hóa đối ngoại',
+      name: 'Quầy Lưu Niệm Văn Miếu — Quốc Tử Giám',
+      role: 'Quà lưu niệm du khách quốc tế',
+      category: 'Không gian văn hóa Thăng Long',
     },
   ];
 
@@ -50,13 +50,13 @@ export const TestimonialsSection: React.FC = () => {
       <div className="max-w-7xl mx-auto space-y-16 relative z-10">
         {/* Section Header */}
         <SectionHeader
-          badge="Góc nhìn chuyên gia & Người sưu tầm"
+          badge="Đánh giá thực chứng & Cố vấn khởi nghiệp"
           title={
             <>
-              Sự Đón Nhận Từ <span className="text-gold-gradient">Giới Chuyên Môn</span>
+              Cộng Đồng Người Dùng &amp; <span className="text-gold-gradient">Cố Vấn Đồ Án</span>
             </>
           }
-          subtitle="Niềm tin và sự đồng hành của các kiến trúc sư, nhà nghiên cứu di sản và các nhà sưu tầm mỹ thuật danh tiếng trong và ngoài nước."
+          subtitle="Khám phá cảm nhận chân thực từ học sinh, sinh viên, người đi làm và cố vấn khởi nghiệp EXE101 sau khi tự tay lắp ráp và lắng nghe podcast lịch sử."
           dividerVariant="lotus"
         />
 
@@ -87,7 +87,7 @@ export const TestimonialsSection: React.FC = () => {
                   </div>
                   <span className="inline-flex items-center gap-1 text-[11px] font-mono text-heritage-gold/90 bg-heritage-gold/10 px-2.5 py-0.5 rounded-full border border-heritage-gold/30">
                     <Award className="w-3 h-3" />
-                    Bản giám định bảo tàng
+                    Trải nghiệm DIY &amp; Podcast
                   </span>
                 </div>
 
@@ -113,7 +113,7 @@ export const TestimonialsSection: React.FC = () => {
                     {item.verifiedHeritageCollector && (
                       <span className="inline-flex items-center gap-1 text-[10px] font-mono text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200 shrink-0">
                         <CheckCircle className="w-3 h-3" />
-                        Nhà sưu tầm xác thực
+                        Trải nghiệm xác thực
                       </span>
                     )}
                   </div>
@@ -125,11 +125,11 @@ export const TestimonialsSection: React.FC = () => {
           ))}
         </div>
 
-        {/* Press & Diplomatic Partners Bar */}
+        {/* Press & Cultural Partners Bar */}
         <div className="pt-10 border-t border-heritage-border/80">
           <div className="text-center space-y-2 mb-8">
             <span className="text-xs font-mono uppercase tracking-[0.25em] text-heritage-muted block">
-              Đối tác văn hóa & Trưng bày ngoại giao
+              Mạng lưới cộng đồng &amp; Điểm ký gửi trải nghiệm
             </span>
           </div>
 

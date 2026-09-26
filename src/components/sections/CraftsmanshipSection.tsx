@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Microscope, Layers, Cpu, Paintbrush, Award, ShieldCheck, CheckCircle2 } from 'lucide-react';
+import { Microscope, Layers, Scissors, Headphones, ShieldCheck, CheckCircle2, HeartHandshake } from 'lucide-react';
 import { SectionHeader } from '../common/SectionHeader';
 import { DongSonDrumMotif } from '../common/HeritageMotifs';
 
@@ -8,62 +8,62 @@ export const CraftsmanshipSection: React.FC = () => {
   const steps = [
     {
       number: '01',
-      title: 'Khảo Cứu Tư Liệu & Đo Đạc',
-      vietnameseTitle: 'Khảo cổ & Khảo sát thực địa',
+      title: 'Khảo Sát Thực Địa & Thiết Kế Low-poly',
+      vietnameseTitle: 'Thiết kế đồ họa hình khối',
       description:
-        'Hàng tháng trời tra cứu bản vẽ cổ thời Pháp thuộc, bản rập văn bia Lý - Trần và các hồ sơ bảo tồn di tích cấp quốc gia để phục dựng nguyên vẹn tỉ lệ kiến trúc nguyên thủy.',
+        'Nghiên cứu kỹ lưỡng tỷ lệ thực địa của di tích, sử dụng phần mềm đồ họa chuyển hóa các chi tiết phức tạp thành hệ thống đa giác Low-poly sắc nét, trẻ trung mà vẫn giữ chuẩn thần thái kiến trúc.',
       icon: Microscope,
-      technicalSpec: 'Dung sai khảo cứu < 0.1%',
+      technicalSpec: 'Tỉ lệ khảo sát thực địa 100%',
     },
     {
       number: '02',
-      title: 'Dựng Hình Số Hóa 3D',
-      vietnameseTitle: 'Mô phỏng kiến trúc vi thể',
+      title: 'Bóc Tách 3D & Lập Trình Đường Cấn Gấp',
+      vietnameseTitle: 'Bóc tách mảng phẳng vi sai',
       description:
-        'Tái hiện từng mộng gỗ, vì kèo cánh sen, góc đao cong bằng phần mềm đồ họa tham số 3D chuyên sâu, đảm bảo cấu trúc chịu lực và ăn khớp tuyệt đối giữa các cấu kiện.',
-      icon: Cpu,
-      technicalSpec: 'Hơn 2.500.000 đa giác / mô hình',
+        'Lập trình thuật toán trải phẳng mô hình 3D thành các mảnh 2D tối ưu trang in. Dập sẵn đường cấn trợ lực (creasing lines) giúp bạn gập nếp sắc nét 100% mà không bị sờn rách mép giấy.',
+      icon: Layers,
+      technicalSpec: 'Dung sai khớp nối < 0.1 mm',
     },
     {
       number: '03',
-      title: 'In Quang Hóa DLP 8K',
-      vietnameseTitle: 'Đúc polymer siêu phân giải',
+      title: 'Tuyển Chọn Giấy Mỹ Thuật & In Kháng Ẩm',
+      vietnameseTitle: 'Vật liệu xanh FSC & Bền màu',
       description:
-        'Sử dụng công nghệ in quang hóa ma trận 8K với lớp cắt siêu mịn chỉ 0.025mm, cho phép hiển thị các đường chỉ ngói và hoa văn cuộn mây mà mắt thường khó lòng phân biệt lớp in.',
-      icon: Layers,
-      technicalSpec: 'Độ dày lớp cắt 25 micron',
+        'Sử dụng giấy bìa mỹ thuật cao cấp định lượng 180-250gsm đạt chuẩn FSC thân thiện môi trường. Phủ lớp bảo vệ vi hạt kháng ẩm và tia UV, chống phai màu trong khí hậu nhiệt đới ẩm Việt Nam.',
+      icon: Scissors,
+      technicalSpec: 'Bìa mỹ thuật 180 - 250 gsm',
     },
     {
       number: '04',
-      title: 'Chế Tác Thủ Công Độc Bản',
-      vietnameseTitle: 'Hồn cốt nghệ nhân Việt',
+      title: 'Tích Hợp QR Podcast & Đóng Gói Flat-pack',
+      vietnameseTitle: 'Trải nghiệm số Phygital độc quyền',
       description:
-        'Nghệ nhân mài giũa ba cấp độ nhám, quét bột đồng oxit patine giả cổ, sơn sa thạch khoáng tự nhiên và phủ sáp ong hữu cơ bảo vệ gỗ tần bì nguyên khối trường tồn với thời gian.',
-      icon: Paintbrush,
-      technicalSpec: '12 giờ hoàn thiện thủ công / tác phẩm',
+        'Khắc mã QR laser liên kết chuỗi podcast lịch sử song ngữ Anh - Việt. Bộ kit được đóng gói mỏng dẹt như cuốn sổ tay mỹ thuật, đóng hộp carton lạnh bảo vệ an toàn trên mọi chuyến bay.',
+      icon: Headphones,
+      technicalSpec: 'Podcast song ngữ EN-VI < 5 phút',
     },
   ];
 
   const materials = [
     {
-      name: 'High-Precision 8K Photopolymer',
-      role: 'Kết cấu kiến trúc chính',
-      detail: 'Resin cao cấp nhập khẩu có phụ gia chống co ngót và kháng tia UV, không bị ố vàng theo năm tháng.',
+      name: 'Giấy Mỹ Thuật Bìa Dày (180 - 250gsm)',
+      role: 'Kết cấu đa giác 3D chính',
+      detail: 'Độ đanh dẻo lý tưởng, bắt keo cực nhạy, chịu lực gấp đa chiều và đạt chứng chỉ rừng bền vững FSC.',
     },
     {
-      name: 'Gỗ Tần Bì & Mun Hoa Nguyên Khối',
-      role: 'Đế trưng bày & Chân bệ',
-      detail: 'Gỗ tự nhiên sấy tiêu chuẩn 8% độ ẩm, phay CNC rãnh Trống đồng Đông Sơn và lau dầu sáp ong tự nhiên.',
+      name: 'Mực In Khoáng Gốc Nước Kháng UV',
+      role: 'Sắc độ di sản chuẩn mực',
+      detail: 'Màu sắc thuần khiết mô phỏng ngói hoàng lưu ly, gạch chu sa và sa thạch Ba Đình, an toàn tuyệt đối khi tiếp xúc.',
     },
     {
-      name: 'Bột Khoáng Sa Thạch & Sơn Gốc Nước',
-      role: 'Bề mặt mô phỏng đá hoa cương',
-      detail: 'Khoáng chất tự nhiên tạo hiệu ứng bề mặt nhám mờ như đá nguyên khối tại Ba Đình hay tường gạch Bát Tràng.',
+      name: 'Keo Dán Thủ Công Đầu Kim',
+      role: 'Hệ thống liên kết bền vững',
+      detail: 'Dạng keo mô hình khô nhanh 15 giây, không mùi, không làm cong vênh giấy, tạo khối liên kết vững chãi.',
     },
     {
-      name: 'Đồng Thau Cổ & Patine Oxit',
-      role: 'Chi tiết mái đao & Biển tên',
-      detail: 'Đồng nguyên chất dập nổi mạ giả cổ, khắc laser tên tác phẩm và số thứ tự sưu tầm độc bản.',
+      name: 'Bao Bì Carton Lạnh Flat-Pack',
+      role: 'Đóng gói mỏng gọn chống va đập',
+      detail: 'Độ dày dưới 10mm, trọng lượng siêu nhẹ 150g, cực kỳ thuận tiện mang trong ba lô hoặc hành lý máy bay.',
     },
   ];
 
@@ -77,13 +77,13 @@ export const CraftsmanshipSection: React.FC = () => {
       <div className="max-w-7xl mx-auto space-y-16 relative z-10">
         {/* Section Header */}
         <SectionHeader
-          badge="Kỹ nghệ chế tác bảo tàng"
+          badge="Quy trình chế tác giấy & Đóng gói Flat-pack"
           title={
             <>
-              Quy Trình Chế Tác <span className="text-gold-gradient">Kỳ Công & Chuẩn Xác</span>
+              Kỹ Nghệ Papercraft &amp; <span className="text-gold-gradient">Hệ Sinh Thái Phygital</span>
             </>
           }
-          subtitle="Sự kết hợp hoàn hảo giữa công nghệ quang hóa thế hệ mới và bàn tay tài hoa của nghệ nhân điêu khắc truyền thống Việt Nam."
+          subtitle="Khám phá hành trình chuyển hóa công trình di sản ngàn năm thành bộ kit giấy dập nếp chuẩn xác từng milimet, dễ dàng tự ráp và bền vững cùng thời gian."
           dividerVariant="lotus"
         />
 
@@ -139,15 +139,15 @@ export const CraftsmanshipSection: React.FC = () => {
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-heritage-border/70 pb-6">
             <div>
               <span className="text-xs font-mono uppercase tracking-[0.25em] text-heritage-gold font-semibold block">
-                Vật liệu thượng hạng
+                Vật liệu an toàn &amp; Thân thiện
               </span>
               <h3 className="font-serif text-2xl sm:text-3xl font-bold text-heritage-dark mt-1">
-                Tuyển Chọn Chất Liệu Bền Vững Với Thời Gian
+                Bộ Kit Giấy Bền Vững Cùng Không Gian Sống
               </h3>
             </div>
             <div className="flex items-center gap-2 text-xs font-mono text-heritage-muted">
               <ShieldCheck className="w-4 h-4 text-heritage-gold" />
-              <span>Bảo hành chống ố vàng & giòn nứt 10 năm</span>
+              <span>Chống ẩm mốc và phai màu trong khí hậu Việt Nam</span>
             </div>
           </div>
 
@@ -166,24 +166,24 @@ export const CraftsmanshipSection: React.FC = () => {
             ))}
           </div>
 
-          {/* Certificate of Authenticity Highlight */}
+          {/* Guarantee Box: Replacement Part Warranty */}
           <div className="p-6 rounded-2xl bg-white border border-heritage-gold/40 flex flex-col sm:flex-row items-center justify-between gap-6 shadow-xs">
             <div className="flex items-center gap-4">
               <div className="w-12 h-12 rounded-full bg-heritage-gold/15 flex items-center justify-center text-heritage-gold shrink-0 border border-heritage-gold/30">
-                <Award className="w-6 h-6" />
+                <HeartHandshake className="w-6 h-6" />
               </div>
               <div className="space-y-0.5">
                 <h4 className="font-serif text-lg font-bold text-heritage-dark">
-                  Chứng Thư Giám Định Nghệ Thuật Đi Kèm
+                  Chính Sách &quot;Yên Tâm Trổ Tài — Đổi Bù Mảnh Hỏng 1-Đổi-1&quot;
                 </h4>
                 <p className="text-xs text-heritage-muted font-sans">
-                  Mỗi mô hình xuất xưởng mang một số thứ tự duy nhất (Serial Number), có chữ ký xác nhận của chủ nhiệm đồ án phục dựng và bảo hành trọn đời.
+                  Nếu trong quá trình cắt dán bạn vô tình làm rách nếp gấp hoặc mất chi tiết, VietScape sẽ gửi bù tấm chi tiết thay thế hoàn toàn miễn phí!
                 </p>
               </div>
             </div>
 
             <div className="px-4 py-2 rounded-xl bg-heritage-sand font-mono text-xs text-heritage-dark border border-heritage-border shrink-0">
-              SERIAL: <strong className="text-heritage-gold">VS-HERITAGE-XXXX</strong>
+              CAM KẾT: <strong className="text-heritage-gold">BẢO HÀNH DIY 100%</strong>
             </div>
           </div>
         </div>

@@ -8,10 +8,11 @@ import CraftsmanshipSection from './components/sections/CraftsmanshipSection';
 import InteractiveViewer from './components/sections/InteractiveViewer';
 import TestimonialsSection from './components/sections/TestimonialsSection';
 import InquirySection from './components/sections/InquirySection';
+import FloatingContactDock from './components/common/FloatingContactDock';
 
 export const App: React.FC = () => {
   const [selectedViewerModelId, setSelectedViewerModelId] = useState<string>('chua-mot-cot');
-  const [inquiryModelInterest, setInquiryModelInterest] = useState<string>('Chùa Một Cột');
+  const [inquiryModelInterest, setInquiryModelInterest] = useState<string>('Kit Chùa Một Cột — Thăng Long Hà Nội (98.200 VNĐ)');
 
   const scrollToElement = (id: string) => {
     const el = document.getElementById(id);
@@ -71,6 +72,15 @@ export const App: React.FC = () => {
 
       {/* 9. Footer & Cultural Accents */}
       <Footer />
+
+      {/* Realtime Multi-channel Floating Contact Dock (Official Info) */}
+      <FloatingContactDock
+        hotline="0852699188"
+        hotlineDisplay="0852 699 188"
+        zaloUrl="https://zalo.me/0852699188"
+        messengerUrl="https://m.me/minquan27"
+        facebookUrl="https://www.facebook.com/minquan27"
+      />
     </div>
   );
 };

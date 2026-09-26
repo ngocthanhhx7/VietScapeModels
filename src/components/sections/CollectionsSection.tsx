@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Compass, Sparkles, Check, Eye } from 'lucide-react';
+import { Compass, Sparkles, Check, Eye, Headphones, Wrench, ArrowRight } from 'lucide-react';
 import { SectionHeader } from '../common/SectionHeader';
 import { modelsData } from '../../data/modelsData';
 
@@ -18,8 +18,10 @@ export const CollectionsSection: React.FC<CollectionsSectionProps> = ({
     'chua-mot-cot': 'perspective',
     'lang-bac': 'perspective',
     'van-mieu': 'perspective',
-    'ngo-mon-hue': 'perspective',
   });
+
+  const availableCount = modelsData.filter((m) => m.status === 'available').length;
+  const upcomingCount = modelsData.filter((m) => m.status === 'upcoming').length;
 
   const filteredModels = modelsData.filter((m) => {
     if (filter === 'all') return true;
@@ -40,51 +42,53 @@ export const CollectionsSection: React.FC<CollectionsSectionProps> = ({
       <div className="max-w-7xl mx-auto space-y-16 relative z-10">
         {/* Section Header */}
         <SectionHeader
-          badge="Bộ sưu tập di sản văn hóa"
+          badge="Bộ sưu tập Kit Giấy 3D DIY — EXE101"
           title={
             <>
-              Tuyệt Tác Kiến Trúc <span className="text-gold-gradient">Thu Nhỏ</span>
+              Kỳ Quan Kiến Trúc <span className="text-gold-gradient">Cắt Dán Tinh Tế</span>
             </>
           }
-          subtitle="Từng tác phẩm là một công trình biểu tượng được số hóa và phục dựng nguyên vẹn theo chuẩn mực kiến trúc và khảo cổ học Việt Nam."
+          subtitle="Mỗi bộ kit giấy phẳng flat-pack được thiết kế chuẩn xác từng đường gấp, kèm mã QR dẫn thẳng đến podcast lịch sử song ngữ Anh - Việt sống động dưới 5 phút."
           dividerVariant="lotus"
         />
 
         {/* Filter Navigation Tabs */}
-        <div className="flex items-center justify-center w-full">
-          <div className="bg-white/80 backdrop-blur-md p-1.5 rounded-2xl sm:rounded-full border border-heritage-border shadow-2xs flex flex-wrap sm:flex-nowrap items-center justify-center gap-1 max-w-full">
-            <button
-              onClick={() => setFilter('all')}
-              className={`px-3.5 sm:px-5 py-1.5 sm:py-2 rounded-full text-xs font-mono transition-all ${
-                filter === 'all'
-                  ? 'bg-heritage-dark text-heritage-sand font-semibold shadow-xs'
-                  : 'text-heritage-muted hover:text-heritage-dark'
-              }`}
-            >
-              Tất cả tác phẩm ({modelsData.length})
-            </button>
-            <button
-              onClick={() => setFilter('available')}
-              className={`px-3.5 sm:px-5 py-1.5 sm:py-2 rounded-full text-xs font-mono transition-all ${
-                filter === 'available'
-                  ? 'bg-heritage-dark text-heritage-sand font-semibold shadow-xs'
-                  : 'text-heritage-muted hover:text-heritage-dark'
-              }`}
-            >
-              Hiện có sẵn (2)
-            </button>
-            <button
-              onClick={() => setFilter('upcoming')}
-              className={`px-3.5 sm:px-5 py-1.5 sm:py-2 rounded-full text-xs font-mono transition-all ${
-                filter === 'upcoming'
-                  ? 'bg-heritage-dark text-heritage-sand font-semibold shadow-xs'
-                  : 'text-heritage-muted hover:text-heritage-dark'
-              }`}
-            >
-              Sắp ra mắt (2)
-            </button>
+        {upcomingCount > 0 && (
+          <div className="flex items-center justify-center w-full">
+            <div className="bg-white/80 backdrop-blur-md p-1.5 rounded-2xl sm:rounded-full border border-heritage-border shadow-2xs flex flex-wrap sm:flex-nowrap items-center justify-center gap-1 max-w-full">
+              <button
+                onClick={() => setFilter('all')}
+                className={`px-3.5 sm:px-5 py-1.5 sm:py-2 rounded-full text-xs font-mono transition-all cursor-pointer ${
+                  filter === 'all'
+                    ? 'bg-heritage-dark text-heritage-sand font-semibold shadow-xs'
+                    : 'text-heritage-muted hover:text-heritage-dark'
+                }`}
+              >
+                Tất cả bộ Kit ({modelsData.length})
+              </button>
+              <button
+                onClick={() => setFilter('available')}
+                className={`px-3.5 sm:px-5 py-1.5 sm:py-2 rounded-full text-xs font-mono transition-all cursor-pointer ${
+                  filter === 'available'
+                    ? 'bg-heritage-dark text-heritage-sand font-semibold shadow-xs'
+                    : 'text-heritage-muted hover:text-heritage-dark'
+                }`}
+              >
+                Hiện có sẵn ({availableCount})
+              </button>
+              <button
+                onClick={() => setFilter('upcoming')}
+                className={`px-3.5 sm:px-5 py-1.5 sm:py-2 rounded-full text-xs font-mono transition-all cursor-pointer ${
+                  filter === 'upcoming'
+                    ? 'bg-heritage-dark text-heritage-sand font-semibold shadow-xs'
+                    : 'text-heritage-muted hover:text-heritage-dark'
+                }`}
+              >
+                Dự án mở rộng ({upcomingCount})
+              </button>
+            </div>
           </div>
-        </div>
+        )}
 
         {/* Models Grid Showcase */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
@@ -113,12 +117,12 @@ export const CollectionsSection: React.FC<CollectionsSectionProps> = ({
                     {model.status === 'available' ? (
                       <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono bg-emerald-50 text-emerald-800 border border-emerald-200">
                         <span className="w-1.5 h-1.5 rounded-full bg-emerald-600 animate-pulse" />
-                        Có sẵn giới hạn ({model.editionLimit} bản)
+                        Kit DIY Sẵn Sàng (98.2K)
                       </span>
                     ) : (
                       <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono bg-amber-50 text-amber-800 border border-amber-200">
                         <span className="w-1.5 h-1.5 rounded-full bg-amber-500" />
-                        Đang chế tác bản mẫu
+                        Giai đoạn 2 (Dự kiến)
                       </span>
                     )}
                   </div>
@@ -138,7 +142,7 @@ export const CollectionsSection: React.FC<CollectionsSectionProps> = ({
                     <div className="inline-flex items-center gap-1 bg-white/90 backdrop-blur-md p-1 rounded-lg border border-heritage-border shadow-2xs">
                       <button
                         onClick={() => toggleAngle(model.id, 'perspective')}
-                        className={`px-3 py-1 rounded text-xs font-mono transition-colors ${
+                        className={`px-3 py-1 rounded text-xs font-mono transition-colors cursor-pointer ${
                           currentAngle === 'perspective'
                             ? 'bg-heritage-dark text-heritage-sand font-medium'
                             : 'text-heritage-muted hover:text-heritage-dark'
@@ -148,7 +152,7 @@ export const CollectionsSection: React.FC<CollectionsSectionProps> = ({
                       </button>
                       <button
                         onClick={() => toggleAngle(model.id, 'front')}
-                        className={`px-3 py-1 rounded text-xs font-mono transition-colors ${
+                        className={`px-3 py-1 rounded text-xs font-mono transition-colors cursor-pointer ${
                           currentAngle === 'front'
                             ? 'bg-heritage-dark text-heritage-sand font-medium'
                             : 'text-heritage-muted hover:text-heritage-dark'
@@ -158,13 +162,20 @@ export const CollectionsSection: React.FC<CollectionsSectionProps> = ({
                       </button>
                     </div>
 
-                    <button
-                      onClick={() => onSelectModelForViewer(model.id)}
-                      className="inline-flex items-center gap-1.5 text-xs font-mono text-heritage-gold hover:text-heritage-gold-dark transition-colors font-medium bg-white/90 backdrop-blur-md px-3 py-1.5 rounded-lg border border-heritage-border hover:border-heritage-gold shadow-2xs"
-                    >
-                      <Eye className="w-3.5 h-3.5" />
-                      <span>Xem 3D tương tác</span>
-                    </button>
+                    <div className="flex items-center gap-2">
+                      <span className="hidden sm:inline-flex items-center gap-1 text-[11px] font-mono text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-lg border border-emerald-200">
+                        <Headphones className="w-3 h-3 text-emerald-600" />
+                        <span>QR Podcast</span>
+                      </span>
+
+                      <button
+                        onClick={() => onSelectModelForViewer(model.id)}
+                        className="inline-flex items-center gap-1.5 text-xs font-mono text-heritage-gold hover:text-heritage-gold-dark transition-colors font-medium bg-white/90 backdrop-blur-md px-3 py-1.5 rounded-lg border border-heritage-border hover:border-heritage-gold shadow-2xs cursor-pointer"
+                      >
+                        <Eye className="w-3.5 h-3.5" />
+                        <span>Xem 3D tương tác</span>
+                      </button>
+                    </div>
                   </div>
                 </div>
 
@@ -183,8 +194,8 @@ export const CollectionsSection: React.FC<CollectionsSectionProps> = ({
 
                       {model.priceEstimateVnd && (
                         <div className="text-right">
-                          <span className="text-[11px] font-mono text-heritage-muted block">Ước tính giá</span>
-                          <span className="font-serif text-lg font-bold text-heritage-dark">
+                          <span className="text-[11px] font-mono text-heritage-muted block">Giá bộ Kit</span>
+                          <span className="font-serif text-xl font-bold text-heritage-dark text-emerald-800">
                             {model.priceEstimateVnd}
                           </span>
                         </div>
@@ -199,8 +210,8 @@ export const CollectionsSection: React.FC<CollectionsSectionProps> = ({
                   {/* Architectural Specifications Table Grid */}
                   <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 py-3 border-y border-heritage-border/70 text-xs font-mono">
                     <div>
-                      <span className="text-heritage-muted block text-[11px]">Thời kỳ:</span>
-                      <span className="font-semibold text-heritage-dark">{model.era}</span>
+                      <span className="text-heritage-muted block text-[11px]">Quy cách:</span>
+                      <span className="font-semibold text-heritage-dark">{model.sheetCount || 4} tờ bìa</span>
                     </div>
                     <div>
                       <span className="text-heritage-muted block text-[11px]">Kích thước:</span>
@@ -209,13 +220,13 @@ export const CollectionsSection: React.FC<CollectionsSectionProps> = ({
                       </span>
                     </div>
                     <div>
-                      <span className="text-heritage-muted block text-[11px]">Trọng lượng:</span>
-                      <span className="font-semibold text-heritage-dark">{model.dimensions.weightGrams} g</span>
+                      <span className="text-heritage-muted block text-[11px]">Độ khó DIY:</span>
+                      <span className="font-semibold text-heritage-dark">{model.assemblyTimeMinutes || 60} phút</span>
                     </div>
                     <div>
                       <span className="text-heritage-muted block text-[11px]">Chất liệu:</span>
                       <span className="font-semibold text-heritage-dark truncate block" title={model.material}>
-                        Resin 8K
+                        Bìa mỹ thuật &gt;180g
                       </span>
                     </div>
                   </div>
@@ -236,15 +247,15 @@ export const CollectionsSection: React.FC<CollectionsSectionProps> = ({
                   <div className="pt-2 flex items-center gap-3">
                     <button
                       onClick={() => onSelectModelForInquiry(model.name)}
-                      className="flex-1 py-3 px-5 rounded-xl text-xs font-mono uppercase tracking-wider font-semibold bg-heritage-dark text-heritage-sand hover:bg-heritage-gold transition-colors duration-300 flex items-center justify-center gap-2"
+                      className="flex-1 py-3 px-5 rounded-xl text-xs font-mono uppercase tracking-wider font-semibold bg-heritage-dark text-heritage-sand hover:bg-heritage-gold transition-colors duration-300 flex items-center justify-center gap-2 cursor-pointer shadow-xs hover:shadow-md"
                     >
                       <Sparkles className="w-3.5 h-3.5 text-heritage-gold group-hover:text-heritage-sand" />
-                      <span>{model.status === 'available' ? 'Đăng ký sở hữu' : 'Đăng ký chờ sớm'}</span>
+                      <span>{model.status === 'available' ? 'Đặt mua Kit (98.2K)' : 'Đăng ký nhận tin'}</span>
                     </button>
 
                     <button
                       onClick={() => onSelectModelForViewer(model.id)}
-                      className="p-3 rounded-xl border border-heritage-border hover:border-heritage-gold text-heritage-dark hover:bg-heritage-cream/40 transition-colors"
+                      className="p-3 rounded-xl border border-heritage-border hover:border-heritage-gold text-heritage-dark hover:bg-heritage-cream/40 transition-colors cursor-pointer"
                       title="Mở trong trình tương tác 3D"
                     >
                       <Compass className="w-4 h-4 text-heritage-gold" />
@@ -255,6 +266,85 @@ export const CollectionsSection: React.FC<CollectionsSectionProps> = ({
             );
           })}
         </div>
+
+        {/* Dedicated Cross-Sell Showcase: Combo Dụng Cụ DIY Chuyên Dụng */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="rounded-3xl bg-gradient-to-br from-[#FFFDF9] via-white to-heritage-cream/40 border-2 border-heritage-gold/50 p-6 sm:p-10 shadow-lg relative overflow-hidden"
+        >
+          <div className="absolute top-0 right-0 w-64 h-64 bg-radial-spotlight rounded-bl-full pointer-events-none opacity-40" />
+
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10">
+            <div className="lg:col-span-8 space-y-4">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-heritage-gold/15 text-heritage-dark text-xs font-mono font-semibold border border-heritage-gold/30">
+                <Wrench className="w-3.5 h-3.5 text-heritage-gold" />
+                <span>Ưu Đãi Bán Kèm Khi Mua Kit Mô Hình</span>
+              </div>
+
+              <h3 className="font-serif text-2xl sm:text-3xl font-bold text-heritage-dark">
+                Combo Bộ Dụng Cụ DIY Chuyên Dụng <span className="text-gold-gradient">(+39.000 ₫)</span>
+              </h3>
+
+              <p className="text-sm text-heritage-muted font-sans leading-relaxed max-w-2xl">
+                Để trải nghiệm lắp ráp trở nên mượt mà và chuẩn xác nhất, VietScape trang bị bộ 3 dụng cụ thủ công chuyên biệt, khắc phục hoàn toàn nỗi lo cong vênh hoặc rách nếp gấp:
+              </p>
+
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2">
+                <div className="p-3.5 rounded-2xl bg-white border border-heritage-border/70 space-y-1 shadow-2xs">
+                  <div className="w-7 h-7 rounded-lg bg-heritage-gold/10 text-heritage-gold flex items-center justify-center font-bold text-xs">
+                    01
+                  </div>
+                  <h4 className="text-xs font-bold text-heritage-dark">Keo Dán Đầu Kim</h4>
+                  <p className="text-[11px] text-heritage-muted">Khô trong 15 giây, đầu kim siêu nhỏ không lem bẩn và không nhăn giấy.</p>
+                </div>
+
+                <div className="p-3.5 rounded-2xl bg-white border border-heritage-border/70 space-y-1 shadow-2xs">
+                  <div className="w-7 h-7 rounded-lg bg-heritage-gold/10 text-heritage-gold flex items-center justify-center font-bold text-xs">
+                    02
+                  </div>
+                  <h4 className="text-xs font-bold text-heritage-dark">Nhíp Thép Đầu Cong</h4>
+                  <p className="text-[11px] text-heritage-muted">Định vị chính xác các khe nẹp dưới 5mm, giúp ngón tay thao tác dễ dàng.</p>
+                </div>
+
+                <div className="p-3.5 rounded-2xl bg-white border border-heritage-border/70 space-y-1 shadow-2xs">
+                  <div className="w-7 h-7 rounded-lg bg-heritage-gold/10 text-heritage-gold flex items-center justify-center font-bold text-xs">
+                    03
+                  </div>
+                  <h4 className="text-xs font-bold text-heritage-dark">Dao Trổ Nghệ Thuật</h4>
+                  <p className="text-[11px] text-heritage-muted">Lưỡi vát 30 độ sắc bén trổ dứt khoát các đường gờ giấy tinh vi.</p>
+                </div>
+              </div>
+            </div>
+
+            <div className="lg:col-span-4 text-center lg:text-right space-y-4 lg:border-l lg:border-heritage-border/60 lg:pl-8">
+              <div className="space-y-1">
+                <span className="text-xs font-mono text-heritage-muted block">Giá mua kèm Kit:</span>
+                <div className="flex items-baseline justify-center lg:justify-end gap-2">
+                  <span className="font-serif text-3xl font-bold text-heritage-dark text-emerald-800">
+                    +39.000 ₫
+                  </span>
+                  <span className="text-xs font-mono line-through text-heritage-muted">
+                    65.000 ₫
+                  </span>
+                </div>
+                <span className="text-[11px] font-mono text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full inline-block mt-1">
+                  Tiết kiệm 40% khi mua kèm
+                </span>
+              </div>
+
+              <button
+                onClick={() => onSelectModelForInquiry('Combo Kit + Bộ dụng cụ DIY (+39K)')}
+                className="w-full py-3.5 px-6 rounded-2xl text-xs font-mono uppercase tracking-wider font-semibold bg-heritage-dark text-heritage-sand hover:bg-heritage-gold transition-all duration-300 flex items-center justify-center gap-2 shadow-md hover:shadow-lg cursor-pointer"
+              >
+                <span>Thêm Combo Vào Đơn Hàng</span>
+                <ArrowRight className="w-4 h-4" />
+              </button>
+            </div>
+          </div>
+        </motion.div>
       </div>
     </section>
   );

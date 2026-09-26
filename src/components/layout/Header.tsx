@@ -16,11 +16,11 @@ export const Header: React.FC = () => {
 
   const navLinks = [
     { label: 'Di sản & Sứ mệnh', href: '#story' },
-    { label: 'Bộ sưu tập', href: '#collections' },
-    { label: 'Kỹ nghệ chế tác', href: '#craftsmanship' },
-    { label: 'Trải nghiệm 3D', href: '#interactive-3d' },
-    { label: 'Ý kiến chuyên gia', href: '#testimonials' },
-    { label: 'Liên hệ', href: '#contact' },
+    { label: 'Bộ sưu tập Kit', href: '#collections' },
+    { label: 'Kỹ nghệ Papercraft', href: '#craftsmanship' },
+    { label: 'Trải nghiệm 3D & Audio', href: '#interactive-3d' },
+    { label: 'Đánh giá cộng đồng', href: '#testimonials' },
+    { label: 'Đặt hàng & Hợp tác', href: '#contact' },
   ];
 
   const handleNavClick = (href: string) => {
@@ -56,8 +56,8 @@ export const Header: React.FC = () => {
             <span className="font-serif text-xl tracking-[0.12em] font-bold text-heritage-dark leading-none group-hover:text-heritage-gold transition-colors">
               VIETSCAPE
             </span>
-            <span className="font-mono text-[9px] uppercase tracking-[0.3em] text-heritage-gold font-medium mt-1">
-              Heritage Models
+            <span className="font-mono text-[9px] uppercase tracking-[0.25em] text-heritage-gold font-medium mt-1">
+              3D Papercraft &amp; Audio Heritage
             </span>
           </div>
         </a>
@@ -78,9 +78,9 @@ export const Header: React.FC = () => {
         {/* Action Button & Hotline */}
         <div className="hidden sm:flex items-center gap-4">
           <div className="hidden xl:flex flex-col text-right font-mono text-[11px] leading-tight">
-            <span className="text-heritage-muted">Hỗ trợ trưng bày</span>
-            <a href="tel:0988000888" className="text-heritage-dark font-semibold hover:text-heritage-gold transition-colors">
-              +84 988 888 888
+            <span className="text-heritage-muted">Hotline / Zalo dự án</span>
+            <a href="tel:0852699188" className="text-heritage-dark font-semibold hover:text-heritage-gold transition-colors">
+              0852 699 188
             </a>
           </div>
 
@@ -89,7 +89,7 @@ export const Header: React.FC = () => {
             className="group relative inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-xs font-mono uppercase tracking-wider font-semibold bg-heritage-dark text-heritage-sand overflow-hidden shadow-sm hover:shadow-md transition-all hover:bg-heritage-gold duration-300"
           >
             <Sparkles className="w-3.5 h-3.5 text-heritage-gold group-hover:text-heritage-sand transition-colors" />
-            <span>Đặt trước tác phẩm</span>
+            <span>Đặt Mua Kit DIY (98.2K)</span>
             <ArrowUpRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
           </button>
         </div>
@@ -121,12 +121,18 @@ export const Header: React.FC = () => {
               </button>
             ))}
             <div className="pt-3 flex flex-col gap-3">
+              <a
+                href="tel:0852699188"
+                className="text-center py-2 text-xs font-mono text-heritage-gold border border-heritage-gold/30 rounded-full"
+              >
+                Hotline: 0852 699 188
+              </a>
               <button
                 onClick={() => handleNavClick('#contact')}
                 className="w-full py-3 rounded-full text-center text-xs font-mono uppercase tracking-wider font-semibold bg-heritage-dark text-heritage-sand flex items-center justify-center gap-2 hover:bg-heritage-gold transition-colors"
               >
                 <Sparkles className="w-4 h-4 text-heritage-gold" />
-                <span>Đặt trước tác phẩm</span>
+                <span>Đặt Mua Kit DIY (98.2K)</span>
               </button>
             </div>
           </div>

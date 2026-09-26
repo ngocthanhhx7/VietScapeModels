@@ -10,31 +10,38 @@ import {
   AlertCircle,
   X,
   FileCheck2,
+  Wrench,
+  PackageCheck,
+  Sparkles,
+  ExternalLink,
 } from 'lucide-react';
 import { SectionHeader } from '../common/SectionHeader';
 import { DongSonDrumMotif, LyLotusMotif } from '../common/HeritageMotifs';
 import { InquiryFormData, InquiryFormErrors } from '../../types';
+import { sendInquiryEmail, calculateEstimatedPrice } from '../../services/emailService';
 
 interface InquirySectionProps {
   initialModelInterest?: string;
 }
 
 const INQUIRY_TYPES = [
-  { id: 'preorder', label: 'Đặt trước mô hình (Pre-order)', shortLabel: 'Đặt trước' },
-  { id: 'corporate_gift', label: 'Quà tặng ngoại giao / doanh nghiệp', shortLabel: 'Quà ngoại giao' },
-  { id: 'custom_commission', label: 'Đặt đúc theo đồ án riêng (Bespoke)', shortLabel: 'Đồ án riêng' },
-  { id: 'partnership', label: 'Hợp tác giám định & phân phối', shortLabel: 'Hợp tác' },
+  { id: 'retail_diy', label: 'Đặt mua Kit DIY lẻ (98.200 ₫)', shortLabel: 'Kit DIY lẻ' },
+  { id: 'combo_deal', label: 'Combo Kit + Bộ dụng cụ chuyên dụng (137.200 ₫)', shortLabel: 'Combo Kit + Dụng cụ' },
+  { id: 'workshop_school', label: 'Đặt cho Trường học / CLB / Workshop (Chiết khấu)', shortLabel: 'Workshop / Trường học' },
+  { id: 'corporate_gift', label: 'Quà lưu niệm văn hóa / Doanh nghiệp', shortLabel: 'Quà lưu niệm' },
+  { id: 'partnership', label: 'Hợp tác ký gửi (Nhà sách, Quầy lưu niệm, Bảo tàng)', shortLabel: 'Hợp tác ký gửi' },
 ] as const;
 
 export const InquirySection: React.FC<InquirySectionProps> = ({
-  initialModelInterest = 'Chùa Một Cột',
+  initialModelInterest = 'Kit Chùa Một Cột — Thăng Long Hà Nội (98.200 VNĐ)',
 }) => {
   const [formData, setFormData] = useState<InquiryFormData>({
     fullName: '',
     phoneNumber: '',
     email: '',
     modelInterest: initialModelInterest,
-    inquiryType: 'preorder',
+    includeToolCombo: false,
+    inquiryType: 'retail_diy',
     message: '',
   });
 
@@ -47,51 +54,58 @@ export const InquirySection: React.FC<InquirySectionProps> = ({
 
   const [errors, setErrors] = useState<InquiryFormErrors>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submissionError, setSubmissionError] = useState<{ message: string; mailtoUrl?: string } | null>(null);
   const [successModalData, setSuccessModalData] = useState<{
     ticketId: string;
     submittedAt: string;
     fullName: string;
     modelInterest: string;
     inquiryTypeLabel: string;
+    estimatedPrice: string;
+    includeToolCombo: boolean;
+    simulated?: boolean;
   } | null>(null);
 
   // Close modal on ESC key
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape' && successModalData) {
-        setSuccessModalData(null);
+      if (e.key === 'Escape') {
+        if (successModalData) setSuccessModalData(null);
+        if (submissionError) setSubmissionError(null);
       }
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [successModalData]);
+  }, [successModalData, submissionError]);
 
-  const validateField = (field: keyof InquiryFormData, value: string): string | undefined => {
+  const validateField = (field: keyof InquiryFormData, value: unknown): string | undefined => {
     switch (field) {
       case 'fullName':
-        if (!value.trim()) return 'Vui lòng nhập họ và tên của bạn.';
+        if (typeof value !== 'string' || !value.trim()) return 'Vui lòng nhập họ và tên của bạn.';
         if (value.trim().length < 2) return 'Họ tên phải có ít nhất 2 ký tự.';
         return undefined;
       case 'phoneNumber': {
-        const cleanedPhone = value.replace(/\s+/g, '');
+        const strVal = typeof value === 'string' ? value : '';
+        const cleanedPhone = strVal.replace(/\s+/g, '');
         const phoneRegex = /^(0|\+84)[3|5|7|8|9][0-9]{8}$/;
         if (!cleanedPhone) return 'Vui lòng nhập số điện thoại liên hệ.';
         if (!phoneRegex.test(cleanedPhone)) {
-          return 'Số điện thoại không hợp lệ (Ví dụ: 0988 888 888 hoặc +84988888888).';
+          return 'Số điện thoại không hợp lệ (Ví dụ: 0852 699 188 hoặc 0988 888 888).';
         }
         return undefined;
       }
       case 'email': {
+        const strVal = typeof value === 'string' ? value : '';
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!value.trim()) return 'Vui lòng nhập địa chỉ email.';
-        if (!emailRegex.test(value.trim())) return 'Địa chỉ email không đúng định dạng (Ví dụ: name@domain.com).';
+        if (!strVal.trim()) return 'Vui lòng nhập địa chỉ email.';
+        if (!emailRegex.test(strVal.trim())) return 'Địa chỉ email không đúng định dạng (Ví dụ: name@domain.com).';
         return undefined;
       }
       case 'modelInterest':
-        if (!value.trim()) return 'Vui lòng lựa chọn tác phẩm kiến trúc quan tâm.';
+        if (typeof value !== 'string' || !value.trim()) return 'Vui lòng lựa chọn tác phẩm kiến trúc quan tâm.';
         return undefined;
       case 'message':
-        if (!value.trim()) return 'Vui lòng chia sẻ nội dung yêu cầu hoặc câu hỏi của bạn.';
+        if (typeof value !== 'string' || !value.trim()) return 'Vui lòng chia sẻ nội dung yêu cầu hoặc câu hỏi của bạn.';
         if (value.trim().length < 10) return 'Lời nhắn cần ít nhất 10 ký tự để chúng tôi hỗ trợ tốt nhất.';
         return undefined;
       default:
@@ -99,12 +113,13 @@ export const InquirySection: React.FC<InquirySectionProps> = ({
     }
   };
 
-  const handleInputChange = (field: keyof InquiryFormData, value: string) => {
+  const handleInputChange = (field: keyof InquiryFormData, value: unknown) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
     // Clear error for field if valid
-    if (errors[field]) {
+    const errKey = field as keyof InquiryFormErrors;
+    if (errors[errKey]) {
       const err = validateField(field, value);
-      setErrors((prev) => ({ ...prev, [field]: err }));
+      setErrors((prev) => ({ ...prev, [errKey]: err }));
     }
   };
 
@@ -129,44 +144,61 @@ export const InquirySection: React.FC<InquirySectionProps> = ({
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const currentEstimatedPrice = calculateEstimatedPrice(formData.modelInterest, formData.includeToolCombo);
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!validateAll()) return;
 
     setIsSubmitting(true);
+    setSubmissionError(null);
 
-    // Simulate authentic server transmission & record creation
-    setTimeout(() => {
+    try {
+      const result = await sendInquiryEmail(formData);
+
+      if (result.success) {
+        const typeLabel =
+          INQUIRY_TYPES.find((t) => t.id === formData.inquiryType)?.label || 'Đặt mua Kit DIY lẻ';
+
+        const fallbackTicketId = `VS-INQ-${new Date().getFullYear()}-${Math.floor(1000 + Math.random() * 9000)}`;
+        const ticketId = result.ticketId || fallbackTicketId;
+
+        setSuccessModalData({
+          ticketId,
+          submittedAt: result.submittedAt,
+          fullName: formData.fullName.trim(),
+          modelInterest: formData.modelInterest,
+          inquiryTypeLabel: typeLabel,
+          estimatedPrice: currentEstimatedPrice,
+          includeToolCombo: Boolean(formData.includeToolCombo),
+          simulated: result.simulated,
+        });
+
+        // Reset form
+        setFormData({
+          fullName: '',
+          phoneNumber: '',
+          email: '',
+          modelInterest: 'Kit Chùa Một Cột — Thăng Long Hà Nội (98.200 VNĐ)',
+          includeToolCombo: false,
+          inquiryType: 'retail_diy',
+          message: '',
+        });
+        setErrors({});
+      } else {
+        setSubmissionError({
+          message: result.error || 'Đã xảy ra sự cố khi truyền dữ liệu.',
+          mailtoUrl: result.mailtoUrl,
+        });
+      }
+    } catch (err: unknown) {
+      console.error('Submission error:', err);
+      setSubmissionError({
+        message: 'Lỗi mạng hoặc máy chủ không phản hồi. Vui lòng thử lại hoặc liên hệ Hotline.',
+      });
+    } finally {
       setIsSubmitting(false);
-      const randomTicketNum = Math.floor(1000 + Math.random() * 9000);
-      const typeLabel =
-        INQUIRY_TYPES.find((t) => t.id === formData.inquiryType)?.label || 'Đặt trước mô hình';
-
-      setSuccessModalData({
-        ticketId: `VS-INQ-${new Date().getFullYear()}-${randomTicketNum}`,
-        submittedAt: new Date().toLocaleTimeString('vi-VN', {
-          hour: '2-digit',
-          minute: '2-digit',
-          day: '2-digit',
-          month: '2-digit',
-          year: 'numeric',
-        }),
-        fullName: formData.fullName.trim(),
-        modelInterest: formData.modelInterest,
-        inquiryTypeLabel: typeLabel,
-      });
-
-      // Reset form
-      setFormData({
-        fullName: '',
-        phoneNumber: '',
-        email: '',
-        modelInterest: 'Chùa Một Cột',
-        inquiryType: 'preorder',
-        message: '',
-      });
-      setErrors({});
-    }, 900);
+    }
   };
 
   return (
@@ -185,13 +217,13 @@ export const InquirySection: React.FC<InquirySectionProps> = ({
       <div className="max-w-7xl mx-auto space-y-16 relative z-10">
         {/* Section Header */}
         <SectionHeader
-          badge="Đăng ký sở hữu & Hợp tác ngoại giao"
+          badge="Đồ Án Khởi Nghiệp EXE101 — Đặt Mua & Hợp Tác"
           title={
             <>
-              Kết Nối Cùng <span className="text-gold-gradient">VietScape Models</span>
+              Đặt Mua Kit DIY & <span className="text-gold-gradient">Kết Nối Hợp Tác</span>
             </>
           }
-          subtitle="Hãy để lại thông tin để nhận tư vấn chuyên sâu về các bản đúc giới hạn, đặt làm tác phẩm theo yêu cầu hoặc hợp tác quà tặng văn hóa đối ngoại."
+          subtitle="Sở hữu bộ kit mô hình giấy 3D Low-poly di sản kèm podcast song ngữ chỉ với 98.200 VNĐ/kit. Miễn phí vận chuyển toàn quốc cho đơn hàng từ 2 kit hoặc khi đặt kèm combo dụng cụ thủ công."
           dividerVariant="lotus"
         />
 
@@ -201,13 +233,13 @@ export const InquirySection: React.FC<InquirySectionProps> = ({
             <div className="p-6 sm:p-8 rounded-3xl bg-heritage-sand/60 border border-heritage-border space-y-6">
               <div>
                 <span className="text-xs font-mono text-heritage-gold uppercase tracking-wider block">
-                  Không gian tiếp đón & Giám định
+                  Đại học FPT Hà Nội — Nhóm 3 (GD1912)
                 </span>
                 <h3 className="font-serif text-2xl font-bold text-heritage-dark mt-1">
-                  Phòng Giám Tuyển VietScape
+                  Dự Án Khởi Nghiệp VietScape Models
                 </h3>
                 <p className="text-sm text-heritage-muted mt-2 font-sans leading-relaxed">
-                  Chúng tôi hân hạnh đón tiếp quý khách đến chiêm ngưỡng trực tiếp các mô hình mẫu, trao đổi về đồ án phục dựng và thưởng trà đàm đạo về di sản kiến trúc Việt.
+                  Chúng tôi sẵn sàng hỗ trợ bạn trải nghiệm tự tay lắp ráp mô hình giấy di sản, cung cấp video hướng dẫn chi tiết và chia sẻ niềm đam mê văn hóa cội nguồn cùng giới trẻ.
                 </p>
               </div>
 
@@ -215,41 +247,44 @@ export const InquirySection: React.FC<InquirySectionProps> = ({
                 <div className="flex items-start gap-3">
                   <MapPin className="w-5 h-5 text-heritage-gold shrink-0 mt-0.5" />
                   <div>
-                    <strong className="text-heritage-dark block">Showroom Hà Nội:</strong>
-                    <span>Số 18 Hàng Gai, Phường Hàng Gai, Quận Hoàn Kiếm, Hà Nội</span>
+                    <strong className="text-heritage-dark block">Văn Phòng Dự Án EXE101:</strong>
+                    <span>Phòng DE424, Tòa nhà Gamma, Trường Đại học FPT Hà Nội, Khu CNC Hòa Lạc</span>
                   </div>
                 </div>
 
                 <div className="flex items-start gap-3">
                   <MapPin className="w-5 h-5 text-heritage-gold shrink-0 mt-0.5" />
                   <div>
-                    <strong className="text-heritage-dark block">Showroom TP. Hồ Chí Minh:</strong>
-                    <span>88 Đồng Khởi, Phường Bến Nghé, Quận 1, TP. Hồ Chí Minh</span>
+                    <strong className="text-heritage-dark block">Điểm Trưng Bày &amp; Ký Gửi Thử Nghiệm:</strong>
+                    <span>Phố cổ Hà Nội (Nhà sách Phương Nam / Nhã Nam, quầy lưu niệm Văn Miếu &amp; Lăng Bác)</span>
                   </div>
                 </div>
 
                 <div className="flex items-start gap-3">
                   <Phone className="w-5 h-5 text-heritage-gold shrink-0 mt-0.5" />
                   <div>
-                    <strong className="text-heritage-dark block">Hotline Trực Tiếp:</strong>
+                    <strong className="text-heritage-dark block">Hotline / Zalo Dự Án:</strong>
                     <a
-                      href="tel:0988888888"
+                      href="tel:0852699188"
                       className="font-mono text-heritage-dark font-semibold hover:text-heritage-gold transition-colors"
                     >
-                      +84 988 888 888
+                      0852 699 188
                     </a>
+                    <span className="text-[11px] text-emerald-600 font-semibold block mt-0.5">
+                      (Hỗ trợ Zalo 24/7 xem ảnh mẫu &amp; tư vấn ráp)
+                    </span>
                   </div>
                 </div>
 
                 <div className="flex items-start gap-3">
                   <Mail className="w-5 h-5 text-heritage-gold shrink-0 mt-0.5" />
                   <div>
-                    <strong className="text-heritage-dark block">Email Ban Giám Tuyển:</strong>
+                    <strong className="text-heritage-dark block">Hòm Thư Quản Trị Đơn Hàng:</strong>
                     <a
-                      href="mailto:curator@vietscapemodels.vn"
+                      href="mailto:vietscapemodels@gmail.com"
                       className="font-mono text-heritage-dark hover:text-heritage-gold transition-colors"
                     >
-                      curator@vietscapemodels.vn
+                      vietscapemodels@gmail.com
                     </a>
                   </div>
                 </div>
@@ -257,24 +292,24 @@ export const InquirySection: React.FC<InquirySectionProps> = ({
                 <div className="flex items-start gap-3">
                   <Clock className="w-5 h-5 text-heritage-gold shrink-0 mt-0.5" />
                   <div>
-                    <strong className="text-heritage-dark block">Thời Gian Làm Việc:</strong>
-                    <span>Thứ Hai — Chủ Nhật (09:00 - 20:30)</span>
+                    <strong className="text-heritage-dark block">Thời Gian Hỗ Trợ:</strong>
+                    <span>Thứ Hai — Chủ Nhật (08:30 - 21:30)</span>
                   </div>
                 </div>
               </div>
             </div>
 
-            {/* B2B & Diplomatic Box */}
+            {/* School & Workshop Box */}
             <div className="p-6 rounded-2xl bg-heritage-cream/60 border border-heritage-border/80 flex items-start gap-4">
               <div className="w-12 h-12 rounded-full bg-heritage-dark text-heritage-gold flex items-center justify-center shrink-0 shadow-sm mt-0.5">
                 <DongSonDrumMotif size={28} />
               </div>
               <div className="text-xs space-y-1">
                 <h4 className="font-serif font-bold text-heritage-dark text-sm">
-                  Quà Tặng Ngoại Giao & Doanh Nghiệp
+                  Chính Sách Lớp Học, Workshop &amp; Quà Tặng
                 </h4>
                 <p className="text-heritage-muted leading-relaxed">
-                  VietScape cung cấp giải pháp hộp quà sơn mài cao cấp, khắc laser biểu trưng song phương và thiệp nghệ thuật phục vụ đón tiếp đối tác quốc tế hoặc quà tặng văn hóa trọng thể.
+                  VietScape hỗ trợ chiết khấu 15% - 25% cho các đơn hàng phục vụ CLB học sinh, sinh viên, workshop trải nghiệm văn hóa và đơn vị du lịch lữ hành.
                 </p>
               </div>
             </div>
@@ -290,19 +325,19 @@ export const InquirySection: React.FC<InquirySectionProps> = ({
               <div className="border-b border-heritage-border/70 pb-4">
                 <div className="flex items-center justify-between">
                   <h3 className="font-serif text-2xl font-bold text-heritage-dark">
-                    Phiếu Đăng Ký Sở Hữu & Hợp Tác
+                    Phiếu Đăng Ký Sở Hữu Kit Di Sản
                   </h3>
                   <LyLotusMotif size={24} className="text-heritage-gold" />
                 </div>
                 <p className="text-xs font-mono text-heritage-muted mt-1">
-                  Vui lòng điền thông tin bên dưới, chuyên viên giám tuyển sẽ liên hệ trong 24 giờ.
+                  Thông tin đơn hàng được tiếp nhận và xử lý trực tiếp qua hệ thống Gmail ban sáng lập.
                 </p>
               </div>
 
               {/* Inquiry Type Radio / Buttons */}
               <div className="space-y-2">
                 <label className="block text-xs font-mono uppercase tracking-wider text-heritage-dark font-semibold">
-                  Mục đích liên hệ:
+                  Phân loại nhu cầu của bạn:
                 </label>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs font-mono">
                   {INQUIRY_TYPES.map((type) => (
@@ -320,7 +355,7 @@ export const InquirySection: React.FC<InquirySectionProps> = ({
                         value={type.id}
                         checked={formData.inquiryType === type.id}
                         onChange={(e) =>
-                          setFormData({ ...formData, inquiryType: e.target.value as any })
+                          handleInputChange('inquiryType', e.target.value)
                         }
                         className="hidden"
                       />
@@ -345,7 +380,7 @@ export const InquirySection: React.FC<InquirySectionProps> = ({
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="space-y-1">
                   <label className="block text-xs font-mono text-heritage-dark font-semibold">
-                    Họ và tên *
+                    Họ và tên của bạn *
                   </label>
                   <input
                     type="text"
@@ -368,13 +403,13 @@ export const InquirySection: React.FC<InquirySectionProps> = ({
 
                 <div className="space-y-1">
                   <label className="block text-xs font-mono text-heritage-dark font-semibold">
-                    Số điện thoại liên hệ *
+                    Số điện thoại nhận hàng (Zalo) *
                   </label>
                   <input
                     type="tel"
                     value={formData.phoneNumber}
                     onChange={(e) => handleInputChange('phoneNumber', e.target.value)}
-                    placeholder="0988 888 888"
+                    placeholder="0852 699 188"
                     className={`w-full px-4 py-2.5 rounded-xl border text-sm focus:outline-hidden transition-colors font-mono ${
                       errors.phoneNumber
                         ? 'border-red-500 bg-red-50/20 text-heritage-dark'
@@ -394,7 +429,7 @@ export const InquirySection: React.FC<InquirySectionProps> = ({
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="space-y-1">
                   <label className="block text-xs font-mono text-heritage-dark font-semibold">
-                    Địa chỉ email *
+                    Địa chỉ email nhận thông tin *
                   </label>
                   <input
                     type="email"
@@ -417,7 +452,7 @@ export const InquirySection: React.FC<InquirySectionProps> = ({
 
                 <div className="space-y-1">
                   <label className="block text-xs font-mono text-heritage-dark font-semibold">
-                    Tác phẩm quan tâm *
+                    Bộ Kit quan tâm *
                   </label>
                   <select
                     value={formData.modelInterest}
@@ -428,11 +463,21 @@ export const InquirySection: React.FC<InquirySectionProps> = ({
                         : 'border-heritage-border focus:border-heritage-gold'
                     }`}
                   >
-                    <option value="Chùa Một Cột">Chùa Một Cột (Tỉ lệ 1:75 — Đang sẵn sàng)</option>
-                    <option value="Lăng Chủ tịch Hồ Chí Minh">Lăng Chủ tịch Hồ Chí Minh (Tỉ lệ 1:300 — Đang sẵn sàng)</option>
-                    <option value="Khuê Văn Các">Khuê Văn Các (Tỉ lệ 1:100 — Đăng ký mở bán sớm)</option>
-                    <option value="Ngọ Môn Huế">Ngọ Môn — Cố đô Huế (Tỉ lệ 1:200 — Đăng ký mở bán sớm)</option>
-                    <option value="Công trình kiến trúc khác">Công trình kiến trúc khác (Yêu cầu riêng)</option>
+                    <option value="Kit Chùa Một Cột — Thăng Long Hà Nội (98.200 VNĐ)">
+                      Kit Chùa Một Cột — Thăng Long (98.200 ₫)
+                    </option>
+                    <option value="Kit Lăng Chủ tịch Hồ Chí Minh — Ba Đình (98.200 VNĐ)">
+                      Kit Lăng Bác — Ba Đình (98.200 ₫)
+                    </option>
+                    <option value="Kit Khuê Văn Các — Văn Miếu Quốc Tử Giám (98.200 VNĐ)">
+                      Kit Khuê Văn Các — Văn Miếu (98.200 ₫)
+                    </option>
+                    <option value="Combo Trọn Bộ 3 Di Sản (Ưu đãi 265.000 VNĐ)">
+                      Combo Trọn Bộ 3 Di Sản (265.000 ₫ — Tiết kiệm 30k)
+                    </option>
+                    <option value="Công trình kiến trúc khác / Đặt làm theo yêu cầu">
+                      Đặt làm đồ án kiến trúc riêng theo yêu cầu
+                    </option>
                   </select>
                   {errors.modelInterest && (
                     <span className="text-[11px] font-mono text-red-600 flex items-center gap-1">
@@ -443,16 +488,42 @@ export const InquirySection: React.FC<InquirySectionProps> = ({
                 </div>
               </div>
 
+              {/* Toolset Combo Checkbox Cross-sell */}
+              <div className="p-4 rounded-2xl bg-heritage-gold/10 border border-heritage-gold/30 hover:border-heritage-gold/50 transition-colors">
+                <label className="flex items-start gap-3 cursor-pointer">
+                  <input
+                    type="checkbox"
+                    checked={Boolean(formData.includeToolCombo)}
+                    onChange={(e) => handleInputChange('includeToolCombo', e.target.checked)}
+                    className="w-5 h-5 rounded-md text-heritage-gold focus:ring-heritage-gold border-heritage-border shrink-0 mt-0.5 accent-[#C59B27]"
+                  />
+                  <div className="space-y-1">
+                    <div className="flex items-center gap-2">
+                      <span className="text-xs font-mono font-bold text-heritage-dark uppercase tracking-wider flex items-center gap-1.5">
+                        <Wrench className="w-3.5 h-3.5 text-heritage-gold" />
+                        Kèm Combo Bộ Dụng Cụ DIY Chuyên Dụng (+39.000 ₫)
+                      </span>
+                      <span className="text-[10px] font-mono bg-heritage-gold text-white px-2 py-0.5 rounded-full font-bold">
+                        Khuyên dùng
+                      </span>
+                    </div>
+                    <p className="text-xs text-heritage-muted font-sans leading-relaxed">
+                      Trọn bộ 3 món tiện lợi: <strong>Keo dán mô hình chuyên dụng đầu kim</strong> (khô 15s không nhăn giấy), <strong>Nhíp định vị chi tiết nhỏ</strong> bằng thép không gỉ, và <strong>Dao trổ rọc giấy thủ công</strong> sắc nét.
+                    </p>
+                  </div>
+                </label>
+              </div>
+
               {/* Message */}
               <div className="space-y-1">
                 <label className="block text-xs font-mono text-heritage-dark font-semibold">
-                  Nội dung yêu cầu / Lời nhắn *
+                  Địa chỉ giao hàng &amp; Lời nhắn *
                 </label>
                 <textarea
-                  rows={4}
+                  rows={3}
                   value={formData.message}
                   onChange={(e) => handleInputChange('message', e.target.value)}
-                  placeholder="Chia sẻ về số lượng dự kiến, yêu cầu khắc tên lưu niệm, địa chỉ giao nhận hoặc câu hỏi của bạn..."
+                  placeholder="Ghi rõ số nhà, tên đường, phường/xã, quận/huyện hoặc yêu cầu bọc quà tặng bạn bè..."
                   className={`w-full px-4 py-2.5 rounded-xl border text-sm focus:outline-hidden transition-colors ${
                     errors.message
                       ? 'border-red-500 bg-red-50/20 text-heritage-dark'
@@ -467,6 +538,42 @@ export const InquirySection: React.FC<InquirySectionProps> = ({
                 )}
               </div>
 
+              {/* Live Price Estimation Strip */}
+              <div className="p-3.5 rounded-xl bg-heritage-sand/70 border border-heritage-border flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs font-mono">
+                <div className="flex items-center gap-2 text-heritage-muted">
+                  <PackageCheck className="w-4 h-4 text-heritage-gold" />
+                  <span>Dự toán đơn hàng:</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <span className="text-base font-bold text-heritage-dark font-serif">
+                    {currentEstimatedPrice}
+                  </span>
+                  {formData.includeToolCombo && (
+                    <span className="text-[10px] text-heritage-gold font-bold bg-heritage-gold/15 px-2 py-0.5 rounded-md">
+                      (Đã bao gồm combo dụng cụ)
+                    </span>
+                  )}
+                </div>
+              </div>
+
+              {/* Submission Error Banner */}
+              {submissionError && (
+                <div className="p-4 rounded-xl bg-red-50 border border-red-200 text-xs text-red-800 space-y-2">
+                  <div className="flex items-center gap-2 font-semibold">
+                    <AlertCircle className="w-4 h-4 text-red-600 shrink-0" />
+                    <span>{submissionError.message}</span>
+                  </div>
+                  {submissionError.mailtoUrl && (
+                    <a
+                      href={submissionError.mailtoUrl}
+                      className="inline-flex items-center gap-1.5 text-xs font-mono font-bold text-red-700 underline hover:text-red-900"
+                    >
+                      Bấm vào đây để mở email gửi trực tiếp <ExternalLink className="w-3 h-3" />
+                    </a>
+                  )}
+                </div>
+              )}
+
               {/* Submit Button */}
               <button
                 type="submit"
@@ -476,12 +583,12 @@ export const InquirySection: React.FC<InquirySectionProps> = ({
                 {isSubmitting ? (
                   <div className="flex items-center gap-2.5">
                     <span className="w-4 h-4 border-2 border-heritage-sand border-t-transparent rounded-full animate-spin" />
-                    <span>Đang gửi thông tin đến ban giám tuyển...</span>
+                    <span>Đang truyền dữ liệu đơn hàng về Gmail...</span>
                   </div>
                 ) : (
                   <>
                     <Send className="w-4 h-4" />
-                    <span>Gửi yêu cầu đến ban giám tuyển</span>
+                    <span>Gửi đơn đặt hàng &amp; Nhận xác nhận ngay</span>
                   </>
                 )}
               </button>
@@ -525,11 +632,16 @@ export const InquirySection: React.FC<InquirySectionProps> = ({
                   Tiếp nhận thành công
                 </span>
                 <h3 className="font-serif text-2xl font-bold text-heritage-dark">
-                  Cảm Ơn Quý Khách Đã Kết Nối
+                  Cảm Ơn Bạn Đã Đồng Hành Cùng Di Sản
                 </h3>
                 <p className="text-sm text-heritage-muted font-sans leading-relaxed">
-                  Kính gửi <strong className="text-heritage-dark">{successModalData.fullName}</strong>, yêu cầu của quý khách đã được lưu trữ trong hệ thống lưu trữ tác phẩm của VietScape Models.
+                  Kính gửi <strong className="text-heritage-dark">{successModalData.fullName}</strong>, yêu cầu đặt hàng của bạn đã được ghi nhận vào hệ thống của VietScape Models (Đồ án EXE101).
                 </p>
+                {successModalData.simulated && (
+                  <p className="text-[11px] font-mono text-amber-700 bg-amber-50 py-1 px-2 rounded-md border border-amber-200 inline-block">
+                    ⚡ Chế độ Demo / Thử nghiệm nội bộ (Đã lưu vào LocalStorage)
+                  </p>
+                )}
               </div>
 
               {/* Ticket Card */}
@@ -537,21 +649,29 @@ export const InquirySection: React.FC<InquirySectionProps> = ({
                 <div className="flex items-center justify-between border-b border-heritage-border/70 pb-2">
                   <span className="text-heritage-muted flex items-center gap-1.5">
                     <FileCheck2 className="w-3.5 h-3.5 text-heritage-gold" />
-                    Mã hồ sơ:
+                    Mã hồ sơ đơn hàng:
                   </span>
                   <span className="font-bold text-heritage-gold tracking-wide">
                     {successModalData.ticketId}
                   </span>
                 </div>
                 <div className="flex items-center justify-between border-b border-heritage-border/70 pb-2">
-                  <span className="text-heritage-muted">Tác phẩm quan tâm:</span>
-                  <span className="font-semibold text-heritage-dark">
+                  <span className="text-heritage-muted">Bộ Kit đăng ký:</span>
+                  <span className="font-semibold text-heritage-dark truncate max-w-[220px]">
                     {successModalData.modelInterest}
                   </span>
                 </div>
                 <div className="flex items-center justify-between border-b border-heritage-border/70 pb-2">
-                  <span className="text-heritage-muted">Phân loại liên hệ:</span>
-                  <span className="text-heritage-dark">{successModalData.inquiryTypeLabel}</span>
+                  <span className="text-heritage-muted">Combo dụng cụ thủ công:</span>
+                  <span className={successModalData.includeToolCombo ? 'text-heritage-gold font-bold' : 'text-heritage-muted'}>
+                    {successModalData.includeToolCombo ? 'CÓ (+39.000 ₫)' : 'Không kèm dụng cụ'}
+                  </span>
+                </div>
+                <div className="flex items-center justify-between border-b border-heritage-border/70 pb-2">
+                  <span className="text-heritage-muted">Dự toán tổng tiền:</span>
+                  <span className="font-bold text-heritage-dark text-sm">
+                    {successModalData.estimatedPrice}
+                  </span>
                 </div>
                 <div className="flex items-center justify-between border-b border-heritage-border/70 pb-2">
                   <span className="text-heritage-muted">Thời gian ghi nhận:</span>
@@ -560,8 +680,8 @@ export const InquirySection: React.FC<InquirySectionProps> = ({
                 <div className="flex items-center justify-between pt-1">
                   <span className="text-heritage-muted">Trạng thái:</span>
                   <span className="inline-flex items-center gap-1 text-emerald-700 font-semibold bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200 text-[11px]">
-                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                    Ban Giám tuyển sẽ liên hệ trong 24h
+                    <Sparkles className="w-3 h-3 text-emerald-500 animate-pulse" />
+                    Nhóm dự án sẽ gọi xác nhận trong 24h
                   </span>
                 </div>
               </div>
@@ -570,7 +690,7 @@ export const InquirySection: React.FC<InquirySectionProps> = ({
                 onClick={() => setSuccessModalData(null)}
                 className="w-full py-3.5 rounded-xl text-xs font-mono uppercase tracking-wider font-semibold bg-heritage-dark text-heritage-sand hover:bg-heritage-gold transition-colors shadow-sm hover:shadow-md cursor-pointer"
               >
-                Hoàn tất & Đóng
+                Hoàn tất &amp; Đóng
               </button>
             </motion.div>
           </div>

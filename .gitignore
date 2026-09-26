@@ -18,6 +18,9 @@ dist-ssr
 .env.test.local
 .env.production.local
 
+# Documents
+*.pdf
+
 # Logs
 logs
 *.log
