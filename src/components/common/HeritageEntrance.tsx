@@ -48,6 +48,14 @@ export const HeritageEntrance: React.FC<HeritageEntranceProps> = ({
   const [isParting, setIsParting] = useState(false);
   const [isDone, setIsDone] = useState(false);
 
+  // Reset internal states whenever isOpen transitions to true
+  useEffect(() => {
+    if (isOpen) {
+      setIsDone(false);
+      setIsParting(false);
+    }
+  }, [isOpen]);
+
   // Finish and clean up
   const handleFinish = useCallback(() => {
     markHeritageEntranceSeen();

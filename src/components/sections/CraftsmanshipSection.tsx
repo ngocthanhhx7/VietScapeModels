@@ -51,14 +51,14 @@ export const CraftsmanshipSection: React.FC = () => {
       detail: 'Độ đanh dẻo lý tưởng, bắt keo cực nhạy, chịu lực gấp đa chiều và đạt chứng chỉ rừng bền vững FSC.',
     },
     {
-      name: 'Mực In Khoáng Gốc Nước Kháng UV',
-      role: 'Sắc độ di sản chuẩn mực',
-      detail: 'Màu sắc thuần khiết mô phỏng ngói hoàng lưu ly, gạch chu sa và sa thạch Ba Đình, an toàn tuyệt đối khi tiếp xúc.',
+      name: 'Mực In Sắc Nét Với Keo Sữa',
+      role: 'Sắc độ di sản chuẩn mực & Bám dính tối ưu',
+      detail: 'Màu in sắc nét chuẩn di sản kết hợp tối ưu cùng keo sữa chuyên dụng thủ công, tạo độ bám dính bền chắc, an toàn tuyệt đối khi tiếp xúc.',
     },
     {
-      name: 'Keo Dán Thủ Công Đầu Kim',
+      name: 'Keo Sữa',
       role: 'Hệ thống liên kết bền vững',
-      detail: 'Dạng keo mô hình khô nhanh 15 giây, không mùi, không làm cong vênh giấy, tạo khối liên kết vững chãi.',
+      detail: 'Dòng keo sữa chuyên dụng thủ công độ kết dính cao, khô ráo nhanh chóng, không mùi độc hại, không làm cong vênh hay biến dạng giấy.',
     },
     {
       name: 'Bao Bì Carton Lạnh Flat-Pack',
@@ -173,7 +173,7 @@ export const CraftsmanshipSection: React.FC = () => {
                 <HeartHandshake className="w-6 h-6" />
               </div>
               <div className="space-y-0.5">
-                <h4 className="font-serif text-lg font-bold text-heritage-dark">
+                <h4 className="font-serif text-lg font-bold text-heritage-dark leading-snug">
                   Chính Sách &quot;Yên Tâm Trổ Tài — Đổi Bù Mảnh Hỏng 1-Đổi-1&quot;
                 </h4>
                 <p className="text-xs text-heritage-muted font-sans">

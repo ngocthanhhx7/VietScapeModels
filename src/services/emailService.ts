@@ -62,10 +62,14 @@ export const calculateEstimatedPrice = (
   modelInterest: string,
   includeToolCombo: boolean = false
 ): string => {
-  let basePrice = 98200; // Giá bán lẻ kit chuẩn đồ án EXE101
+  let basePrice = 99000; // Giá chuẩn 99.000 VNĐ
 
-  if (modelInterest.includes('Combo Trọn Bộ') || modelInterest.includes('Cả 3')) {
-    basePrice = 265000; // Ưu đãi trọn bộ 3 di sản
+  if (modelInterest.includes('Khuê Văn Các') || modelInterest.includes('Khue Van Cac') || modelInterest.includes('van-mieu')) {
+    basePrice = 95000; // Khuê Văn Các 95.000 VNĐ
+  } else if (modelInterest.includes('Lăng') || modelInterest.includes('Lang Bac')) {
+    basePrice = 99000; // Lăng Bác 99.000 VNĐ
+  } else if (modelInterest.includes('Chùa Một Cột') || modelInterest.includes('chua-mot-cot')) {
+    basePrice = 99000; // Chùa Một Cột 99.000 VNĐ
   } else if (modelInterest.includes('Yêu cầu riêng') || modelInterest.includes('theo yêu cầu')) {
     return 'Báo giá theo thiết kế';
   }
@@ -122,7 +126,7 @@ export const generateMailtoLink = (
     `- Số điện thoại: ${data.phoneNumber}\n` +
     `- Email: ${data.email}\n` +
     `- Bộ kit quan tâm: ${data.modelInterest}\n` +
-    `- Kèm combo dụng cụ thủ công: ${data.includeToolCombo ? 'CÓ (+39.000 VNĐ)' : 'KHÔNG'}\n` +
+    `- Quy cách: Trọn bộ kit DIY kèm keo sữa chuyên dụng\n` +
     `- Dự toán: ${estimatedPrice}\n` +
     `- Lời nhắn: ${data.message}\n\n` +
     `Xin cảm ơn!`
@@ -155,10 +159,8 @@ export const sendInquiryEmail = async (
       customer_phone: formData.phoneNumber.trim(),
       customer_email: formData.email.trim(),
       model_interest: formData.modelInterest,
-      include_tool_combo: formData.includeToolCombo
-        ? 'CÓ (+39.000 VNĐ - Keo dán chuyên dụng, nhíp định vị, dao rọc giấy)'
-        : 'KHÔNG (Chỉ nhận bộ kit giấy 3D)',
-      tool_combo_status: formData.includeToolCombo ? 'Có kèm bộ dụng cụ' : 'Không kèm dụng cụ',
+      include_tool_combo: 'Trọn bộ kit DIY đầy đủ chi tiết và keo sữa chuyên dụng',
+      tool_combo_status: 'Kèm keo sữa chuyên dụng',
       inquiry_type: formData.inquiryType,
       estimated_total_price: estimatedPrice,
       message: formData.message.trim(),
@@ -208,7 +210,7 @@ export const sendInquiryEmail = async (
       'Số Điện Thoại': formData.phoneNumber.trim(),
       'Email Khách': formData.email.trim(),
       'Sản Phẩm Quan Tâm': formData.modelInterest,
-      'Combo Dụng Cụ DIY': formData.includeToolCombo ? 'CÓ (+39.000 VNĐ)' : 'Không',
+      'Quy Cách Đóng Gói': 'Trọn bộ kit DIY kèm keo sữa chuyên dụng',
       'Nhu Cầu': formData.inquiryType,
       'Tổng Tiền Dự Toán': estimatedPrice,
       'Lời Nhắn / Địa Chỉ': formData.message.trim(),

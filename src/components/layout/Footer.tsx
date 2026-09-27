@@ -89,7 +89,7 @@ export const Footer: React.FC<FooterProps> = ({ onReplayEntrance }) => {
                   className="hover:text-heritage-gold transition-colors flex items-center justify-between w-full text-left"
                 >
                   <span>Chùa Một Cột (Liên Hoa Đài)</span>
-                  <span className="text-xs font-mono text-heritage-gold font-bold whitespace-nowrap">98.200 VNĐ</span>
+                  <span className="text-xs font-mono text-heritage-gold font-bold whitespace-nowrap">99.000 VNĐ</span>
                 </button>
               </li>
               <li>
@@ -98,7 +98,7 @@ export const Footer: React.FC<FooterProps> = ({ onReplayEntrance }) => {
                   className="hover:text-heritage-gold transition-colors flex items-center justify-between w-full text-left"
                 >
                   <span>Lăng Chủ tịch Hồ Chí Minh</span>
-                  <span className="text-xs font-mono text-heritage-gold font-bold whitespace-nowrap">98.200 VNĐ</span>
+                  <span className="text-xs font-mono text-heritage-gold font-bold whitespace-nowrap">99.000 VNĐ</span>
                 </button>
               </li>
               <li>
@@ -107,7 +107,7 @@ export const Footer: React.FC<FooterProps> = ({ onReplayEntrance }) => {
                   className="hover:text-heritage-gold transition-colors flex items-center justify-between w-full text-left"
                 >
                   <span>Khuê Văn Các (Văn Miếu)</span>
-                  <span className="text-xs font-mono text-heritage-gold font-bold whitespace-nowrap">98.200 VNĐ</span>
+                  <span className="text-xs font-mono text-heritage-gold font-bold whitespace-nowrap">95.000 VNĐ</span>
                 </button>
               </li>
               <li>

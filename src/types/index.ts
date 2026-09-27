@@ -42,7 +42,7 @@ export interface ModelSpecification {
   sheetCount?: number;
   partsCount?: number;
   assemblyTimeMinutes?: number;
-  difficulty?: 'Dễ' | 'Trung bình' | 'Thử thách';
+  difficulty?: 'Dễ' | 'Trung bình' | 'Thử thách' | 'Cao';
   podcastDurationMinutes?: number;
   hasBilingualPodcast?: boolean;
   toolsetComboIncluded?: boolean;
@@ -54,7 +54,7 @@ export interface InquiryFormData {
   email: string;
   modelInterest: string;
   includeToolCombo?: boolean;
-  inquiryType: 'retail_diy' | 'combo_deal' | 'workshop_school' | 'corporate_gift' | 'partnership' | 'preorder' | 'custom_commission';
+  inquiryType: string;
   message: string;
 }
 

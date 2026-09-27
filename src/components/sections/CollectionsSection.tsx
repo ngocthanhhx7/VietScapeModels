@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Compass, Sparkles, Check, Eye, Headphones, Wrench, ArrowRight } from 'lucide-react';
+import { Compass, Sparkles, Check, Eye, Headphones } from 'lucide-react';
 import { SectionHeader } from '../common/SectionHeader';
 import { modelsData } from '../../data/modelsData';
 
@@ -117,7 +117,7 @@ export const CollectionsSection: React.FC<CollectionsSectionProps> = ({
                     {model.status === 'available' ? (
                       <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono bg-emerald-50 text-emerald-800 border border-emerald-200">
                         <span className="w-1.5 h-1.5 rounded-full bg-emerald-600 animate-pulse" />
-                        Kit DIY Sẵn Sàng (98.200 VNĐ)
+                        Kit DIY Sẵn Sàng ({model.priceEstimateVnd || '99.000 VNĐ'})
                       </span>
                     ) : (
                       <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono bg-amber-50 text-amber-800 border border-amber-200">
@@ -250,7 +250,7 @@ export const CollectionsSection: React.FC<CollectionsSectionProps> = ({
                       className="flex-1 py-3 px-5 rounded-xl text-xs font-mono uppercase tracking-wider font-semibold bg-heritage-dark text-heritage-sand hover:bg-heritage-gold transition-colors duration-300 flex items-center justify-center gap-2 cursor-pointer shadow-xs hover:shadow-md"
                     >
                       <Sparkles className="w-3.5 h-3.5 text-heritage-gold group-hover:text-heritage-sand" />
-                      <span>{model.status === 'available' ? 'Đặt mua Kit (98.200 VNĐ)' : 'Đăng ký nhận tin'}</span>
+                      <span>{model.status === 'available' ? `Đặt mua Kit (${model.priceEstimateVnd || '99.000 VNĐ'})` : 'Đăng ký nhận tin'}</span>
                     </button>
 
                     <button
@@ -266,85 +266,6 @@ export const CollectionsSection: React.FC<CollectionsSectionProps> = ({
             );
           })}
         </div>
-
-        {/* Dedicated Cross-Sell Showcase: Combo Dụng Cụ DIY Chuyên Dụng */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="rounded-3xl bg-gradient-to-br from-[#FFFDF9] via-white to-heritage-cream/40 border-2 border-heritage-gold/50 p-6 sm:p-10 shadow-lg relative overflow-hidden"
-        >
-          <div className="absolute top-0 right-0 w-64 h-64 bg-radial-spotlight rounded-bl-full pointer-events-none opacity-40" />
-
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10">
-            <div className="lg:col-span-8 space-y-4">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-heritage-gold/15 text-heritage-dark text-xs font-mono font-semibold border border-heritage-gold/30">
-                <Wrench className="w-3.5 h-3.5 text-heritage-gold" />
-                <span>Ưu Đãi Bán Kèm Khi Mua Kit Mô Hình</span>
-              </div>
-
-              <h3 className="font-serif text-2xl sm:text-3xl font-bold text-heritage-dark">
-                Combo Bộ Dụng Cụ DIY Chuyên Dụng <span className="text-gold-gradient">(+39.000 VNĐ)</span>
-              </h3>
-
-              <p className="text-sm text-heritage-muted font-sans leading-relaxed max-w-2xl">
-                Để trải nghiệm lắp ráp trở nên mượt mà và chuẩn xác nhất, VietScape trang bị bộ 3 dụng cụ thủ công chuyên biệt, khắc phục hoàn toàn nỗi lo cong vênh hoặc rách nếp gấp:
-              </p>
-
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2">
-                <div className="p-3.5 rounded-2xl bg-white border border-heritage-border/70 space-y-1 shadow-2xs">
-                  <div className="w-7 h-7 rounded-lg bg-heritage-gold/10 text-heritage-gold flex items-center justify-center font-bold text-xs">
-                    01
-                  </div>
-                  <h4 className="text-xs font-bold text-heritage-dark">Keo Dán Đầu Kim</h4>
-                  <p className="text-[11px] text-heritage-muted">Khô trong 15 giây, đầu kim siêu nhỏ không lem bẩn và không nhăn giấy.</p>
-                </div>
-
-                <div className="p-3.5 rounded-2xl bg-white border border-heritage-border/70 space-y-1 shadow-2xs">
-                  <div className="w-7 h-7 rounded-lg bg-heritage-gold/10 text-heritage-gold flex items-center justify-center font-bold text-xs">
-                    02
-                  </div>
-                  <h4 className="text-xs font-bold text-heritage-dark">Nhíp Thép Đầu Cong</h4>
-                  <p className="text-[11px] text-heritage-muted">Định vị chính xác các khe nẹp dưới 5mm, giúp ngón tay thao tác dễ dàng.</p>
-                </div>
-
-                <div className="p-3.5 rounded-2xl bg-white border border-heritage-border/70 space-y-1 shadow-2xs">
-                  <div className="w-7 h-7 rounded-lg bg-heritage-gold/10 text-heritage-gold flex items-center justify-center font-bold text-xs">
-                    03
-                  </div>
-                  <h4 className="text-xs font-bold text-heritage-dark">Dao Trổ Nghệ Thuật</h4>
-                  <p className="text-[11px] text-heritage-muted">Lưỡi vát 30 độ sắc bén trổ dứt khoát các đường gờ giấy tinh vi.</p>
-                </div>
-              </div>
-            </div>
-
-            <div className="lg:col-span-4 text-center lg:text-right space-y-4 lg:border-l lg:border-heritage-border/60 lg:pl-8">
-              <div className="space-y-1">
-                <span className="text-xs font-mono text-heritage-muted block">Giá mua kèm Kit:</span>
-                <div className="flex items-baseline justify-center lg:justify-end gap-2">
-                  <span className="font-serif text-3xl font-bold text-emerald-800 whitespace-nowrap">
-                    +39.000 VNĐ
-                  </span>
-                  <span className="text-xs font-mono line-through text-heritage-muted whitespace-nowrap">
-                    65.000 VNĐ
-                  </span>
-                </div>
-                <span className="text-[11px] font-mono text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full inline-block mt-1">
-                  Tiết kiệm 40% khi mua kèm
-                </span>
-              </div>
-
-              <button
-                onClick={() => onSelectModelForInquiry('Combo Kit + Bộ dụng cụ DIY (+39.000 VNĐ)')}
-                className="w-full py-3.5 px-6 rounded-2xl text-xs font-mono uppercase tracking-wider font-semibold bg-heritage-dark text-heritage-sand hover:bg-heritage-gold transition-all duration-300 flex items-center justify-center gap-2 shadow-md hover:shadow-lg cursor-pointer"
-              >
-                <span>Thêm Combo Vào Đơn Hàng</span>
-                <ArrowRight className="w-4 h-4" />
-              </button>
-            </div>
-          </div>
-        </motion.div>
       </div>
     </section>
   );

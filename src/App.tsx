@@ -14,7 +14,7 @@ import HeritageEntrance, { hasSeenHeritageEntrance } from './components/common/H
 export const App: React.FC = () => {
   const [showEntrance, setShowEntrance] = useState<boolean>(() => !hasSeenHeritageEntrance());
   const [selectedViewerModelId, setSelectedViewerModelId] = useState<string>('chua-mot-cot');
-  const [inquiryModelInterest, setInquiryModelInterest] = useState<string>('Kit Chùa Một Cột — Thăng Long Hà Nội (98.200 VNĐ)');
+  const [inquiryModelInterest, setInquiryModelInterest] = useState<string>('Kit Chùa Một Cột — Thăng Long Hà Nội (99.000 VNĐ)');
 
   const scrollToElement = (id: string) => {
     const el = document.getElementById(id);

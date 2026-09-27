@@ -104,7 +104,7 @@ export const Header: React.FC<HeaderProps> = ({ onReplayEntrance }) => {
             className="group relative inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-xs font-mono uppercase tracking-wider font-semibold bg-heritage-dark text-heritage-sand overflow-hidden shadow-sm hover:shadow-md transition-all hover:bg-heritage-gold duration-300"
           >
             <Sparkles className="w-3.5 h-3.5 text-heritage-gold group-hover:text-heritage-sand transition-colors" />
-            <span>Đặt Mua Kit DIY (98.200 VNĐ)</span>
+            <span>Đặt Mua Kit DIY (Chỉ từ 95.000 VNĐ)</span>
             <ArrowUpRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
           </button>
         </div>
@@ -159,7 +159,7 @@ export const Header: React.FC<HeaderProps> = ({ onReplayEntrance }) => {
                 className="w-full py-3 rounded-full text-center text-xs font-mono uppercase tracking-wider font-semibold bg-heritage-dark text-heritage-sand flex items-center justify-center gap-2 hover:bg-heritage-gold transition-colors"
               >
                 <Sparkles className="w-4 h-4 text-heritage-gold" />
-                <span>Đặt Mua Kit DIY (98.200 VNĐ)</span>
+                <span>Đặt Mua Kit DIY (Chỉ từ 95.000 VNĐ)</span>
               </button>
             </div>
           </div>

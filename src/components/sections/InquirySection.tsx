@@ -10,7 +10,6 @@ import {
   AlertCircle,
   X,
   FileCheck2,
-  Wrench,
   PackageCheck,
   Sparkles,
   ExternalLink,
@@ -25,15 +24,31 @@ interface InquirySectionProps {
 }
 
 const INQUIRY_TYPES = [
-  { id: 'retail_diy', label: 'Đặt mua Kit DIY lẻ (98.200 VNĐ)', shortLabel: 'Kit DIY lẻ' },
-  { id: 'combo_deal', label: 'Combo Kit + Bộ dụng cụ chuyên dụng (137.200 VNĐ)', shortLabel: 'Combo Kit + Dụng cụ' },
-  { id: 'workshop_school', label: 'Đặt cho Trường học / CLB / Workshop (Chiết khấu)', shortLabel: 'Workshop / Trường học' },
-  { id: 'corporate_gift', label: 'Quà lưu niệm văn hóa / Doanh nghiệp', shortLabel: 'Quà lưu niệm' },
-  { id: 'partnership', label: 'Hợp tác ký gửi (Nhà sách, Quầy lưu niệm, Bảo tàng)', shortLabel: 'Hợp tác ký gửi' },
+  {
+    id: 'chua-mot-cot',
+    label: 'Kit Chùa Một Cột (99.000 VNĐ)',
+    shortLabel: 'Chùa Một Cột',
+    price: '99.000 VNĐ',
+    modelName: 'Kit Chùa Một Cột — Thăng Long Hà Nội (99.000 VNĐ)',
+  },
+  {
+    id: 'lang-bac',
+    label: 'Kit Lăng Bác (99.000 VNĐ)',
+    shortLabel: 'Lăng Bác',
+    price: '99.000 VNĐ',
+    modelName: 'Kit Lăng Chủ tịch Hồ Chí Minh — Ba Đình (99.000 VNĐ)',
+  },
+  {
+    id: 'khue-van-cac',
+    label: 'Kit Khuê Văn Các (95.000 VNĐ)',
+    shortLabel: 'Khuê Văn Các',
+    price: '95.000 VNĐ',
+    modelName: 'Kit Khuê Văn Các — Văn Miếu Quốc Tử Giám (95.000 VNĐ)',
+  },
 ] as const;
 
 export const InquirySection: React.FC<InquirySectionProps> = ({
-  initialModelInterest = 'Kit Chùa Một Cột — Thăng Long Hà Nội (98.200 VNĐ)',
+  initialModelInterest = 'Kit Chùa Một Cột — Thăng Long Hà Nội (99.000 VNĐ)',
 }) => {
   const [formData, setFormData] = useState<InquiryFormData>({
     fullName: '',
@@ -41,7 +56,7 @@ export const InquirySection: React.FC<InquirySectionProps> = ({
     email: '',
     modelInterest: initialModelInterest,
     includeToolCombo: false,
-    inquiryType: 'retail_diy',
+    inquiryType: 'chua-mot-cot',
     message: '',
   });
 
@@ -49,21 +64,23 @@ export const InquirySection: React.FC<InquirySectionProps> = ({
   useEffect(() => {
     if (initialModelInterest) {
       let mapped = initialModelInterest;
-      if (initialModelInterest.includes('Chùa Một Cột')) {
-        mapped = 'Kit Chùa Một Cột — Thăng Long Hà Nội (98.200 VNĐ)';
-      } else if (initialModelInterest.includes('Lăng')) {
-        mapped = 'Kit Lăng Chủ tịch Hồ Chí Minh — Ba Đình (98.200 VNĐ)';
-      } else if (initialModelInterest.includes('Khuê Văn Các')) {
-        mapped = 'Kit Khuê Văn Các — Văn Miếu Quốc Tử Giám (98.200 VNĐ)';
-      } else if (initialModelInterest.includes('Combo Trọn Bộ') || initialModelInterest.includes('Cả 3')) {
-        mapped = 'Combo Trọn Bộ 3 Di Sản (Ưu đãi 265.000 VNĐ)';
+      let matchedType = 'chua-mot-cot';
+      if (initialModelInterest.includes('Chùa Một Cột') || initialModelInterest.includes('chua-mot-cot')) {
+        mapped = 'Kit Chùa Một Cột — Thăng Long Hà Nội (99.000 VNĐ)';
+        matchedType = 'chua-mot-cot';
+      } else if (initialModelInterest.includes('Lăng') || initialModelInterest.includes('lang-bac')) {
+        mapped = 'Kit Lăng Chủ tịch Hồ Chí Minh — Ba Đình (99.000 VNĐ)';
+        matchedType = 'lang-bac';
+      } else if (initialModelInterest.includes('Khuê Văn Các') || initialModelInterest.includes('khue-van-cac') || initialModelInterest.includes('van-mieu')) {
+        mapped = 'Kit Khuê Văn Các — Văn Miếu Quốc Tử Giám (95.000 VNĐ)';
+        matchedType = 'khue-van-cac';
       }
 
-      if (initialModelInterest.includes('Bộ dụng cụ') || initialModelInterest.includes('Combo Kit')) {
-        setFormData((prev) => ({ ...prev, modelInterest: mapped, includeToolCombo: true }));
-      } else {
-        setFormData((prev) => ({ ...prev, modelInterest: mapped }));
-      }
+      setFormData((prev) => ({
+        ...prev,
+        modelInterest: mapped,
+        inquiryType: matchedType,
+      }));
     }
   }, [initialModelInterest]);
 
@@ -194,9 +211,9 @@ export const InquirySection: React.FC<InquirySectionProps> = ({
           fullName: '',
           phoneNumber: '',
           email: '',
-          modelInterest: 'Kit Chùa Một Cột — Thăng Long Hà Nội (98.200 VNĐ)',
+          modelInterest: 'Kit Chùa Một Cột — Thăng Long Hà Nội (99.000 VNĐ)',
           includeToolCombo: false,
-          inquiryType: 'retail_diy',
+          inquiryType: 'chua-mot-cot',
           message: '',
         });
         setErrors({});
@@ -238,7 +255,7 @@ export const InquirySection: React.FC<InquirySectionProps> = ({
               Đặt Mua Kit DIY & <span className="text-gold-gradient">Kết Nối Hợp Tác</span>
             </>
           }
-          subtitle="Sở hữu bộ kit mô hình giấy 3D Low-poly di sản kèm podcast song ngữ chỉ với 98.200 VNĐ/kit. Miễn phí vận chuyển toàn quốc cho đơn hàng từ 2 kit hoặc khi đặt kèm combo dụng cụ thủ công."
+          subtitle="Sở hữu bộ kit mô hình giấy 3D Low-poly di sản kèm podcast song ngữ chỉ từ 95.000 VNĐ/kit. Miễn phí vận chuyển toàn quốc cho đơn hàng từ 2 kit."
           dividerVariant="lotus"
         />
 
@@ -354,7 +371,7 @@ export const InquirySection: React.FC<InquirySectionProps> = ({
                 <label className="block text-xs font-mono uppercase tracking-wider text-heritage-dark font-semibold">
                   Phân loại nhu cầu của bạn:
                 </label>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs font-mono">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 text-xs font-mono">
                   {INQUIRY_TYPES.map((type) => (
                     <label
                       key={type.id}
@@ -369,13 +386,14 @@ export const InquirySection: React.FC<InquirySectionProps> = ({
                         name="inquiryType"
                         value={type.id}
                         checked={formData.inquiryType === type.id}
-                        onChange={(e) =>
-                          handleInputChange('inquiryType', e.target.value)
-                        }
+                        onChange={() => {
+                          handleInputChange('inquiryType', type.id);
+                          handleInputChange('modelInterest', type.modelName);
+                        }}
                         className="hidden"
                       />
                       <span
-                        className={`w-3 h-3 rounded-full border flex items-center justify-center shrink-0 ${
+                        className={`w-3.5 h-3.5 rounded-full border flex items-center justify-center shrink-0 mt-0.5 ${
                           formData.inquiryType === type.id
                             ? 'bg-heritage-gold border-heritage-gold ring-2 ring-heritage-gold/20'
                             : 'border-heritage-muted/60'
@@ -385,7 +403,10 @@ export const InquirySection: React.FC<InquirySectionProps> = ({
                           <span className="w-1.5 h-1.5 rounded-full bg-white" />
                         )}
                       </span>
-                      <span className="truncate">{type.label}</span>
+                      <div className="flex flex-col min-w-0">
+                        <span className="font-semibold text-heritage-dark truncate">{type.shortLabel}</span>
+                        <span className="text-[11px] text-heritage-gold font-bold">{type.price}</span>
+                      </div>
                     </label>
                   ))}
                 </div>
@@ -471,24 +492,31 @@ export const InquirySection: React.FC<InquirySectionProps> = ({
                   </label>
                   <select
                     value={formData.modelInterest}
-                    onChange={(e) => handleInputChange('modelInterest', e.target.value)}
+                    onChange={(e) => {
+                      const val = e.target.value;
+                      let matchedType = formData.inquiryType;
+                      if (val.includes('Chùa Một Cột') || val.includes('chua-mot-cot')) matchedType = 'chua-mot-cot';
+                      else if (val.includes('Lăng') || val.includes('lang-bac')) matchedType = 'lang-bac';
+                      else if (val.includes('Khuê Văn Các') || val.includes('khue-van-cac')) matchedType = 'khue-van-cac';
+                      setFormData((prev) => ({ ...prev, modelInterest: val, inquiryType: matchedType }));
+                      if (errors.modelInterest) {
+                        setErrors((prev) => ({ ...prev, modelInterest: undefined }));
+                      }
+                    }}
                     className={`w-full px-4 py-2.5 rounded-xl border text-sm focus:outline-hidden bg-white transition-colors ${
                       errors.modelInterest
                         ? 'border-red-500 bg-red-50/20'
                         : 'border-heritage-border focus:border-heritage-gold'
                     }`}
                   >
-                    <option value="Kit Chùa Một Cột — Thăng Long Hà Nội (98.200 VNĐ)">
-                      Kit Chùa Một Cột — Thăng Long (98.200 VNĐ)
+                    <option value="Kit Chùa Một Cột — Thăng Long Hà Nội (99.000 VNĐ)">
+                      Kit Chùa Một Cột — Thăng Long (99.000 VNĐ)
                     </option>
-                    <option value="Kit Lăng Chủ tịch Hồ Chí Minh — Ba Đình (98.200 VNĐ)">
-                      Kit Lăng Bác — Ba Đình (98.200 VNĐ)
+                    <option value="Kit Lăng Chủ tịch Hồ Chí Minh — Ba Đình (99.000 VNĐ)">
+                      Kit Lăng Bác — Ba Đình (99.000 VNĐ)
                     </option>
-                    <option value="Kit Khuê Văn Các — Văn Miếu Quốc Tử Giám (98.200 VNĐ)">
-                      Kit Khuê Văn Các — Văn Miếu (98.200 VNĐ)
-                    </option>
-                    <option value="Combo Trọn Bộ 3 Di Sản (Ưu đãi 265.000 VNĐ)">
-                      Combo Trọn Bộ 3 Di Sản (Ưu đãi 265.000 VNĐ — Tiết kiệm 30.000 VNĐ)
+                    <option value="Kit Khuê Văn Các — Văn Miếu Quốc Tử Giám (95.000 VNĐ)">
+                      Kit Khuê Văn Các — Văn Miếu (95.000 VNĐ)
                     </option>
                     <option value="Công trình kiến trúc khác / Đặt làm theo yêu cầu">
                       Đặt làm đồ án kiến trúc riêng theo yêu cầu
@@ -501,32 +529,6 @@ export const InquirySection: React.FC<InquirySectionProps> = ({
                     </span>
                   )}
                 </div>
-              </div>
-
-              {/* Toolset Combo Checkbox Cross-sell */}
-              <div className="p-4 rounded-2xl bg-heritage-gold/10 border border-heritage-gold/30 hover:border-heritage-gold/50 transition-colors">
-                <label className="flex items-start gap-3 cursor-pointer">
-                  <input
-                    type="checkbox"
-                    checked={Boolean(formData.includeToolCombo)}
-                    onChange={(e) => handleInputChange('includeToolCombo', e.target.checked)}
-                    className="w-5 h-5 rounded-md text-heritage-gold focus:ring-heritage-gold border-heritage-border shrink-0 mt-0.5 accent-[#C59B27]"
-                  />
-                  <div className="space-y-1">
-                    <div className="flex items-center gap-2">
-                      <span className="text-xs font-mono font-bold text-heritage-dark uppercase tracking-wider flex items-center gap-1.5">
-                        <Wrench className="w-3.5 h-3.5 text-heritage-gold" />
-                        Kèm Combo Bộ Dụng Cụ DIY Chuyên Dụng (+39.000 VNĐ)
-                      </span>
-                      <span className="text-[10px] font-mono bg-heritage-gold text-white px-2 py-0.5 rounded-full font-bold">
-                        Khuyên dùng
-                      </span>
-                    </div>
-                    <p className="text-xs text-heritage-muted font-sans leading-relaxed">
-                      Trọn bộ 3 món tiện lợi: <strong>Keo dán mô hình chuyên dụng đầu kim</strong> (khô 15s không nhăn giấy), <strong>Nhíp định vị chi tiết nhỏ</strong> bằng thép không gỉ, và <strong>Dao trổ rọc giấy thủ công</strong> sắc nét.
-                    </p>
-                  </div>
-                </label>
               </div>
 
               {/* Message */}
@@ -563,11 +565,9 @@ export const InquirySection: React.FC<InquirySectionProps> = ({
                   <span className="text-base font-bold text-heritage-dark font-serif">
                     {currentEstimatedPrice}
                   </span>
-                  {formData.includeToolCombo && (
-                    <span className="text-[10px] text-heritage-gold font-bold bg-heritage-gold/15 px-2 py-0.5 rounded-md">
-                      (Đã bao gồm combo dụng cụ)
-                    </span>
-                  )}
+                  <span className="text-[10px] text-emerald-700 font-bold bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded-md">
+                    Kèm keo sữa chuyên dụng
+                  </span>
                 </div>
               </div>
 
@@ -677,9 +677,9 @@ export const InquirySection: React.FC<InquirySectionProps> = ({
                   </span>
                 </div>
                 <div className="flex items-center justify-between border-b border-heritage-border/70 pb-2">
-                  <span className="text-heritage-muted">Combo dụng cụ thủ công:</span>
-                  <span className={successModalData.includeToolCombo ? 'text-heritage-gold font-bold' : 'text-heritage-muted'}>
-                    {successModalData.includeToolCombo ? 'CÓ (+39.000 VNĐ)' : 'Không kèm dụng cụ'}
+                  <span className="text-heritage-muted">Quy cách đóng gói:</span>
+                  <span className="text-emerald-700 font-semibold">
+                    Đầy đủ chi tiết &amp; keo sữa chuyên dụng
                   </span>
                 </div>
                 <div className="flex items-center justify-between border-b border-heritage-border/70 pb-2">

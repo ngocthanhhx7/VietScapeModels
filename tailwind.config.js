@@ -21,7 +21,7 @@ export default {
         },
       },
       fontFamily: {
-        serif: ['"Playfair Display"', 'Lora', 'Georgia', 'Cambria', '"Times New Roman"', 'serif'],
+        serif: ['Lora', 'Merriweather', 'Georgia', 'serif'],
         sans: ['"Be Vietnam Pro"', 'sans-serif'],
         mono: ['"JetBrains Mono"', 'monospace'],
       },
