@@ -129,19 +129,12 @@ export const CollectionsSection: React.FC<CollectionsSectionProps> = ({
 
                   {/* Render Image Display */}
                   <div className="relative my-6 h-[300px] flex items-center justify-center">
-                    <div
-                      className="w-full h-full flex items-center justify-center"
-                      style={{
-                        transform: model.visualScale ? `scale(${model.visualScale})` : undefined,
-                      }}
-                    >
-                      <img
-                        src={currentImg}
-                        alt={`${model.name} render`}
-                        className="max-h-full max-w-full object-contain drop-shadow-2xl transition-transform duration-500 group-hover:scale-105"
-                        loading="lazy"
-                      />
-                    </div>
+                    <img
+                      src={currentImg}
+                      alt={`${model.name} render`}
+                      className="max-h-full max-w-full object-contain drop-shadow-2xl transition-transform duration-500 group-hover:scale-105"
+                      loading="lazy"
+                    />
                   </div>
 
                   {/* Angle Switcher Controls & Quick 3D button */}

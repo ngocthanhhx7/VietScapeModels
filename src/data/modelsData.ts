@@ -106,7 +106,6 @@ export const modelsData: ModelSpecification[] = [
       weightGrams: 350,
     },
     dimensionDisplay: '33 × 30 × 23 cm',
-    visualScale: 1.35,
     material: 'Giấy bìa mỹ thuật vân sa thạch 250gsm dập nếp vi sai, in sắc nét',
     finish: 'Mực in sắc nét với keo sữa chuyên dụng, dập nếp trợ lực chống nứt gãy giấy',
     editionLimit: 1000,
@@ -114,7 +113,7 @@ export const modelsData: ModelSpecification[] = [
     architecturalSignificance: 'Bố cục khối vuông vức ba tầng uy nghiêm: tầng 1 cấu trúc bậc thềm tam cấp khán đài, tầng 2 hệ 20 cột ốp đá hoa cương bọc lấy phòng thiêng, tầng mái giật cấp. Thiết kế Low-poly giấy tạo nên tác phẩm decor bàn làm việc đậm chiều sâu lịch sử.',
     views: {
       front: `${BASE}models/lang-bac-front.png`,
-      perspective: `${BASE}models/lang-bac-perspective.png`,
+      perspective: `${BASE}models/Lang bac mowi nhat.jpg`,
     },
     hotspots: [
       {
