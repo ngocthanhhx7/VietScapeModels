@@ -25,6 +25,7 @@ export interface ModelSpecification {
     depthMm: number;
     weightGrams: number;
   };
+  dimensionDisplay?: string;
   material: string;
   finish: string;
   editionLimit: number;

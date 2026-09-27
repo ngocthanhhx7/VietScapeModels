@@ -211,12 +211,12 @@ export const CollectionsSection: React.FC<CollectionsSectionProps> = ({
                   <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 py-3 border-y border-heritage-border/70 text-xs font-mono">
                     <div>
                       <span className="text-heritage-muted block text-[11px]">Quy cách:</span>
-                      <span className="font-semibold text-heritage-dark">{model.sheetCount || 4} tờ bìa</span>
+                      <span className="font-semibold text-heritage-dark">{model.sheetCount || 20} tờ</span>
                     </div>
                     <div>
                       <span className="text-heritage-muted block text-[11px]">Kích thước:</span>
                       <span className="font-semibold text-heritage-dark">
-                        {model.dimensions.heightMm}×{model.dimensions.widthMm} mm
+                        {model.dimensionDisplay || `${model.dimensions.heightMm}×${model.dimensions.widthMm} mm`}
                       </span>
                     </div>
                     <div>

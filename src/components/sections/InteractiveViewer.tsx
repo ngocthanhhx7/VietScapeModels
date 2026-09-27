@@ -456,7 +456,7 @@ export const InteractiveViewer: React.FC<InteractiveViewerProps> = ({
                 <div>
                   <span className="text-heritage-muted block text-[11px]">Kích thước sau ráp:</span>
                   <span className="font-bold text-heritage-dark">
-                    {model.dimensions.heightMm}×{model.dimensions.widthMm} mm
+                    {model.dimensionDisplay || `${model.dimensions.heightMm}×${model.dimensions.widthMm} mm`}
                   </span>
                 </div>
                 <div>

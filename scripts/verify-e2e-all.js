@@ -146,6 +146,8 @@ const collectionsCode = fs.readFileSync(path.join(rootDir, 'src/components/secti
 assert(collectionsCode.includes('id="collections"'), 'CollectionsSection declares id="collections"');
 assert(collectionsCode.includes('model.difficulty'), 'CollectionsSection binds DIY difficulty to model.difficulty');
 assert(!collectionsCode.includes('{model.assemblyTimeMinutes || 60} phút'), 'CollectionsSection no longer displays minutes for DIY difficulty');
+assert(collectionsCode.includes('model.dimensionDisplay'), 'CollectionsSection displays 3D dimensions via model.dimensionDisplay');
+assert(collectionsCode.includes('{model.sheetCount || 20} tờ'), 'CollectionsSection formats sheet count as {count} tờ');
 
 const craftsmanshipCode = fs.readFileSync(path.join(rootDir, 'src/components/sections/CraftsmanshipSection.tsx'), 'utf-8');
 assert(craftsmanshipCode.includes('id="craftsmanship"'), 'CraftsmanshipSection declares id="craftsmanship"');
@@ -155,6 +157,12 @@ assert(viewerCode.includes('id="interactive-3d"'), 'InteractiveViewer declares c
 assert(viewerCode.includes('id="interactive-viewer"'), 'InteractiveViewer provides backward-compatible id="interactive-viewer"');
 assert(viewerCode.includes('model.difficulty'), 'InteractiveViewer displays model.difficulty for DIY difficulty');
 assert(!viewerCode.includes('Thời gian ráp:'), 'InteractiveViewer synchronizes label to Độ khó DIY without minutes');
+assert(viewerCode.includes('model.dimensionDisplay'), 'InteractiveViewer displays 3D dimensions via model.dimensionDisplay');
+
+const modelsDataCode = fs.readFileSync(path.join(rootDir, 'src/data/modelsData.ts'), 'utf-8');
+assert(modelsDataCode.includes("dimensionDisplay: '19 × 20 × 30 cm'"), 'Chùa Một Cột has exact dimensions 19 × 20 × 30 cm');
+assert(modelsDataCode.includes("dimensionDisplay: '33 × 30 × 23 cm'"), 'Lăng Bác has exact dimensions 33 × 30 × 23 cm');
+assert(modelsDataCode.includes("dimensionDisplay: '26 × 21 × 33 cm'"), 'Khuê Văn Các has exact dimensions 26 × 21 × 33 cm');
 
 const testimonialsCode = fs.readFileSync(path.join(rootDir, 'src/components/sections/TestimonialsSection.tsx'), 'utf-8');
 assert(testimonialsCode.includes('id="testimonials"'), 'TestimonialsSection declares id="testimonials"');
