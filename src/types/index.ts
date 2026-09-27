@@ -26,6 +26,7 @@ export interface ModelSpecification {
     weightGrams: number;
   };
   dimensionDisplay?: string;
+  visualScale?: number;
   material: string;
   finish: string;
   editionLimit: number;

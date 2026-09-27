@@ -163,6 +163,9 @@ const modelsDataCode = fs.readFileSync(path.join(rootDir, 'src/data/modelsData.t
 assert(modelsDataCode.includes("dimensionDisplay: '19 × 20 × 30 cm'"), 'Chùa Một Cột has exact dimensions 19 × 20 × 30 cm');
 assert(modelsDataCode.includes("dimensionDisplay: '33 × 30 × 23 cm'"), 'Lăng Bác has exact dimensions 33 × 30 × 23 cm');
 assert(modelsDataCode.includes("dimensionDisplay: '26 × 21 × 33 cm'"), 'Khuê Văn Các has exact dimensions 26 × 21 × 33 cm');
+assert(modelsDataCode.includes('visualScale: 1.35'), 'Lăng Bác has visualScale 1.35 for prominent display');
+assert(collectionsCode.includes('model.visualScale'), 'CollectionsSection supports visualScale');
+assert(viewerCode.includes('model.visualScale'), 'InteractiveViewer supports visualScale');
 
 const testimonialsCode = fs.readFileSync(path.join(rootDir, 'src/components/sections/TestimonialsSection.tsx'), 'utf-8');
 assert(testimonialsCode.includes('id="testimonials"'), 'TestimonialsSection declares id="testimonials"');

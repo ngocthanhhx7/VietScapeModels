@@ -239,7 +239,7 @@ export const InteractiveViewer: React.FC<InteractiveViewerProps> = ({
               {/* Scalable Model Container with Hotspots */}
               <div
                 className="relative z-10 w-full flex items-center justify-center transition-transform duration-300"
-                style={{ transform: `scale(${zoom})` }}
+                style={{ transform: `scale(${zoom * (model.visualScale || 1)})` }}
               >
                 <img
                   src={model.views[angle]}

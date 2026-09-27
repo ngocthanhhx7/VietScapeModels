@@ -106,6 +106,7 @@ export const modelsData: ModelSpecification[] = [
       weightGrams: 350,
     },
     dimensionDisplay: '33 × 30 × 23 cm',
+    visualScale: 1.35,
     material: 'Giấy bìa mỹ thuật vân sa thạch 250gsm dập nếp vi sai, in sắc nét',
     finish: 'Mực in sắc nét với keo sữa chuyên dụng, dập nếp trợ lực chống nứt gãy giấy',
     editionLimit: 1000,
