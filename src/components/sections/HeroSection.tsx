@@ -122,21 +122,24 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
         </div>
 
         {/* Heritage Stats Strip Bar */}
-        <div className="mt-16 pt-8 border-t border-heritage-border/80 grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+        <div className="mt-16 pt-8 border-t border-heritage-border/80 grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 text-center">
           <div className="space-y-1">
-            <span className="font-serif text-3xl sm:text-4xl font-bold text-heritage-dark whitespace-nowrap">95.000 - 99.000 VNĐ</span>
+            <span className="font-serif text-2xl sm:text-3xl lg:text-4xl font-bold text-heritage-dark block">
+              <span className="inline sm:hidden">Từ 95k VNĐ</span>
+              <span className="hidden sm:inline whitespace-nowrap">95.000 - 99.000 VNĐ</span>
+            </span>
             <p className="text-xs font-mono uppercase tracking-wider text-heritage-muted">Mức giá sinh viên</p>
           </div>
           <div className="space-y-1">
-            <span className="font-serif text-3xl sm:text-4xl font-bold text-heritage-gold">180+ gsm</span>
+            <span className="font-serif text-2xl sm:text-3xl lg:text-4xl font-bold text-heritage-gold block">180+ gsm</span>
             <p className="text-xs font-mono uppercase tracking-wider text-heritage-muted">Giấy mỹ thuật dày dặn</p>
           </div>
           <div className="space-y-1">
-            <span className="font-serif text-3xl sm:text-4xl font-bold text-heritage-dark">&lt; 5 Phút</span>
+            <span className="font-serif text-2xl sm:text-3xl lg:text-4xl font-bold text-heritage-dark block">&lt; 5 Phút</span>
             <p className="text-xs font-mono uppercase tracking-wider text-heritage-muted">Podcast QR song ngữ</p>
           </div>
           <div className="space-y-1">
-            <span className="font-serif text-3xl sm:text-4xl font-bold text-heritage-gold">100% DIY</span>
+            <span className="font-serif text-2xl sm:text-3xl lg:text-4xl font-bold text-heritage-gold block">100% DIY</span>
             <p className="text-xs font-mono uppercase tracking-wider text-heritage-muted">Healing &amp; Xả stress</p>
           </div>
         </div>

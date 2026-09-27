@@ -225,6 +225,10 @@ for (const sec of sectionFiles) {
   assert(secCode.includes('sm:') || secCode.includes('md:') || secCode.includes('lg:'), `${sec} contains responsive breakpoint classes`);
 }
 
+// Hero mobile price collision check
+assert(heroCode.includes('Từ 95k VNĐ'), 'HeroSection provides compact mobile price "Từ 95k VNĐ" to prevent collision');
+assert(heroCode.includes('95.000 - 99.000 VNĐ'), 'HeroSection preserves full price for desktop/tablet viewports');
+
 // Motifs check
 const motifsCode = fs.readFileSync(path.join(rootDir, 'src/components/common/HeritageMotifs.tsx'), 'utf-8');
 assert(motifsCode.includes('DongSonDrumMotif'), 'HeritageMotifs provides Dong Son drum SVG');
