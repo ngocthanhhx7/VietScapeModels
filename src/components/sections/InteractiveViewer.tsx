@@ -466,8 +466,8 @@ export const InteractiveViewer: React.FC<InteractiveViewerProps> = ({
                   </span>
                 </div>
                 <div>
-                  <span className="text-heritage-muted block text-[11px]">Thời gian ráp:</span>
-                  <span className="font-bold text-heritage-dark">~{model.assemblyTimeMinutes || 60} phút</span>
+                  <span className="text-heritage-muted block text-[11px]">Độ khó DIY:</span>
+                  <span className="font-bold text-heritage-dark">{model.difficulty || 'Cao'}</span>
                 </div>
               </div>
 

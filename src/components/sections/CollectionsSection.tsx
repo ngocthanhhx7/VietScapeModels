@@ -221,7 +221,7 @@ export const CollectionsSection: React.FC<CollectionsSectionProps> = ({
                     </div>
                     <div>
                       <span className="text-heritage-muted block text-[11px]">Độ khó DIY:</span>
-                      <span className="font-semibold text-heritage-dark">{model.assemblyTimeMinutes || 60} phút</span>
+                      <span className="font-semibold text-heritage-dark">{model.difficulty || 'Cao'}</span>
                     </div>
                     <div>
                       <span className="text-heritage-muted block text-[11px]">Chất liệu:</span>

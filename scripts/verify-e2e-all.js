@@ -144,6 +144,8 @@ assert(storyCode.includes('id="story"'), 'StorySection declares id="story"');
 
 const collectionsCode = fs.readFileSync(path.join(rootDir, 'src/components/sections/CollectionsSection.tsx'), 'utf-8');
 assert(collectionsCode.includes('id="collections"'), 'CollectionsSection declares id="collections"');
+assert(collectionsCode.includes('model.difficulty'), 'CollectionsSection binds DIY difficulty to model.difficulty');
+assert(!collectionsCode.includes('{model.assemblyTimeMinutes || 60} phút'), 'CollectionsSection no longer displays minutes for DIY difficulty');
 
 const craftsmanshipCode = fs.readFileSync(path.join(rootDir, 'src/components/sections/CraftsmanshipSection.tsx'), 'utf-8');
 assert(craftsmanshipCode.includes('id="craftsmanship"'), 'CraftsmanshipSection declares id="craftsmanship"');
@@ -151,6 +153,8 @@ assert(craftsmanshipCode.includes('id="craftsmanship"'), 'CraftsmanshipSection d
 const viewerCode = fs.readFileSync(path.join(rootDir, 'src/components/sections/InteractiveViewer.tsx'), 'utf-8');
 assert(viewerCode.includes('id="interactive-3d"'), 'InteractiveViewer declares canonical id="interactive-3d"');
 assert(viewerCode.includes('id="interactive-viewer"'), 'InteractiveViewer provides backward-compatible id="interactive-viewer"');
+assert(viewerCode.includes('model.difficulty'), 'InteractiveViewer displays model.difficulty for DIY difficulty');
+assert(!viewerCode.includes('Thời gian ráp:'), 'InteractiveViewer synchronizes label to Độ khó DIY without minutes');
 
 const testimonialsCode = fs.readFileSync(path.join(rootDir, 'src/components/sections/TestimonialsSection.tsx'), 'utf-8');
 assert(testimonialsCode.includes('id="testimonials"'), 'TestimonialsSection declares id="testimonials"');
