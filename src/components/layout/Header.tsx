@@ -19,12 +19,12 @@ export const Header: React.FC<HeaderProps> = ({ onReplayEntrance }) => {
   }, []);
 
   const navLinks = [
-    { label: 'Di sản & Sứ mệnh', href: '#story' },
-    { label: 'Bộ sưu tập Kit', href: '#collections' },
-    { label: 'Kỹ nghệ Papercraft', href: '#craftsmanship' },
-    { label: 'Trải nghiệm 3D & Audio', href: '#interactive-3d' },
-    { label: 'Đánh giá cộng đồng', href: '#testimonials' },
-    { label: 'Đặt hàng & Hợp tác', href: '#contact' },
+    { label: 'Di sản', href: '#story' },
+    { label: 'Bộ sưu tập', href: '#collections' },
+    { label: 'Kỹ nghệ', href: '#craftsmanship' },
+    { label: 'Trải nghiệm 3D', href: '#interactive-3d' },
+    { label: 'Đánh giá', href: '#testimonials' },
+    { label: 'Đặt hàng', href: '#contact' },
   ];
 
   const handleNavClick = (href: string) => {
@@ -67,12 +67,12 @@ export const Header: React.FC<HeaderProps> = ({ onReplayEntrance }) => {
         </a>
 
         {/* Desktop Navigation */}
-        <nav className="hidden lg:flex items-center gap-7">
+        <nav className="hidden lg:flex items-center gap-5 xl:gap-7">
           {navLinks.map((link) => (
             <button
               key={link.href}
               onClick={() => handleNavClick(link.href)}
-              className="text-xs font-sans font-medium text-heritage-muted hover:text-heritage-dark transition-colors tracking-wide relative py-1 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[1.5px] after:bg-heritage-gold hover:after:w-full after:transition-all after:duration-300"
+              className="whitespace-nowrap text-xs font-sans font-medium text-heritage-muted hover:text-heritage-dark transition-colors tracking-wide relative py-1 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[1.5px] after:bg-heritage-gold hover:after:w-full after:transition-all after:duration-300"
             >
               {link.label}
             </button>
@@ -101,11 +101,11 @@ export const Header: React.FC<HeaderProps> = ({ onReplayEntrance }) => {
 
           <button
             onClick={() => handleNavClick('#contact')}
-            className="group relative inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-xs font-mono uppercase tracking-wider font-semibold bg-heritage-dark text-heritage-sand overflow-hidden shadow-sm hover:shadow-md transition-all hover:bg-heritage-gold duration-300"
+            className="group relative inline-flex items-center gap-2 px-4 sm:px-5 py-2.5 rounded-full text-xs font-mono uppercase tracking-wider font-semibold bg-heritage-dark text-heritage-sand overflow-hidden shadow-sm hover:shadow-md transition-all hover:bg-heritage-gold duration-300 whitespace-nowrap"
           >
-            <Sparkles className="w-3.5 h-3.5 text-heritage-gold group-hover:text-heritage-sand transition-colors" />
-            <span>Đặt Mua Kit DIY (Chỉ từ 95.000 VNĐ)</span>
-            <ArrowUpRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+            <Sparkles className="w-3.5 h-3.5 text-heritage-gold group-hover:text-heritage-sand transition-colors shrink-0" />
+            <span className="whitespace-nowrap">Đặt Mua Kit DIY (Từ 95k)</span>
+            <ArrowUpRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 shrink-0" />
           </button>
         </div>
 
@@ -159,7 +159,7 @@ export const Header: React.FC<HeaderProps> = ({ onReplayEntrance }) => {
                 className="w-full py-3 rounded-full text-center text-xs font-mono uppercase tracking-wider font-semibold bg-heritage-dark text-heritage-sand flex items-center justify-center gap-2 hover:bg-heritage-gold transition-colors"
               >
                 <Sparkles className="w-4 h-4 text-heritage-gold" />
-                <span>Đặt Mua Kit DIY (Chỉ từ 95.000 VNĐ)</span>
+                <span>Đặt Mua Kit DIY (Từ 95.000 VNĐ)</span>
               </button>
             </div>
           </div>

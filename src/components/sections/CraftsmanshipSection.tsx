@@ -29,7 +29,7 @@ export const CraftsmanshipSection: React.FC = () => {
       title: 'Tuyển Chọn Giấy Mỹ Thuật & In Kháng Ẩm',
       vietnameseTitle: 'Vật liệu xanh FSC & Bền màu',
       description:
-        'Sử dụng giấy bìa mỹ thuật cao cấp định lượng 180-250gsm đạt chuẩn FSC thân thiện môi trường. Phủ lớp bảo vệ vi hạt kháng ẩm và tia UV, chống phai màu trong khí hậu nhiệt đới ẩm Việt Nam.',
+        'Sử dụng giấy bìa mỹ thuật cao cấp định lượng 180 - 250 gsm đạt chuẩn FSC thân thiện môi trường. Phủ lớp bảo vệ vi hạt kháng ẩm và tia UV, chống phai màu trong khí hậu nhiệt đới ẩm Việt Nam.',
       icon: Scissors,
       technicalSpec: 'Bìa mỹ thuật 180 - 250 gsm',
     },
@@ -46,7 +46,7 @@ export const CraftsmanshipSection: React.FC = () => {
 
   const materials = [
     {
-      name: 'Giấy Mỹ Thuật Bìa Dày (180 - 250gsm)',
+      name: 'Giấy Mỹ Thuật Bìa Dày (180 - 250 gsm)',
       role: 'Kết cấu đa giác 3D chính',
       detail: 'Độ đanh dẻo lý tưởng, bắt keo cực nhạy, chịu lực gấp đa chiều và đạt chứng chỉ rừng bền vững FSC.',
     },
@@ -80,7 +80,8 @@ export const CraftsmanshipSection: React.FC = () => {
           badge="Quy trình chế tác giấy & Đóng gói Flat-pack"
           title={
             <>
-              Kỹ Nghệ Papercraft &amp; <span className="text-gold-gradient">Hệ Sinh Thái Phygital</span>
+              <span className="inline-block">Kỹ Nghệ Papercraft</span> &amp;{' '}
+              <span className="inline-block text-gold-gradient">Hệ Sinh Thái Phygital</span>
             </>
           }
           subtitle="Khám phá hành trình chuyển hóa công trình di sản ngàn năm thành bộ kit giấy dập nếp chuẩn xác từng milimet, dễ dàng tự ráp và bền vững cùng thời gian."
@@ -174,7 +175,7 @@ export const CraftsmanshipSection: React.FC = () => {
               </div>
               <div className="space-y-0.5">
                 <h4 className="font-serif text-lg font-bold text-heritage-dark leading-snug">
-                  Chính Sách &quot;Yên Tâm Trổ Tài — Đổi Bù Mảnh Hỏng 1-Đổi-1&quot;
+                  Chính Sách &quot;Yên Tâm Trổ Tài — Đổi Bù Mảnh Hỏng 1 - Đổi - 1&quot;
                 </h4>
                 <p className="text-xs text-heritage-muted font-sans">
                   Nếu trong quá trình cắt dán bạn vô tình làm rách nếp gấp hoặc mất chi tiết, VietScape sẽ gửi bù tấm chi tiết thay thế hoàn toàn miễn phí!

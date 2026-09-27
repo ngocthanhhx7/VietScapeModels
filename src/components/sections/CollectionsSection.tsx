@@ -42,10 +42,11 @@ export const CollectionsSection: React.FC<CollectionsSectionProps> = ({
       <div className="max-w-7xl mx-auto space-y-16 relative z-10">
         {/* Section Header */}
         <SectionHeader
-          badge="Bộ sưu tập Kit Giấy 3D DIY — EXE101"
+          badge="Bộ sưu tập Kit Giấy 3D DIY — EXE201"
           title={
             <>
-              Kỳ Quan Kiến Trúc <span className="text-gold-gradient">Cắt Dán Tinh Tế</span>
+              <span className="inline-block">Kỳ Quan Kiến Trúc</span>{' '}
+              <span className="inline-block text-gold-gradient">Cắt Dán Tinh Tế</span>
             </>
           }
           subtitle="Mỗi bộ kit giấy phẳng flat-pack được thiết kế chuẩn xác từng đường gấp, kèm mã QR dẫn thẳng đến podcast lịch sử song ngữ Anh - Việt sống động dưới 5 phút."
@@ -132,7 +133,7 @@ export const CollectionsSection: React.FC<CollectionsSectionProps> = ({
                     <img
                       src={currentImg}
                       alt={`${model.name} render`}
-                      className="max-h-full max-w-full object-contain drop-shadow-2xl transition-transform duration-500 group-hover:scale-105"
+                      className="max-h-full max-w-full object-contain rounded-2xl border border-heritage-border/40 shadow-sm drop-shadow-2xl transition-transform duration-500 group-hover:scale-105"
                       loading="lazy"
                     />
                   </div>
@@ -226,7 +227,7 @@ export const CollectionsSection: React.FC<CollectionsSectionProps> = ({
                     <div>
                       <span className="text-heritage-muted block text-[11px]">Chất liệu:</span>
                       <span className="font-semibold text-heritage-dark truncate block" title={model.material}>
-                        Bìa mỹ thuật &gt;180g
+                        Bìa mỹ thuật &gt; 180g
                       </span>
                     </div>
                   </div>

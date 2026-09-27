@@ -30,7 +30,7 @@ export const testimonialsData: Testimonial[] = [
     quote: 'VietScape Models đã giải quyết rất xuất sắc bài toán đưa di sản đến gần giới trẻ. Sản phẩm kết hợp hài hòa giữa thủ công thư giãn (Papercraft) và công nghệ số Phygital (Bilingual Podcast), chi phí đầu tư tinh gọn và tiềm năng nhân rộng thị trường cực kỳ lớn.',
     author: 'ThS. Lê Hoàng Anh',
     role: 'Giảng viên Bộ môn Khởi nghiệp & Đổi mới Sáng tạo',
-    organization: 'Cố vấn Đồ án Khởi nghiệp Sáng tạo EXE101',
+    organization: 'Cố vấn Đồ án Khởi nghiệp Sáng tạo EXE201',
     verifiedHeritageCollector: true,
   },
 ];

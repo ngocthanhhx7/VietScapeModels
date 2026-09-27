@@ -249,10 +249,11 @@ export const InquirySection: React.FC<InquirySectionProps> = ({
       <div className="max-w-7xl mx-auto space-y-16 relative z-10">
         {/* Section Header */}
         <SectionHeader
-          badge="Đồ Án Khởi Nghiệp EXE101 — Đặt Mua & Hợp Tác"
+          badge="Đồ Án Khởi Nghiệp EXE201 — Đặt Mua & Hợp Tác"
           title={
             <>
-              Đặt Mua Kit DIY & <span className="text-gold-gradient">Kết Nối Hợp Tác</span>
+              <span className="inline-block">Đặt Mua Kit DIY</span> &amp;{' '}
+              <span className="inline-block text-gold-gradient">Kết Nối Hợp Tác</span>
             </>
           }
           subtitle="Sở hữu bộ kit mô hình giấy 3D Low-poly di sản kèm podcast song ngữ chỉ từ 95.000 VNĐ/kit. Miễn phí vận chuyển toàn quốc cho đơn hàng từ 2 kit."
@@ -279,7 +280,7 @@ export const InquirySection: React.FC<InquirySectionProps> = ({
                 <div className="flex items-start gap-3">
                   <MapPin className="w-5 h-5 text-heritage-gold shrink-0 mt-0.5" />
                   <div>
-                    <strong className="text-heritage-dark block">Văn Phòng Dự Án EXE101:</strong>
+                    <strong className="text-heritage-dark block">Văn Phòng Dự Án EXE201:</strong>
                     <span>Phòng DE424, Tòa nhà Gamma, Trường Đại học FPT Hà Nội, Khu CNC Hòa Lạc</span>
                   </div>
                 </div>
@@ -650,7 +651,7 @@ export const InquirySection: React.FC<InquirySectionProps> = ({
                   Cảm Ơn Bạn Đã Đồng Hành Cùng Di Sản
                 </h3>
                 <p className="text-sm text-heritage-muted font-sans leading-relaxed">
-                  Kính gửi <strong className="text-heritage-dark">{successModalData.fullName}</strong>, yêu cầu đặt hàng của bạn đã được ghi nhận vào hệ thống của VietScape Models (Đồ án EXE101).
+                  Kính gửi <strong className="text-heritage-dark">{successModalData.fullName}</strong>, yêu cầu đặt hàng của bạn đã được ghi nhận vào hệ thống của VietScape Models (Đồ án EXE201).
                 </p>
                 {successModalData.simulated && (
                   <p className="text-[11px] font-mono text-amber-700 bg-amber-50 py-1 px-2 rounded-md border border-amber-200 inline-block">

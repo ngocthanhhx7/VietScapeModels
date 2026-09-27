@@ -35,12 +35,12 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
             {/* Tagline Badge */}
             <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full text-xs font-mono uppercase tracking-[0.2em] bg-heritage-gold/10 text-heritage-dark border border-heritage-gold/30 backdrop-blur-xs">
               <LyLotusMotif size={18} className="text-heritage-gold" />
-              <span>Bộ Kit Mô Hình Giấy 3D DIY — Đồ Án Khởi Nghiệp EXE101</span>
+              <span>Bộ Kit Mô Hình Giấy 3D DIY — Đồ Án Khởi Nghiệp EXE201</span>
             </div>
 
             {/* Main Editorial Headline */}
-            <h1 className="font-serif text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-normal text-heritage-dark leading-[1.38] sm:leading-[1.35] lg:leading-[1.32]">
-              Tự Tay Ráp Di Sản — Chạm Vào <span className="text-gold-gradient">Hồn Thiêng</span> Kiến Trúc Việt
+            <h1 className="font-serif text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-normal text-heritage-dark leading-[1.38] sm:leading-[1.35] lg:leading-[1.32] [text-wrap:balance]">
+              <span className="inline-block">Tự Tay Ráp Di Sản</span> — <span className="inline-block">Chạm Vào <span className="text-gold-gradient">Hồn Thiêng</span></span> <span className="inline-block">Kiến Trúc Việt</span>
             </h1>
 
             {/* Subheading Narrative */}

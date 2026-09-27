@@ -53,10 +53,11 @@ export const TestimonialsSection: React.FC = () => {
           badge="Đánh giá thực chứng & Cố vấn khởi nghiệp"
           title={
             <>
-              Cộng Đồng Người Dùng &amp; <span className="text-gold-gradient">Cố Vấn Đồ Án</span>
+              <span className="inline-block">Cộng Đồng Người Dùng</span> &amp;{' '}
+              <span className="inline-block text-gold-gradient">Cố Vấn Đồ Án</span>
             </>
           }
-          subtitle="Khám phá cảm nhận chân thực từ học sinh, sinh viên, người đi làm và cố vấn khởi nghiệp EXE101 sau khi tự tay lắp ráp và lắng nghe podcast lịch sử."
+          subtitle="Khám phá cảm nhận chân thực từ học sinh, sinh viên, người đi làm và cố vấn khởi nghiệp EXE201 sau khi tự tay lắp ráp và lắng nghe podcast lịch sử."
           dividerVariant="lotus"
         />
 

@@ -33,7 +33,7 @@ export const Footer: React.FC<FooterProps> = ({ onReplayEntrance }) => {
         <div className="flex items-center gap-8 text-heritage-gold/60 animate-pulse-glow">
           <HoiVanFretMotif size={28} />
           <span className="hidden sm:inline font-mono text-[10px] uppercase tracking-[0.3em] text-heritage-gold/70">
-            VietScape 3D Papercraft &amp; Audio Heritage — EXE101 FPT University
+            VietScape 3D Papercraft &amp; Audio Heritage — EXE201 FPT University
           </span>
           <HoiVanFretMotif size={28} />
         </div>
@@ -61,17 +61,17 @@ export const Footer: React.FC<FooterProps> = ({ onReplayEntrance }) => {
             </div>
 
             <p className="text-sm text-heritage-sand/70 leading-relaxed font-sans">
-              VietScape Models là dự án khởi nghiệp sáng tạo EXE101 (Nhóm 3 — Lớp GD1912, Đại học FPT), tiên phong tái hiện kiến trúc di sản Việt Nam qua bộ kit mô hình giấy 3D cắt dán DIY Low-poly tối giản, tích hợp mã QR lắng nghe podcast lịch sử song ngữ Anh - Việt sống động.
+              VietScape Models là dự án khởi nghiệp sáng tạo EXE201 (Nhóm 3 — Lớp GD1912, Đại học FPT), tiên phong tái hiện kiến trúc di sản Việt Nam qua bộ kit mô hình giấy 3D cắt dán DIY Low-poly tối giản, tích hợp mã QR lắng nghe podcast lịch sử song ngữ Anh - Việt sống động.
             </p>
 
             <div className="flex flex-wrap items-center gap-2.5 pt-2">
               <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs font-mono text-heritage-gold">
                 <ShieldCheck className="w-3.5 h-3.5" />
-                <span>Giấy mỹ thuật &gt;180gsm</span>
+                <span>Giấy mỹ thuật &gt; 180gsm</span>
               </div>
               <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs font-mono text-heritage-sand/80">
                 <Award className="w-3.5 h-3.5 text-heritage-gold" />
-                <span>Bảo hành bù mảnh 1-đổi-1</span>
+                <span>Bảo hành bù mảnh 1 - Đổi - 1</span>
               </div>
             </div>
           </div>
@@ -89,7 +89,6 @@ export const Footer: React.FC<FooterProps> = ({ onReplayEntrance }) => {
                   className="hover:text-heritage-gold transition-colors flex items-center justify-between w-full text-left"
                 >
                   <span>Chùa Một Cột (Liên Hoa Đài)</span>
-                  <span className="text-xs font-mono text-heritage-gold font-bold whitespace-nowrap">99.000 VNĐ</span>
                 </button>
               </li>
               <li>
@@ -98,7 +97,6 @@ export const Footer: React.FC<FooterProps> = ({ onReplayEntrance }) => {
                   className="hover:text-heritage-gold transition-colors flex items-center justify-between w-full text-left"
                 >
                   <span>Lăng Chủ tịch Hồ Chí Minh</span>
-                  <span className="text-xs font-mono text-heritage-gold font-bold whitespace-nowrap">99.000 VNĐ</span>
                 </button>
               </li>
               <li>
@@ -107,7 +105,6 @@ export const Footer: React.FC<FooterProps> = ({ onReplayEntrance }) => {
                   className="hover:text-heritage-gold transition-colors flex items-center justify-between w-full text-left"
                 >
                   <span>Khuê Văn Các (Văn Miếu)</span>
-                  <span className="text-xs font-mono text-heritage-gold font-bold whitespace-nowrap">95.000 VNĐ</span>
                 </button>
               </li>
               <li>
@@ -130,7 +127,7 @@ export const Footer: React.FC<FooterProps> = ({ onReplayEntrance }) => {
             </h4>
             <div className="space-y-3 text-xs text-heritage-sand/70 font-sans">
               <div>
-                <strong className="block text-white font-medium">Văn phòng EXE101:</strong>
+                <strong className="block text-white font-medium">Văn phòng EXE201:</strong>
                 <p>Phòng DE424, Gamma, ĐH FPT Hà Nội</p>
               </div>
               <div>
@@ -199,7 +196,7 @@ export const Footer: React.FC<FooterProps> = ({ onReplayEntrance }) => {
 
         {/* Bottom Bar: Copyright & Terms */}
         <div className="pt-8 mt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono text-heritage-sand/60">
-          <p className="text-center sm:text-left">© 2026 VietScape Models — Đồ án Khởi nghiệp Sáng tạo EXE101 (Nhóm 3 — GD1912, Đại học FPT).</p>
+          <p className="text-center sm:text-left">© 2026 VietScape Models — Đồ án Khởi nghiệp Sáng tạo EXE201 (Nhóm 3 — GD1912, Đại học FPT).</p>
           <div className="flex flex-wrap items-center justify-center sm:justify-end gap-4 sm:gap-6">
             {onReplayEntrance && (
               <button
@@ -212,7 +209,7 @@ export const Footer: React.FC<FooterProps> = ({ onReplayEntrance }) => {
               </button>
             )}
             <a href="#contact" className="hover:text-heritage-gold transition-colors">
-              Chính sách bảo hành 1-đổi-1
+              Chính sách bảo hành 1 - Đổi - 1
             </a>
             <a href="https://zalo.me/0852699188" target="_blank" rel="noopener noreferrer" className="hover:text-heritage-gold transition-colors">
               Hỗ trợ Zalo: 0852 699 188

@@ -48,7 +48,9 @@ export const StorySection: React.FC = () => {
           badge="Câu chuyện khởi nghiệp & Sứ mệnh di sản"
           title={
             <>
-              Hồi Sinh Di Sản Bằng <span className="text-gold-gradient">Đôi Tay Người Trẻ</span> &amp; Công Nghệ Số
+              <span className="inline-block">Hồi Sinh Di Sản Bằng</span>{' '}
+              <span className="inline-block text-gold-gradient">Đôi Tay Người Trẻ</span> &amp;{' '}
+              <span className="inline-block">Công Nghệ Số</span>
             </>
           }
           subtitle="Khởi nguồn từ thực trạng quà lưu niệm Việt Nam còn nghèo nàn, cồng kềnh và thiếu chiều sâu văn hóa, nhóm sinh viên FPT University đã phát triển giải pháp kit giấy 3D kết hợp podcast song ngữ để lịch sử chạm tới trái tim thế hệ trẻ."
@@ -61,7 +63,7 @@ export const StorySection: React.FC = () => {
 
           <div className="max-w-4xl mx-auto text-center space-y-4">
             <span className="text-xs font-mono uppercase tracking-[0.25em] text-heritage-gold font-semibold block">
-              — Tuyên ngôn Dự án VietScape Models (Đồ án EXE101) —
+              — Tuyên ngôn Dự án VietScape Models (Đồ án EXE201) —
             </span>
             <blockquote className="font-serif text-xl sm:text-2xl lg:text-3xl italic text-heritage-dark font-medium leading-relaxed">
               &ldquo;Di sản không chỉ nằm im sau lớp kính viện bảo tàng. Di sản sống động nhất khi được chính bạn tự tay nâng niu, cắt dán từng nếp gấp và lắng nghe câu chuyện nghìn năm cất tiếng.&rdquo;

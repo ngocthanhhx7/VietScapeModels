@@ -1,5 +1,5 @@
 /**
- * VietScape Models - EXE101 Startup Project
+ * VietScape Models - EXE201 Startup Project
  * Email Delivery Service for Customer Inquiries & Pre-orders
  * 
  * Direct REST delivery to quanp2710@gmail.com via FormSubmit AJAX endpoint,
@@ -33,7 +33,7 @@ export const isEmailConfigured = (): boolean => {
 };
 
 /**
- * Tạo mã hồ sơ / đơn hàng chuẩn VietScape EXE101
+ * Tạo mã hồ sơ / đơn hàng chuẩn VietScape EXE201
  * Ví dụ: VS-INQ-2026-7281 (Bao gồm định danh VS-INQ- chuẩn kiểm thử)
  */
 export const generateTicketId = (): string => {

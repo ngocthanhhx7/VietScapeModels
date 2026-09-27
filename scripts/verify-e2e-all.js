@@ -275,6 +275,52 @@ if (fs.existsSync(distAssets)) {
 }
 
 // ============================================================================
+// 9. TYPOGRAPHY, EXE201 CODIFICATION & UX/UI REFINEMENT AUDIT
+// ============================================================================
+console.log('\n✨ 9. Typography, EXE201 Codification & UX/UI Refinement Audit:');
+assert(headerCode.includes('whitespace-nowrap'), 'Header enforces whitespace-nowrap to prevent 2-line wraps');
+assert(headerCode.includes("label: 'Di sản'"), "Header uses concise label 'Di sản'");
+assert(headerCode.includes("label: 'Bộ sưu tập'"), "Header uses concise label 'Bộ sưu tập'");
+assert(headerCode.includes("label: 'Kỹ nghệ'"), "Header uses concise label 'Kỹ nghệ'");
+assert(headerCode.includes("label: 'Trải nghiệm 3D'"), "Header uses concise label 'Trải nghiệm 3D'");
+
+const sectionHeaderCode = fs.readFileSync(path.join(rootDir, 'src/components/common/SectionHeader.tsx'), 'utf-8');
+assert(sectionHeaderCode.includes('[text-wrap:balance]'), 'SectionHeader applies [text-wrap:balance] for elegant line breaks');
+
+assert(viewerCode.includes('z-30') && viewerCode.includes('pointer-events-none'), 'InteractiveViewer elevates watermark badge to z-30 pointer-events-none');
+assert(viewerCode.includes('rounded-2xl') || viewerCode.includes('rounded-3xl'), 'InteractiveViewer softens model image corners with rounded radius');
+assert(collectionsCode.includes('rounded-2xl'), 'CollectionsSection softens model card preview images with rounded radius');
+
+const footerCode = fs.readFileSync(path.join(rootDir, 'src/components/layout/Footer.tsx'), 'utf-8');
+assert(!footerCode.includes('99.000 VNĐ') && !footerCode.includes('95.000 VNĐ'), 'Footer removes landmark prices under Bộ Kit Di Sản DIY');
+assert(footerCode.includes('1 - Đổi - 1'), 'Footer formats warranty guarantee as 1 - Đổi - 1');
+assert(footerCode.includes('Giấy mỹ thuật &gt; 180gsm'), 'Footer formats paper spec as Giấy mỹ thuật > 180gsm');
+
+// Global zero EXE101 guarantee
+const srcFiles = [
+  'src/components/layout/Header.tsx',
+  'src/components/layout/Footer.tsx',
+  'src/components/sections/HeroSection.tsx',
+  'src/components/sections/CollectionsSection.tsx',
+  'src/components/sections/CraftsmanshipSection.tsx',
+  'src/components/sections/InteractiveViewer.tsx',
+  'src/components/sections/StorySection.tsx',
+  'src/components/sections/TestimonialsSection.tsx',
+  'src/components/sections/InquirySection.tsx',
+  'src/data/modelsData.ts',
+  'src/data/testimonialsData.ts',
+  'src/services/emailService.ts',
+];
+for (const file of srcFiles) {
+  const content = fs.readFileSync(path.join(rootDir, file), 'utf-8');
+  assert(!content.includes('EXE101'), `${file} has zero occurrences of EXE101`);
+}
+assert(footerCode.includes('EXE201'), 'Footer reflects project code EXE201');
+assert(heroCode.includes('EXE201'), 'HeroSection reflects project code EXE201');
+assert(collectionsCode.includes('EXE201'), 'CollectionsSection reflects project code EXE201');
+assert(inquiryCode.includes('EXE201'), 'InquirySection reflects project code EXE201');
+
+// ============================================================================
 // FINAL SUMMARY
 // ============================================================================
 console.log('\n================================================================');

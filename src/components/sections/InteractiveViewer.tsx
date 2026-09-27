@@ -86,7 +86,8 @@ export const InteractiveViewer: React.FC<InteractiveViewerProps> = ({
           badge="Phòng trải nghiệm số hóa 3D & Audio Podcast"
           title={
             <>
-              Trải Nghiệm Khảo Sát <span className="text-gold-gradient">Kiến Trúc Đa Chiều</span>
+              <span className="inline-block">Trải Nghiệm Khảo Sát</span>{' '}
+              <span className="inline-block text-gold-gradient">Kiến Trúc Đa Chiều</span>
             </>
           }
           subtitle="Tương tác xoay góc nhìn mô hình giấy Low-poly, giải mã từng cấu kiện lịch sử và nghe thử Podcast thuyết minh song ngữ Anh - Việt tích hợp qua mã QR."
@@ -225,8 +226,8 @@ export const InteractiveViewer: React.FC<InteractiveViewerProps> = ({
               }`}
             >
               {/* Subtle watermark in stage */}
-              <div className="absolute top-6 left-6 z-10 flex items-center gap-2">
-                <span className="font-mono text-xs uppercase tracking-widest text-heritage-gold font-semibold bg-white/70 backdrop-blur-md px-3 py-1 rounded-full border border-heritage-gold/30">
+              <div className="absolute top-5 left-5 z-30 flex items-center gap-2 pointer-events-none">
+                <span className="font-mono text-xs uppercase tracking-widest text-heritage-gold font-semibold bg-white/90 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-heritage-gold/30 shadow-xs">
                   {model.scale} — {model.name}
                 </span>
               </div>
@@ -244,7 +245,7 @@ export const InteractiveViewer: React.FC<InteractiveViewerProps> = ({
                 <img
                   src={model.views[angle]}
                   alt={`${model.name} - ${angle}`}
-                  className="max-h-[420px] max-w-full object-contain drop-shadow-2xl select-none pointer-events-none"
+                  className="max-h-[420px] max-w-full object-contain rounded-2xl md:rounded-3xl border border-heritage-border/40 shadow-lg drop-shadow-2xl select-none pointer-events-none"
                 />
 
                 {/* Hotspot Pins */}
@@ -462,7 +463,7 @@ export const InteractiveViewer: React.FC<InteractiveViewerProps> = ({
                 <div>
                   <span className="text-heritage-muted block text-[11px]">Chất liệu giấy:</span>
                   <span className="font-bold text-heritage-dark truncate block" title={model.material}>
-                    Bìa mỹ thuật &gt;180g
+                    Bìa mỹ thuật &gt; 180g
                   </span>
                 </div>
                 <div>

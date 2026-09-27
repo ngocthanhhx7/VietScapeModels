@@ -19,7 +19,7 @@ export const modelsData: ModelSpecification[] = [
       weightGrams: 280,
     },
     dimensionDisplay: '19 × 20 × 30 cm',
-    material: 'Giấy mỹ thuật Kraft & Couche >=180gsm dập nếp cấn vi sai, cắt laser chính xác',
+    material: 'Giấy mỹ thuật Kraft & Couche >= 180gsm dập nếp cấn vi sai, cắt laser chính xác',
     finish: 'Mực in sắc nét với keo sữa chuyên dụng, dập nếp định vị trợ lực gập sắc nét',
     editionLimit: 1000,
     description: 'Khởi dựng vào mùa đông năm Kỷ Sửu (1049) dưới thời vua Lý Thái Tông, Chùa Một Cột (Diên Hựu Tự) mô phỏng đóa sen ngát hương vươn lên từ hồ Linh Chiểu. Phiên bản Kit Giấy 3D DIY tái hiện kiến trúc độc nhất vô nhị qua hình khối Low-poly tối giản, kết hợp mã QR lắng nghe podcast lịch sử song ngữ Anh - Việt sống động dưới 5 phút.',
@@ -72,12 +72,12 @@ export const modelsData: ModelSpecification[] = [
       'Kích thước thành phẩm bề thế: 19 × 20 × 30 cm',
       'Tích hợp mã QR Podcast lịch sử song ngữ Anh - Việt (04:30 phút)',
       'Bao bì Flat-pack mỏng nhẹ kèm keo sữa chuyên dụng thủ công',
-      'Chính sách bảo hành bù 1-đổi-1 miễn phí nếu vô tình làm rách chi tiết khi ráp',
+      'Chính sách bảo hành bù 1 - Đổi - 1 miễn phí nếu vô tình làm rách chi tiết khi ráp',
     ],
     materialsBreakdown: [
       {
         component: 'Trang bìa chi tiết mô hình',
-        material: 'Giấy mỹ thuật định lượng cao >=180gsm (20 trang)',
+        material: 'Giấy mỹ thuật định lượng cao >= 180gsm (20 trang)',
         craftTechnique: 'Mực in sắc nét, dập cấn nếp trợ lực vi sai chống nứt mép',
       },
       {

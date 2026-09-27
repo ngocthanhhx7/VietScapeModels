@@ -1,4 +1,4 @@
-# Hướng Dẫn Tích Hợp Gửi Email Đơn Hàng Thật Về Gmail (VietScape Models — EXE101)
+# Hướng Dẫn Tích Hợp Gửi Email Đơn Hàng Thật Về Gmail (VietScape Models — EXE201)
 
 Tài liệu này hướng dẫn cách cấu hình hệ thống gửi email đơn hàng từ Landing Page VietScape Models trực tiếp về hộp thư Gmail của ban quản trị dự án thông qua nền tảng **EmailJS**.
 
@@ -30,7 +30,7 @@ Tài liệu này hướng dẫn cách cấu hình hệ thống gửi email đơn
 ## Bước 1: Đăng ký tài khoản EmailJS
 
 1. Truy cập [https://www.emailjs.com/](https://www.emailjs.com/).
-2. Nhấn nút **Sign Up Free** (Gói miễn phí cho phép gửi **200 email/tháng**, hoàn toàn đủ cho việc thử nghiệm, demo đồ án EXE101 và chạy chiến dịch khởi động).
+2. Nhấn nút **Sign Up Free** (Gói miễn phí cho phép gửi **200 email/tháng**, hoàn toàn đủ cho việc thử nghiệm, demo đồ án EXE201 và chạy chiến dịch khởi động).
 3. Xác minh địa chỉ email đăng ký để kích hoạt tài khoản.
 
 ---
@@ -146,7 +146,7 @@ Trên bảng điều khiển EmailJS, chọn tab **Email Services** ở thanh b�
 
   <!-- Footer -->
   <div style="background: #F4ECE1; padding: 14px 24px; text-align: center; font-size: 12px; color: #6E6259; border-top: 1px solid #D8C7B5;">
-    Hệ thống Tiếp Nhận Đơn Hàng Tự Động — Đồ án Khởi nghiệp EXE101 VietScape Models.
+    Hệ thống Tiếp Nhận Đơn Hàng Tự Động — Đồ án Khởi nghiệp EXE201 VietScape Models.
   </div>
 </div>
 ```

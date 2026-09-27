@@ -29,7 +29,7 @@ export const SectionHeader: React.FC<SectionHeaderProps> = ({
         </div>
       )}
 
-      <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold tracking-normal text-heritage-dark leading-[1.38] sm:leading-[1.35] lg:leading-[1.32]">
+      <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold tracking-normal text-heritage-dark leading-[1.38] sm:leading-[1.35] lg:leading-[1.32] [text-wrap:balance]">
         {title}
       </h2>
 
