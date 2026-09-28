@@ -9,12 +9,17 @@ import InteractiveViewer from './components/sections/InteractiveViewer';
 import TestimonialsSection from './components/sections/TestimonialsSection';
 import InquirySection from './components/sections/InquirySection';
 import FloatingContactDock from './components/common/FloatingContactDock';
-import HeritageEntrance, { hasSeenHeritageEntrance } from './components/common/HeritageEntrance';
+import HeritageEntrance from './components/common/HeritageEntrance';
 
 export const App: React.FC = () => {
-  const [showEntrance, setShowEntrance] = useState<boolean>(() => !hasSeenHeritageEntrance());
+  const [showEntrance, setShowEntrance] = useState<boolean>(true);
   const [selectedViewerModelId, setSelectedViewerModelId] = useState<string>('chua-mot-cot');
   const [inquiryModelInterest, setInquiryModelInterest] = useState<string>('Kit Chùa Một Cột — Thăng Long Hà Nội (99.000 VNĐ)');
+
+  const handleReplayEntrance = () => {
+    window.scrollTo({ top: 0, behavior: 'instant' });
+    setShowEntrance(true);
+  };
 
   const scrollToElement = (id: string) => {
     const el = document.getElementById(id);
@@ -43,7 +48,7 @@ export const App: React.FC = () => {
       />
 
       {/* 1. Header / Navigation */}
-      <Header onReplayEntrance={() => setShowEntrance(true)} />
+      <Header onReplayEntrance={handleReplayEntrance} />
 
       {/* Main 8 Content Sections */}
       <main className="flex-1 w-full">
@@ -80,7 +85,7 @@ export const App: React.FC = () => {
       </main>
 
       {/* 9. Footer & Cultural Accents */}
-      <Footer onReplayEntrance={() => setShowEntrance(true)} />
+      <Footer onReplayEntrance={handleReplayEntrance} />
 
       {/* Realtime Multi-channel Floating Contact Dock (Official Info) */}
       <FloatingContactDock

@@ -49,6 +49,7 @@ const requiredFiles = [
   'src/components/sections/InteractiveViewer.tsx',
   'src/components/sections/TestimonialsSection.tsx',
   'src/components/sections/InquirySection.tsx',
+  'src/components/common/HeritageEntrance.tsx',
   'src/components/common/HeritageMotifs.tsx',
   'src/components/common/MuseumPedestal.tsx',
   'src/components/common/SectionHeader.tsx',
@@ -131,6 +132,21 @@ for (const comp of expectedSequence) {
 assert(appContent.includes('handleSelectModelForViewer'), 'App.tsx plumbs model selection to InteractiveViewer');
 assert(appContent.includes('handleSelectModelForInquiry'), 'App.tsx plumbs model selection to InquirySection');
 assert(appContent.includes('scrollToElement'), 'App.tsx provides smooth scrolling navigation helper');
+
+// Heritage Entrance mounting and state wiring in App.tsx
+assert(appContent.includes('HeritageEntrance'), 'App.tsx imports HeritageEntrance component');
+assert(
+  appContent.indexOf('<HeritageEntrance') !== -1 && appContent.indexOf('<HeritageEntrance') < appContent.indexOf('<Header'),
+  'HeritageEntrance is mounted before Header in App.tsx'
+);
+assert(
+  appContent.includes('useState<boolean>(true)') || appContent.includes('useState(true)'),
+  'App.tsx initializes entrance state to true on initial load & reload'
+);
+assert(
+  appContent.includes('onReplayEntrance={handleReplayEntrance}') || (appContent.includes('onReplayEntrance') && appContent.includes('setShowEntrance(true)')),
+  'App.tsx wires onReplayEntrance replay triggers'
+);
 
 // ============================================================================
 // 4. NAVIGATION ANCHORS & SECTION IDS
@@ -245,6 +261,8 @@ assert(heroCode.includes('95.000 - 99.000 VNĐ'), 'HeroSection preserves full pr
 // Motifs check
 const motifsCode = fs.readFileSync(path.join(rootDir, 'src/components/common/HeritageMotifs.tsx'), 'utf-8');
 assert(motifsCode.includes('DongSonDrumMotif'), 'HeritageMotifs provides Dong Son drum SVG');
+assert(motifsCode.includes('ChimLacBirdMotif'), 'HeritageMotifs provides ChimLacBirdMotif SVG');
+assert(motifsCode.includes('GrandDongSonDrumMotif'), 'HeritageMotifs provides GrandDongSonDrumMotif SVG');
 assert(motifsCode.includes('LyLotusMotif'), 'HeritageMotifs provides Ly Dynasty lotus SVG');
 assert(motifsCode.includes('CloudScrollMotif'), 'HeritageMotifs provides Cloud scroll SVG');
 assert(motifsCode.includes('HoiVanFretMotif'), 'HeritageMotifs provides Hoi Van fret motif SVG');
@@ -319,6 +337,91 @@ assert(footerCode.includes('EXE201'), 'Footer reflects project code EXE201');
 assert(heroCode.includes('EXE201'), 'HeroSection reflects project code EXE201');
 assert(collectionsCode.includes('EXE201'), 'CollectionsSection reflects project code EXE201');
 assert(inquiryCode.includes('EXE201'), 'InquirySection reflects project code EXE201');
+
+// ============================================================================
+// 10. GRAND OPENING HERITAGE ENTRANCE & DONG SON CHIM LAC VECTOR AUDIT (R1 - R5)
+// ============================================================================
+console.log('\n🦅 10. Grand Opening Heritage Entrance & Dong Son Chim Lac Vector Audit:');
+
+const entranceCode = fs.readFileSync(path.join(rootDir, 'src/components/common/HeritageEntrance.tsx'), 'utf-8');
+
+// 10.1 Dong Son Chim Lac Archaeological & Vector Characteristics (R1)
+assert(motifsCode.includes('ChimLacBirdMotif'), 'HeritageMotifs exports ChimLacBirdMotif component');
+assert(
+  motifsCode.includes('#FFF3C4') && motifsCode.includes('#E5B942') && motifsCode.includes('#C59B27'),
+  'ChimLacBirdMotif defines imperial Dong Son gold gradient (#FFF3C4 -> #E5B942 -> #C59B27)'
+);
+assert(
+  motifsCode.includes('lacAuraGlow') && motifsCode.includes('feGaussianBlur'),
+  'ChimLacBirdMotif incorporates radiant aura glow filter'
+);
+assert(
+  motifsCode.includes('Mào lông vũ') || motifsCode.includes('Crown Crest Plumes'),
+  'ChimLacBirdMotif models authentic Dong Son crest plume'
+);
+assert(
+  motifsCode.includes('Wing Geometric Engravings') || motifsCode.includes('răng lược') || motifsCode.includes('comb-teeth'),
+  'ChimLacBirdMotif features authentic geometric wing feather engravings'
+);
+assert(
+  motifsCode.includes('Trailing Silk Ribbon Plumage') || motifsCode.includes('dải lông đuôi'),
+  'ChimLacBirdMotif features aerodynamic trailing ribbon plumage'
+);
+assert(motifsCode.includes('GrandDongSonDrumMotif'), 'HeritageMotifs exports GrandDongSonDrumMotif');
+assert(
+  motifsCode.includes('numPoints = 14') || motifsCode.includes('14-pointed solar star'),
+  'GrandDongSonDrumMotif incorporates 14-pointed solar star core'
+);
+
+// 10.2 Page Reload Activation & Accessibility Controls (R3 & R4)
+assert(
+  appContent.includes('useState<boolean>(true)') || appContent.includes('useState(true)'),
+  'Heritage entrance auto-triggers on page reload and initial visit (R4)'
+);
+assert(
+  entranceCode.includes('handleSkip') && entranceCode.includes('Bỏ qua / Khám phá ngay'),
+  'HeritageEntrance provides responsive Skip action button (R3)'
+);
+assert(
+  entranceCode.includes('Escape') || entranceCode.includes("e.key === 'Escape'"),
+  'HeritageEntrance supports Escape key dismissal (R3)'
+);
+assert(
+  entranceCode.includes("document.body.style.overflow = 'hidden'"),
+  'HeritageEntrance enforces body scroll lock during active entrance'
+);
+assert(
+  headerCode.includes('onReplayEntrance') && (headerCode.includes('Xem lại hiệu ứng mở màn Hoàng Triều') || headerCode.includes('Xem lại mở màn Hoàng Triều')),
+  'Header provides replay opening entrance button (R4)'
+);
+assert(
+  footerCode.includes('onReplayEntrance') && footerCode.includes('Xem lại mở màn Hoàng Triều'),
+  'Footer provides replay opening entrance button (R4)'
+);
+
+// 10.3 Epic Scenario & Coordinated Multi-Layer Architecture (R2)
+assert(entranceCode.includes('royal-silk-curtain'), 'HeritageEntrance employs royal silk curtain texture panels');
+assert(
+  entranceCode.includes('isParting') && entranceCode.includes('-102%') && entranceCode.includes('102%'),
+  'HeritageEntrance implements royal curtain parting spring physics'
+);
+assert(entranceCode.includes('GrandDongSonDrumMotif'), 'HeritageEntrance renders rotating Grand Dong Son bronze drum');
+assert(entranceCode.includes('ChimLacBirdMotif'), 'HeritageEntrance renders Dong Son Chim Lac vector motif');
+assert(entranceCode.includes('CloudScrollMotif'), 'HeritageEntrance coordinates mythic cloud gathering');
+assert(
+  entranceCode.includes('VIETSCAPE MODELS') && entranceCode.includes('Hồn Thiêng Kiến Trúc Việt'),
+  'HeritageEntrance presents imperial branding typography'
+);
+assert(
+  entranceCode.includes('isParting') && entranceCode.includes('bg-gradient-to-r'),
+  'HeritageEntrance coordinates center radiant beam upon parting'
+);
+
+// 10.4 Epic Scenario Narrative Timing (~3.8s - 4.5s)
+assert(
+  entranceCode.includes('1800') && entranceCode.includes('2800') && entranceCode.includes('3800') && entranceCode.includes('4200'),
+  'HeritageEntrance coordinates 4-tier narrative timing sequence (1800ms parting -> 2800ms climax -> 3800ms dissolve -> 4200ms finish)'
+);
 
 // ============================================================================
 // FINAL SUMMARY

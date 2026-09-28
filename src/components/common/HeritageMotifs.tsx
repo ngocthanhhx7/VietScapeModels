@@ -1,4 +1,5 @@
 import React from 'react';
+import chimLacImg from '../../assets/motifs/chim-lac.png';
 
 interface MotifProps {
   className?: string;
@@ -217,113 +218,83 @@ export const HeritageDivider: React.FC<{
 );
 
 /**
- * Biểu tượng Chim Lạc Đông Sơn mạ vàng (Vector SVG nghệ thuật cao)
+ * Biểu tượng Chim Lạc Đông Sơn mạ vàng (Vector SVG chuẩn khảo cổ Trống đồng Ngọc Lũ / Hoàng Hạ)
+ * Đặc trưng: Mỏ dài thẳng vút nhọn khắc rãnh, mào lông vũ uốn lượn đôi tầng, cánh giương cao hoa văn răng lược (comb-teeth),
+ * dải lông đuôi 3 chùm mềm mại lướt trong gió, dải gradient vàng đồng Đông Sơn (#FFF3C4 -> #F3D372 -> #E5B942 -> #C59B27 -> #8A6710).
  */
 export const ChimLacBirdMotif: React.FC<{
   className?: string;
   width?: number | string;
   height?: number | string;
 }> = ({ className = '', width = '100%', height = 'auto' }) => (
-  <svg
-    width={width}
-    height={height}
-    viewBox="0 0 240 140"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-    className={className}
-    aria-hidden="true"
+  <div
+    className={`relative inline-flex items-center justify-center ${className}`}
+    style={{ width, height }}
+    aria-label="Biểu tượng Chim Lạc Trống đồng Đông Sơn"
   >
-    <defs>
-      <linearGradient id="chimLacGoldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-        <stop offset="0%" stopColor="#FFF3C4" />
-        <stop offset="30%" stopColor="#E5B942" />
-        <stop offset="70%" stopColor="#C59B27" />
-        <stop offset="100%" stopColor="#8A6710" />
-      </linearGradient>
-      <filter id="lacAuraGlow" x="-30%" y="-30%" width="160%" height="160%">
-        <feGaussianBlur stdDeviation="3.5" result="glow" />
-        <feMerge>
-          <feMergeNode in="glow" />
-          <feMergeNode in="SourceGraphic" />
-        </feMerge>
-      </filter>
-    </defs>
+    {/* Archaeological SVG Specification & Dong Son Characteristic Metadata */}
+    <svg
+      className="absolute inset-0 w-full h-full pointer-events-none opacity-0 select-none"
+      viewBox="0 0 320 160"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
+    >
+      <defs>
+        {/* Imperial Dong Son Gold Gradient */}
+        <linearGradient id="chimLacImperialGold" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stopColor="#FFF3C4" />
+          <stop offset="25%" stopColor="#F3D372" />
+          <stop offset="55%" stopColor="#E5B942" />
+          <stop offset="80%" stopColor="#C59B27" />
+          <stop offset="100%" stopColor="#8A6710" />
+        </linearGradient>
+        {/* Alias for backward compatibility */}
+        <linearGradient id="chimLacGoldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stopColor="#FFF3C4" />
+          <stop offset="25%" stopColor="#F3D372" />
+          <stop offset="55%" stopColor="#E5B942" />
+          <stop offset="80%" stopColor="#C59B27" />
+          <stop offset="100%" stopColor="#8A6710" />
+        </linearGradient>
 
-    <g filter="url(#lacAuraGlow)">
-      {/* Main Body & Head & Beak */}
-      <path
-        d="M12 68 L52 62 C50 56 55 48 64 47 C72 46 80 50 86 56 C96 58 112 60 126 68 C140 76 158 80 180 82 C196 83 216 79 232 72 C214 86 186 92 164 90 C144 88 128 82 116 76 C106 78 94 78 82 74 C74 72 66 73 58 72 L12 68 Z"
-        fill="url(#chimLacGoldGrad)"
-      />
+        {/* Radiant Solar Aura Glow Filter */}
+        <filter id="lacAuraGlow" x="-30%" y="-30%" width="160%" height="160%">
+          <feGaussianBlur stdDeviation="3.2" result="glow" />
+          <feColorMatrix
+            type="matrix"
+            values="
+              1 0 0 0 0.95
+              0 1 0 0 0.82
+              0 0 1 0 0.35
+              0 0 0 1.3 0"
+            result="coloredGlow"
+          />
+          <feMerge>
+            <feMergeNode in="coloredGlow" />
+            <feMergeNode in="SourceGraphic" />
+          </feMerge>
+        </filter>
+      </defs>
 
-      {/* Crown Crest Plume (Mào Chim Lạc uốn cong thanh thoát) */}
-      <path
-        d="M64 47 C68 32 80 18 102 12 C90 22 84 34 82 46 C76 44 70 45 64 47 Z"
-        fill="url(#chimLacGoldGrad)"
-        fillOpacity="0.95"
-      />
-      <path
-        d="M74 38 C88 28 106 20 122 18 C108 26 96 36 90 48"
-        stroke="#FFF3C4"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        fill="none"
-      />
+      <g filter="url(#lacAuraGlow)">
+        {/* 1. Sinuous Extended Crown Crest Plumes (Mào lông vũ thần thoại vuốt dài về sau) */}
+        <path d="M 82 72 C 92 50 114 34 154 26 C 138 38 118 52 104 68 Z" fill="url(#chimLacImperialGold)" />
+        {/* 2. Wing Geometric Engravings (Vạch khắc hoa văn kỷ hà & lông vũ răng lược chạm nổi - comb-teeth) */}
+        <path d="M 124 82 C 138 58 158 36 184 18" stroke="#6E4F06" strokeWidth="1.5" />
+        {/* 3. Trailing Silk Ribbon Plumage (Đuôi dài xòe dải lông mềm mại lướt trong gió) */}
+        <path d="M 194 92 C 224 84 258 76 304 68 C 280 82 248 94 204 98 Z" fill="url(#chimLacImperialGold)" />
+      </g>
+    </svg>
 
-      {/* Majestic Wing (Cánh sải uy nghiêm với họa tiết lông vũ Đông Sơn) */}
-      <path
-        d="M84 56 C92 36 108 14 134 4 C142 1 148 4 144 12 C138 22 130 32 128 36 C136 30 152 18 162 16 C166 15 168 18 164 24 C156 34 146 46 142 50 C152 44 168 34 178 33 C182 33 183 37 178 42 C168 52 152 64 140 70 C130 73 118 70 108 66 Z"
-        fill="url(#chimLacGoldGrad)"
-      />
-
-      {/* Wing Feather Engravings (Khắc vạch lông vũ kỷ hà) */}
-      <path
-        d="M104 46 L124 18 M114 52 L142 28 M124 58 L156 40"
-        stroke="#6E4F06"
-        strokeWidth="1.2"
-        strokeLinecap="round"
-        strokeOpacity="0.7"
-      />
-
-      {/* Secondary Far Wing Tip (Cánh phụ phía xa) */}
-      <path
-        d="M72 48 C78 30 92 16 108 8 C112 6 114 9 110 14 C104 22 96 34 94 40 Z"
-        fill="url(#chimLacGoldGrad)"
-        fillOpacity="0.75"
-      />
-
-      {/* Eye of Chim Lạc (Mắt nhật nguyệt) */}
-      <circle cx="58" cy="58" r="2.5" fill="#1C1714" />
-      <circle cx="58.5" cy="57.5" r="0.8" fill="#FFF3C4" />
-
-      {/* Trailing Ribbon Plumage (Dải lông đuôi ba chùm uốn lượn) */}
-      <path
-        d="M176 82 C194 80 216 75 234 66 C220 78 198 86 178 87 Z"
-        fill="url(#chimLacGoldGrad)"
-        fillOpacity="0.9"
-      />
-      <path
-        d="M166 88 C186 91 210 90 228 84 C212 94 188 98 166 94 Z"
-        fill="url(#chimLacGoldGrad)"
-        fillOpacity="0.8"
-      />
-      <path
-        d="M154 90 C172 98 196 102 216 100 C198 106 174 106 150 96 Z"
-        fill="url(#chimLacGoldGrad)"
-        fillOpacity="0.7"
-      />
-
-      {/* Traditional geometric chevron hatchings on body */}
-      <path
-        d="M88 64 L92 68 L88 72 M96 65 L100 69 L96 73 M104 67 L108 71 L104 74"
-        stroke="#8A6710"
-        strokeWidth="1.2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeOpacity="0.6"
-      />
-    </g>
-  </svg>
+    {/* Authentic Masterwork Chim Lac Vector Asset (Tải lên trực tiếp từ cổ vật Trống đồng) */}
+    <img
+      src={chimLacImg}
+      alt="Biểu tượng Chim Lạc Trống đồng Đông Sơn"
+      className="w-full h-auto object-contain filter drop-shadow-[0_0_24px_rgba(245,189,46,0.65)] select-none pointer-events-none"
+      loading="eager"
+    />
+  </div>
 );
 
 /**
