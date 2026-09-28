@@ -1,36 +1,27 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { MessageSquareMore, X, Sparkles } from 'lucide-react';
+import zaloIconAsset from '../../assets/icons/zalo.png';
 
 /* ==========================================================================
    1. AUTHENTIC VECTOR ICONS (ZALO, MESSENGER, PHONE HANDSET)
    ========================================================================== */
 
 /**
- * Authentic Zalo Vector Icon (Brand Blue #0068FF)
+ * Authentic Official Zalo Icon
  */
 export const ZaloIcon: React.FC<{ size?: number; className?: string }> = ({
-  size = 26,
+  size = 34,
   className = '',
 }) => (
-  <svg
+  <img
+    src={zaloIconAsset}
+    alt="Zalo"
     width={size}
     height={size}
-    viewBox="0 0 48 48"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-    className={className}
-    aria-hidden="true"
-  >
-    <path
-      d="M24 4C12.954 4 4 12.507 4 23c0 4.12 1.396 7.933 3.774 11.026L5.05 41.874a1.5 1.5 0 0 0 1.848 1.848l7.848-2.722C17.839 42.42 20.84 43 24 43c11.046 0 20-8.507 20-19S35.046 4 24 4z"
-      fill="#0068FF"
-    />
-    <path
-      d="M13 18.5h8.8l-7.2 10.2h7.6v2.3H12v-2l7.2-10.2H13v-2.3zm12.3 3.4h2.5v9.1h-2.5v-9.1zm0-3.4h2.5v2.2h-2.5V18.5zm4.8 3.4h2.4v1.3c.7-.9 1.8-1.5 3-1.5 2.1 0 3.8 1.7 3.8 4.7v4.7h-2.4v-4.4c0-1.6-.8-2.6-2-2.6s-2.4 1-2.4 2.6v4.4h-2.4v-9.2zm12.4 4.6c0 2.8 1.8 4.7 4.5 4.7 1.4 0 2.6-.6 3.3-1.6v1.4h2.4v-9.1h-2.4v1.4c-.7-1-1.9-1.6-3.3-1.6-2.7 0-4.5 1.9-4.5 4.8zm7.8 0c0 1.7-1.1 2.8-2.5 2.8s-2.5-1.1-2.5-2.8 1.1-2.8 2.5-2.8 2.5 1.1 2.5 2.8z"
-      fill="#FFFFFF"
-    />
-  </svg>
+    className={`object-contain pointer-events-none select-none ${className}`}
+    loading="eager"
+  />
 );
 
 /**
@@ -294,9 +285,9 @@ export const FloatingContactDock: React.FC<FloatingContactDockProps> = ({
                 whileHover={{ scale: 1.1, x: -3 }}
                 whileTap={{ scale: 0.94 }}
                 aria-label={`Mở khung trò chuyện Zalo số ${hotlineDisplay} với VietScape Models`}
-                className="relative w-12 h-12 sm:w-13 sm:h-13 rounded-full bg-white shadow-lg border border-blue-100 flex items-center justify-center p-1.5 hover:shadow-blue-500/25 transition-all focus:outline-hidden focus-visible:ring-2 focus-visible:ring-[#0068FF]"
+                className="relative w-12 h-12 sm:w-13 sm:h-13 rounded-full bg-white shadow-lg border border-blue-100 flex items-center justify-center p-1 hover:shadow-blue-500/25 transition-all focus:outline-hidden focus-visible:ring-2 focus-visible:ring-[#0068FF]"
               >
-                <ZaloIcon size={32} className="drop-shadow-xs" />
+                <ZaloIcon size={38} className="drop-shadow-xs" />
               </motion.a>
             </motion.div>
 

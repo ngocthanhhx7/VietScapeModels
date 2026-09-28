@@ -48,12 +48,23 @@ export const HeritageEntrance: React.FC<HeritageEntranceProps> = ({
   const [isParting, setIsParting] = useState(false);
   const [isClimax, setIsClimax] = useState(false);
   const [isTransitioning, setIsTransitioning] = useState(false);
-  const [isDone, setIsDone] = useState(false);
+  const [isDesktop, setIsDesktop] = useState(() => {
+    return typeof window !== 'undefined' ? window.innerWidth >= 1024 : false;
+  });
 
-  // Reset internal states on open
+  // Track desktop viewport for expansive aerial flight path
+  useEffect(() => {
+    const handleResize = () => {
+      setIsDesktop(typeof window !== 'undefined' && window.innerWidth >= 1024);
+    };
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  // Reset internal animation stage states on open
   useEffect(() => {
     if (isOpen) {
-      setIsDone(false);
       setIsParting(false);
       setIsClimax(false);
       setIsTransitioning(false);
@@ -63,7 +74,6 @@ export const HeritageEntrance: React.FC<HeritageEntranceProps> = ({
   // Clean finish
   const handleFinish = useCallback(() => {
     markHeritageEntranceSeen();
-    setIsDone(true);
     document.body.style.overflow = '';
     onComplete();
   }, [onComplete]);
@@ -71,7 +81,6 @@ export const HeritageEntrance: React.FC<HeritageEntranceProps> = ({
   // Instant graceful Skip
   const handleSkip = useCallback(() => {
     markHeritageEntranceSeen();
-    setIsDone(true);
     document.body.style.overflow = '';
     if (onSkip) {
       onSkip();
@@ -82,7 +91,7 @@ export const HeritageEntrance: React.FC<HeritageEntranceProps> = ({
 
   // Keyboard shortcut: ESC to skip instantly
   useEffect(() => {
-    if (!isOpen || isDone) return;
+    if (!isOpen) return;
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
         handleSkip();
@@ -90,11 +99,11 @@ export const HeritageEntrance: React.FC<HeritageEntranceProps> = ({
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [isOpen, isDone, handleSkip]);
+  }, [isOpen, handleSkip]);
 
   // Body scroll lock during entrance with guaranteed cleanup
   useEffect(() => {
-    if (isOpen && !isDone) {
+    if (isOpen) {
       const originalOverflow = document.body.style.overflow;
       document.body.style.overflow = 'hidden';
       return () => {
@@ -103,7 +112,7 @@ export const HeritageEntrance: React.FC<HeritageEntranceProps> = ({
     } else {
       document.body.style.overflow = '';
     }
-  }, [isOpen, isDone]);
+  }, [isOpen]);
 
   // Guaranteed unmount cleanup
   useEffect(() => {
@@ -114,14 +123,7 @@ export const HeritageEntrance: React.FC<HeritageEntranceProps> = ({
 
   // Master 4-tier Epic Timeline: ~4.2s total (satisfying ~3.8s - 4.5s)
   useEffect(() => {
-    if (!isOpen || isDone) return;
-
-    if (shouldReduceMotion) {
-      const timer = setTimeout(() => {
-        handleFinish();
-      }, 400);
-      return () => clearTimeout(timer);
-    }
+    if (!isOpen) return;
 
     // Stage 1 -> Stage 2: Curtain parting & Aura burst at 1.8s
     const partingTimer = setTimeout(() => {
@@ -149,9 +151,9 @@ export const HeritageEntrance: React.FC<HeritageEntranceProps> = ({
       clearTimeout(transitionTimer);
       clearTimeout(completeTimer);
     };
-  }, [isOpen, isDone, shouldReduceMotion, handleFinish]);
+  }, [isOpen, shouldReduceMotion, handleFinish]);
 
-  if (!isOpen || isDone) return null;
+  if (!isOpen) return null;
 
   return (
     <AnimatePresence>
@@ -184,31 +186,31 @@ export const HeritageEntrance: React.FC<HeritageEntranceProps> = ({
         <motion.div
           initial={{ x: -80, opacity: 0 }}
           animate={{
-            x: isParting ? -220 : 0,
-            opacity: isParting ? 0 : 0.65,
+            x: isParting ? -260 : 0,
+            opacity: isParting ? 0 : 0.7,
           }}
           transition={{
             duration: isParting ? 0.9 : 1.6,
             ease: 'easeOut',
           }}
-          className="absolute top-6 sm:top-12 left-2 sm:left-10 z-35 pointer-events-none text-heritage-gold/40"
+          className="absolute top-4 sm:top-8 md:top-12 left-2 sm:left-8 md:left-12 lg:left-16 z-35 pointer-events-none text-heritage-gold/45"
         >
-          <CloudScrollMotif size={140} className="w-28 sm:w-44 md:w-56 h-auto drop-shadow-[0_0_15px_rgba(212,175,55,0.3)]" />
+          <CloudScrollMotif size={160} className="w-28 sm:w-44 md:w-56 lg:w-64 h-auto drop-shadow-[0_0_18px_rgba(212,175,55,0.35)]" />
         </motion.div>
 
         <motion.div
           initial={{ x: 80, opacity: 0 }}
           animate={{
-            x: isParting ? 220 : 0,
-            opacity: isParting ? 0 : 0.65,
+            x: isParting ? 260 : 0,
+            opacity: isParting ? 0 : 0.7,
           }}
           transition={{
             duration: isParting ? 0.9 : 1.6,
             ease: 'easeOut',
           }}
-          className="absolute top-6 sm:top-12 right-2 sm:right-10 z-35 pointer-events-none text-heritage-gold/40 scale-x-[-1]"
+          className="absolute top-4 sm:top-8 md:top-12 right-2 sm:right-8 md:right-12 lg:right-16 z-35 pointer-events-none text-heritage-gold/45 scale-x-[-1]"
         >
-          <CloudScrollMotif size={140} className="w-28 sm:w-44 md:w-56 h-auto drop-shadow-[0_0_15px_rgba(212,175,55,0.3)]" />
+          <CloudScrollMotif size={160} className="w-28 sm:w-44 md:w-56 lg:w-64 h-auto drop-shadow-[0_0_18px_rgba(212,175,55,0.35)]" />
         </motion.div>
 
         {/* Ambient Mist Pulse */}
@@ -265,7 +267,7 @@ export const HeritageEntrance: React.FC<HeritageEntranceProps> = ({
             initial={{ opacity: 0.95, scaleX: 1 }}
             animate={{ opacity: 0, scaleX: 35 }}
             transition={{ duration: 0.8, ease: 'easeOut' }}
-            className="absolute top-0 bottom-0 left-1/2 -translate-x-1/2 w-5 bg-gradient-to-r from-transparent via-[#FFF3C4] to-transparent z-35 pointer-events-none filter blur-xs"
+            className="absolute top-0 bottom-0 left-1/2 -translate-x-1/2 w-6 bg-gradient-to-r from-transparent via-[#FFF3C4] to-transparent z-35 pointer-events-none filter blur-xs"
           />
         )}
 
@@ -273,120 +275,131 @@ export const HeritageEntrance: React.FC<HeritageEntranceProps> = ({
         {/* CENTER STAGE: SOLAR DRUM, CHIM LẠC & CLIMAX TYPOGRAPHY         */}
         {/* ============================================================== */}
         <div className="absolute inset-0 z-40 flex flex-col items-center justify-center pointer-events-none px-4 sm:px-6">
-          {/* Luminous Solar Aura Shockwave / Burst */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.6 }}
-            animate={
-              isParting
-                ? { opacity: [0.9, 0.4, 0.7], scale: [0.8, 2.4, 1.2] }
-                : { opacity: [0, 0.7, 0.85], scale: [0.6, 1, 1.05] }
-            }
-            transition={{
-              duration: isParting ? 1.0 : 1.8,
-              ease: 'easeOut',
-            }}
-            className="absolute w-[360px] h-[360px] xs:w-[420px] xs:h-[420px] sm:w-[620px] sm:h-[620px] rounded-full bg-radial-spotlight opacity-75 filter blur-3xl"
-          />
-
-          {/* Rotating Grand Đông Sơn Drum (Reaching focal climax in Stage 3) */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.75, rotate: 0 }}
-            animate={{
-              opacity: isClimax ? 0.75 : isParting ? 0.55 : 0.35,
-              scale: isClimax ? 1.0 : isParting ? 0.95 : 0.85,
-              rotate: 360,
-            }}
-            transition={{
-              opacity: { duration: 0.8, ease: 'easeOut' },
-              scale: { duration: 0.9, ease: 'easeOut' },
-              rotate: { duration: 55, repeat: Infinity, ease: 'linear' },
-            }}
-            className="text-heritage-gold/60 pointer-events-none w-[270px] h-[270px] xs:w-[320px] xs:h-[320px] sm:w-[460px] sm:h-[460px] lg:w-[560px] lg:h-[560px] flex items-center justify-center"
-          >
-            <GrandDongSonDrumMotif size="100%" />
-          </motion.div>
-
-          {/* Chim Lạc Swooping Dynamic Flight along Bezier Trajectory (Facing Left, soaring from high clouds) */}
-          <motion.div
-            initial={{ x: 220, y: -150, scale: 0.4, opacity: 0, rotate: -18 }}
-            animate={
-              isClimax
-                ? {
-                    x: 0,
-                    y: -24,
-                    scale: 1.02,
-                    opacity: 1,
-                    rotate: 0,
-                  }
-                : {
-                    x: [220, 80, 10, 0],
-                    y: [-150, -45, -8, 0],
-                    scale: [0.4, 0.85, 1.12, 1.0],
-                    opacity: [0, 0.85, 1, 1],
-                    rotate: [-18, -8, 2, 0],
-                  }
-            }
-            transition={
-              isClimax
-                ? { duration: 0.8, ease: 'easeOut' }
-                : {
-                    duration: 1.8,
-                    times: [0, 0.45, 0.8, 1],
-                    ease: [0.16, 1, 0.3, 1],
-                  }
-            }
-            className="relative z-10 -mt-20 xs:-mt-24 sm:-mt-36 mb-4 sm:mb-6"
-          >
-            {/* Radiant Bird Halo */}
-            <div className="absolute inset-0 bg-heritage-gold/30 rounded-full filter blur-2xl scale-125 -z-10" />
-            <ChimLacBirdMotif className="w-48 xs:w-56 sm:w-72 md:w-80 lg:w-96 h-auto drop-shadow-[0_12px_36px_rgba(212,175,55,0.7)]" />
-          </motion.div>
-
-          {/* Stage 3 Branding Typography Awakening */}
-          <div className="text-center relative z-20 space-y-2.5 sm:space-y-3">
+          <div className="relative w-full max-w-5xl max-h-[92vh] flex flex-col items-center justify-center my-auto">
+            {/* Luminous Solar Aura Shockwave / Burst */}
             <motion.div
-              initial={{ opacity: 0, y: 22 }}
+              initial={{ opacity: 0, scale: 0.6 }}
               animate={
-                isClimax
-                  ? { opacity: 1, y: 0, scale: 1 }
-                  : isParting
-                  ? { opacity: 0.7, y: 8, scale: 0.98 }
-                  : { opacity: 0, y: 22 }
+                isParting
+                  ? { opacity: [0.9, 0.45, 0.75], scale: [0.8, 2.2, 1.2] }
+                  : { opacity: [0, 0.65, 0.8], scale: [0.6, 1, 1.05] }
               }
-              transition={{ duration: 0.65, ease: 'easeOut' }}
-            >
-              <h1 className="font-serif text-2xl xs:text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-[0.16em] sm:tracking-[0.22em] text-gold-gradient uppercase drop-shadow-[0_4px_18px_rgba(0,0,0,0.9)] whitespace-nowrap">
-                VIETSCAPE MODELS
-              </h1>
-            </motion.div>
+              transition={{
+                duration: isParting ? 1.0 : 1.8,
+                ease: 'easeOut',
+              }}
+              className="absolute w-[320px] h-[320px] xs:w-[380px] xs:h-[380px] sm:w-[500px] sm:h-[500px] md:w-[560px] md:h-[560px] lg:w-[620px] lg:h-[620px] max-w-[55vh] max-h-[55vh] rounded-full bg-radial-spotlight opacity-75 filter blur-3xl pointer-events-none"
+            />
 
-            <motion.div
-              initial={{ scaleX: 0, opacity: 0 }}
-              animate={
-                isClimax
-                  ? { scaleX: 1, opacity: 1 }
-                  : { scaleX: 0, opacity: 0 }
-              }
-              transition={{ duration: 0.5, delay: 0.15, ease: 'easeOut' }}
-              className="flex items-center justify-center gap-2 sm:gap-3 py-0.5 sm:py-1"
-            >
-              <div className="w-12 sm:w-28 h-px bg-gradient-to-r from-transparent to-heritage-gold" />
-              <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 rotate-45 border border-heritage-gold bg-heritage-gold/40" />
-              <div className="w-12 sm:w-28 h-px bg-gradient-to-l from-transparent to-heritage-gold" />
-            </motion.div>
+            {/* Focal Heraldic Center: Drum Backdrop + Chim Lac Hero */}
+            <div className="relative flex items-center justify-center w-full">
+              {/* Rotating Grand Đông Sơn Drum (Sacred Solar Mandala Backdrop) */}
+              <motion.div
+                initial={{ opacity: 0, scale: 0.75, rotate: 0 }}
+                animate={{
+                  opacity: isClimax ? 0.8 : isParting ? 0.55 : 0.35,
+                  scale: isClimax ? 1.0 : isParting ? 0.95 : 0.85,
+                  rotate: 360,
+                }}
+                transition={{
+                  opacity: { duration: 0.8, ease: 'easeOut' },
+                  scale: { duration: 0.9, ease: 'easeOut' },
+                  rotate: { duration: 55, repeat: Infinity, ease: 'linear' },
+                }}
+                className="text-heritage-gold/60 pointer-events-none w-[260px] h-[260px] xs:w-[300px] xs:h-[300px] sm:w-[390px] sm:h-[390px] md:w-[450px] md:h-[450px] lg:w-[490px] lg:h-[490px] max-w-[48vh] max-h-[48vh] aspect-square flex items-center justify-center"
+              >
+                <GrandDongSonDrumMotif size="100%" />
+              </motion.div>
 
-            <motion.p
-              initial={{ opacity: 0, y: 14 }}
-              animate={
-                isClimax
-                  ? { opacity: 1, y: 0 }
-                  : { opacity: 0, y: 14 }
-              }
-              transition={{ duration: 0.5, delay: 0.25, ease: 'easeOut' }}
-              className="font-mono text-[10px] xs:text-xs sm:text-sm uppercase tracking-[0.25em] sm:tracking-[0.35em] text-heritage-sand/90 font-medium drop-shadow-md"
-            >
-              Hồn Thiêng Kiến Trúc Việt
-            </motion.p>
+              {/* Chim Lạc Swooping Dynamic Flight along Bezier Trajectory (Facing Left, soaring from high clouds) */}
+              <motion.div
+                initial={{
+                  x: isDesktop ? 460 : 220,
+                  y: isDesktop ? -260 : -150,
+                  scale: 0.38,
+                  opacity: 0,
+                  rotate: -18,
+                }}
+                animate={
+                  isClimax
+                    ? {
+                        x: 0,
+                        y: 0,
+                        scale: 1.05,
+                        opacity: 1,
+                        rotate: 0,
+                      }
+                    : {
+                        x: isDesktop ? [460, 180, 25, 0] : [220, 80, 10, 0],
+                        y: isDesktop ? [-260, -85, -10, 0] : [-150, -45, -8, 0],
+                        scale: [0.38, 0.85, 1.15, 1.0],
+                        opacity: [0, 0.85, 1, 1],
+                        rotate: [-18, -9, 2, 0],
+                      }
+                }
+                transition={
+                  isClimax
+                    ? { duration: 0.8, ease: 'easeOut' }
+                    : {
+                        duration: 1.8,
+                        times: [0, 0.45, 0.8, 1],
+                        ease: [0.16, 1, 0.3, 1],
+                      }
+                }
+                className="absolute z-10 flex items-center justify-center pointer-events-none"
+              >
+                {/* Radiant Bird Halo */}
+                <div className="absolute inset-0 bg-heritage-gold/30 rounded-full filter blur-2xl scale-125 -z-10" />
+                <ChimLacBirdMotif className="w-44 xs:w-52 sm:w-68 md:w-80 lg:w-96 max-h-[28vh] w-auto h-auto drop-shadow-[0_12px_36px_rgba(212,175,55,0.7)]" />
+              </motion.div>
+            </div>
+
+            {/* Stage 3 Branding Typography Awakening */}
+            <div className="text-center relative z-20 space-y-2 sm:space-y-2.5 md:space-y-3 mt-3 xs:mt-4 sm:mt-5 md:mt-6">
+              <motion.div
+                initial={{ opacity: 0, y: 22 }}
+                animate={
+                  isClimax
+                    ? { opacity: 1, y: 0, scale: 1 }
+                    : isParting
+                    ? { opacity: 0.7, y: 8, scale: 0.98 }
+                    : { opacity: 0, y: 22 }
+                }
+                transition={{ duration: 0.65, ease: 'easeOut' }}
+              >
+                <h1 className="font-serif text-xl xs:text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-[0.16em] sm:tracking-[0.22em] text-gold-gradient uppercase drop-shadow-[0_4px_18px_rgba(0,0,0,0.9)] whitespace-nowrap">
+                  VIETSCAPE MODELS
+                </h1>
+              </motion.div>
+
+              <motion.div
+                initial={{ scaleX: 0, opacity: 0 }}
+                animate={
+                  isClimax
+                    ? { scaleX: 1, opacity: 1 }
+                    : { scaleX: 0, opacity: 0 }
+                }
+                transition={{ duration: 0.5, delay: 0.15, ease: 'easeOut' }}
+                className="flex items-center justify-center gap-2 sm:gap-3 py-0.5 sm:py-1"
+              >
+                <div className="w-10 xs:w-12 sm:w-24 md:w-32 h-px bg-gradient-to-r from-transparent to-heritage-gold" />
+                <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 rotate-45 border border-heritage-gold bg-heritage-gold/40" />
+                <div className="w-10 xs:w-12 sm:w-24 md:w-32 h-px bg-gradient-to-l from-transparent to-heritage-gold" />
+              </motion.div>
+
+              <motion.p
+                initial={{ opacity: 0, y: 14 }}
+                animate={
+                  isClimax
+                    ? { opacity: 1, y: 0 }
+                    : { opacity: 0, y: 14 }
+                }
+                transition={{ duration: 0.5, delay: 0.25, ease: 'easeOut' }}
+                className="font-mono text-[9px] xs:text-[10px] sm:text-xs md:text-sm uppercase tracking-[0.22em] sm:tracking-[0.32em] text-heritage-sand/90 font-medium drop-shadow-md"
+              >
+                Hồn Thiêng Kiến Trúc Việt
+              </motion.p>
+            </div>
           </div>
         </div>
       </motion.div>
