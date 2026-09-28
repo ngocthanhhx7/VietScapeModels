@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { ArrowRight, ShieldCheck, Award, Sparkles, CheckCircle2, Phone, Mail, MessageCircle } from 'lucide-react';
-import { DongSonDrumMotif, HoiVanFretMotif, LyLotusMotif } from '../common/HeritageMotifs';
+import { HoiVanFretMotif, LyLotusMotif } from '../common/HeritageMotifs';
+import logoImg from '../../assets/logo/logo-transparent.png';
 
 export interface FooterProps {
   onReplayEntrance?: () => void;
@@ -48,13 +49,19 @@ export const Footer: React.FC<FooterProps> = ({ onReplayEntrance }) => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 mb-16">
           {/* Brand Info & Mission (Col 1-4) */}
           <div className="lg:col-span-4 space-y-6">
-            <div className="flex items-center gap-3">
-              <div className="w-12 h-12 rounded-full bg-heritage-gold/15 flex items-center justify-center text-heritage-gold border border-heritage-gold/40">
-                <DongSonDrumMotif size={32} />
+            <div className="flex items-center gap-4">
+              {/* Heritage Cartouche Container for Maximum Contrast */}
+              <div className="p-2 sm:p-2.5 rounded-2xl bg-gradient-to-b from-[#FAEBDF]/95 via-[#FBF9F5]/95 to-[#F3EFE6]/90 border border-heritage-gold/40 shadow-md shadow-black/30 backdrop-blur-xs shrink-0 group">
+                <img
+                  src={logoImg}
+                  alt="VietScape Models Logo"
+                  className="h-12 sm:h-14 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
+                  loading="lazy"
+                />
               </div>
               <div>
-                <h3 className="font-serif text-2xl font-bold tracking-wider text-white">VIETSCAPE</h3>
-                <span className="font-mono text-[10px] uppercase tracking-[0.25em] text-heritage-gold block">
+                <h3 className="font-serif text-xl sm:text-2xl font-bold tracking-wider text-white">VIETSCAPE MODELS</h3>
+                <span className="font-mono text-[10px] uppercase tracking-[0.25em] text-heritage-gold block mt-0.5">
                   3D Papercraft &amp; Audio Guide
                 </span>
               </div>

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X, ArrowUpRight, Sparkles } from 'lucide-react';
-import { DongSonDrumMotif } from '../common/HeritageMotifs';
+import logoImg from '../../assets/logo/logo-transparent.png';
 
 export interface HeaderProps {
   onReplayEntrance?: () => void;
@@ -47,23 +47,19 @@ export const Header: React.FC<HeaderProps> = ({ onReplayEntrance }) => {
         {/* Brand Logo */}
         <a
           href="#"
-          className="flex items-center gap-3.5 group cursor-pointer"
+          className="flex items-center group cursor-pointer focus:outline-hidden focus-visible:ring-2 focus-visible:ring-heritage-gold/50 rounded-lg p-1 -m-1 transition-all"
           onClick={(e) => {
             e.preventDefault();
             window.scrollTo({ top: 0, behavior: 'smooth' });
           }}
+          aria-label="VietScape Models — Về đầu trang"
         >
-          <div className="w-10 h-10 rounded-full bg-heritage-dark flex items-center justify-center text-heritage-gold shadow-sm group-hover:scale-105 transition-transform duration-300">
-            <DongSonDrumMotif size={24} />
-          </div>
-          <div className="flex flex-col">
-            <span className="font-serif text-xl tracking-[0.12em] font-bold text-heritage-dark leading-none group-hover:text-heritage-gold transition-colors">
-              VIETSCAPE
-            </span>
-            <span className="font-mono text-[9px] uppercase tracking-[0.25em] text-heritage-gold font-medium mt-1">
-              3D Papercraft &amp; Audio Heritage
-            </span>
-          </div>
+          <img
+            src={logoImg}
+            alt="VietScape Models — Di sản mô hình giấy 3D"
+            className="h-10 sm:h-11 lg:h-12 w-auto object-contain transition-transform duration-300 group-hover:scale-105 filter drop-shadow-xs"
+            loading="eager"
+          />
         </a>
 
         {/* Desktop Navigation */}

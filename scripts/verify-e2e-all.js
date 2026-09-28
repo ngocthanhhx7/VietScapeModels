@@ -95,11 +95,15 @@ for (const img of requiredModelImages) {
   }
 }
 
-// Favicon SVG check
-const faviconPath = path.join(rootDir, 'public', 'vite.svg');
-assert(fs.existsSync(faviconPath), 'Heritage Favicon SVG exists at public/vite.svg');
-if (fs.existsSync(faviconPath)) {
-  const favContent = fs.readFileSync(faviconPath, 'utf-8');
+// Favicon check (compatible with new ICO and SVG fallback)
+const faviconIcoPath = path.join(rootDir, 'public', 'favicon.ico');
+const faviconSvgPath = path.join(rootDir, 'public', 'vite.svg');
+assert(
+  fs.existsSync(faviconIcoPath) || fs.existsSync(faviconSvgPath),
+  'Favicon asset exists at public/favicon.ico or public/vite.svg'
+);
+if (fs.existsSync(faviconSvgPath)) {
+  const favContent = fs.readFileSync(faviconSvgPath, 'utf-8');
   assert(favContent.includes('<svg') && favContent.includes('#C59B27'), 'Favicon contains gold heritage branding');
 }
 
@@ -422,6 +426,94 @@ assert(
   entranceCode.includes('1800') && entranceCode.includes('2800') && entranceCode.includes('3800') && entranceCode.includes('4200'),
   'HeritageEntrance coordinates 4-tier narrative timing sequence (1800ms parting -> 2800ms climax -> 3800ms dissolve -> 4200ms finish)'
 );
+
+// ============================================================================
+// 11. OFFICIAL BRAND LOGO & FAVICON INTEGRATION AUDIT (R1 - R5)
+// ============================================================================
+console.log('\n💎 11. Official Brand Logo & Favicon Integration Audit:');
+
+// 11.1 Logo Asset Files & Transparency (R1)
+const logoTransparentPath = path.join(rootDir, 'src/assets/logo/logo-transparent.png');
+const publicLogoPath = path.join(rootDir, 'public/logo.png');
+const publicFaviconPath = path.join(rootDir, 'public/favicon.ico');
+
+assert(fs.existsSync(logoTransparentPath), 'Transparent logo exists: src/assets/logo/logo-transparent.png');
+if (fs.existsSync(logoTransparentPath)) {
+  const size = fs.statSync(logoTransparentPath).size;
+  assert(size > 5000, `src/assets/logo/logo-transparent.png is authentic web asset (${size} bytes)`);
+  assert(size < 3000000, `src/assets/logo/logo-transparent.png is web-optimized (<3MB)`);
+}
+
+assert(fs.existsSync(publicLogoPath), 'Public logo exists: public/logo.png');
+if (fs.existsSync(publicLogoPath)) {
+  const size = fs.statSync(publicLogoPath).size;
+  assert(size > 5000, `public/logo.png is authentic web asset (${size} bytes)`);
+}
+
+assert(fs.existsSync(publicFaviconPath), 'Public favicon exists: public/favicon.ico');
+if (fs.existsSync(publicFaviconPath)) {
+  const size = fs.statSync(publicFaviconPath).size;
+  assert(size > 100, `public/favicon.ico is valid ICO file (${size} bytes)`);
+}
+
+// 11.2 Header Brand Logo Integration (R2)
+assert(
+  headerCode.includes('logo-transparent.png') || headerCode.includes('/logo.png') || headerCode.includes('logoTransparent') || headerCode.includes('logo'),
+  'Header references new brand logo asset'
+);
+assert(
+  headerCode.includes('<img') && (headerCode.includes('alt="VietScape Models') || headerCode.includes("alt='VietScape Models")),
+  'Header renders logo image with proper alt="VietScape Models" attribute'
+);
+assert(
+  headerCode.includes('h-10') || headerCode.includes('h-11') || headerCode.includes('h-12'),
+  'Header restricts logo height to responsive h-10/h-11/h-12 scale'
+);
+assert(
+  headerCode.includes("window.scrollTo({ top: 0, behavior: 'smooth' })"),
+  'Header logo click triggers smooth scroll to top'
+);
+
+// 11.3 Footer Brand Logo Integration (R3)
+assert(
+  footerCode.includes('logo-transparent.png') || footerCode.includes('/logo.png') || footerCode.includes('logoTransparent') || footerCode.includes('logo'),
+  'Footer references new brand logo asset'
+);
+assert(
+  footerCode.includes('<img') && (footerCode.includes('alt="VietScape Models') || footerCode.includes("alt='VietScape Models")),
+  'Footer renders logo image with proper alt="VietScape Models" attribute'
+);
+assert(
+  footerCode.includes('h-10') || footerCode.includes('h-12') || footerCode.includes('h-14') || footerCode.includes('object-contain'),
+  'Footer styles logo with appropriate dimension and object-contain classes'
+);
+
+// 11.4 Browser Favicon Synchronization in index.html (R4)
+const indexHtmlContent = fs.readFileSync(path.join(rootDir, 'index.html'), 'utf-8');
+assert(
+  indexHtmlContent.includes('href="/favicon.ico"') || indexHtmlContent.includes('href="favicon.ico"') || indexHtmlContent.includes('href="/logo.png"'),
+  'index.html links to new brand favicon'
+);
+assert(
+  !indexHtmlContent.includes('href="/vite.svg"'),
+  'index.html replaces legacy vite.svg favicon'
+);
+
+// 11.5 Dist Output Favicon & Logo Verification (R5)
+if (fs.existsSync(distDir)) {
+  const distLogo = path.join(distDir, 'logo.png');
+  const distFavicon = path.join(distDir, 'favicon.ico');
+  assert(fs.existsSync(distLogo), 'dist/logo.png deployed to production bundle');
+  assert(fs.existsSync(distFavicon), 'dist/favicon.ico deployed to production bundle');
+
+  if (fs.existsSync(distHtml)) {
+    const distHtmlContent = fs.readFileSync(distHtml, 'utf-8');
+    assert(
+      distHtmlContent.includes('favicon.ico') || distHtmlContent.includes('logo.png'),
+      'dist/index.html includes updated brand favicon'
+    );
+  }
+}
 
 // ============================================================================
 // FINAL SUMMARY
